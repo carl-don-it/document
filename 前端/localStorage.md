@@ -1,0 +1,1 @@
+ [Introduction to localStorage and sessionStorage](https://alligator.io/js/introduction-localstorage-sessionstorage/)

@@ -1,0 +1,34 @@
+#rabbitmq1 , 绑定host文件，${home}目录 
+docker run -di --name rabbitmq1 --hostname rabbitmq1\
+-p 5672:5672 -p 15672:15672 \
+-v /var/dockerbinds/rabbitmq1/var/lib/rabbitmq:/var/lib/rabbitmq \
+-v /var/dockerbinds/rabbitmq1/etc/hosts:/etc/hosts \
+-e RABBITMQ_DEFAULT_VHOST=/ \
+-e RABBITMQ_DEFAULT_USER=admin \
+-e RABBITMQ_DEFAULT_PASS=admin \
+rabbitmq:3.7.17-management
+
+#rabbitmq2
+docker run -d --name rabbitmq2 -p 5673:5672 -p 15673:15672 -v /var/dockerbinds/rabbitmq2/var/lib/rabbitmq:/var/lib/rabbitmq -v /var/dockerbinds/rabbitmq2/etc/hosts:/etc/hosts --hostname rabbitmq2 -e RABBITMQ_DEFAULT_VHOST=/ -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:3.7.17-management
+
+#rabbitmq3
+docker run -d --name rabbitmq3 --hostname rabbitmq3 -p 5674:5672 -p 15674:15672 -v /var/dockerbinds/rabbitmq3/var/lib/rabbitmq:/var/lib/rabbitmq -v /var/dockerbinds/rabbitmq3/etc/hosts:/etc/hosts   -e RABBITMQ_DEFAULT_VHOST=/ -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:3.7.17-management
+
+#进入容器
+docker exec -it rabbitmq1 /bin/bash
+docker exec -it rabbitmq2 /bin/bash
+docker exec -it rabbitmq3 /bin/bash
+
+#查看容器ip地址
+docker inspect --format='{{.NetworkSettings.IPAddress}}' rabbitmq1
+
+#生产者
+docker run -di --name interviewjob-rabbitmq-producer \
+-p 45000:45000 \
+-v /var/log/interviewjob/producer:/var/log/interviewjob \
+-e PORT=45000 \
+-e logdir=/var/log/interviewjob \
+-e rabbitmqIP=192.168.72.142 \
+-e rabbitmqPORT=5672 \
+interviewjob-rabbitmq-producer:latest
+
