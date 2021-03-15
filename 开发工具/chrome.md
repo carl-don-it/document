@@ -1,4 +1,4 @@
-## [Chrome - JavaScript调试技巧总结（浏览器调试JS）](https://www.cnblogs.com/wyt007/p/10084529.html)
+# [Chrome - JavaScript调试技巧总结（浏览器调试JS）](https://www.cnblogs.com/wyt007/p/10084529.html)
 
 **Chrome** 是 **Google** 出品的一款非常优秀的浏览器，其内置了开发者工具（**Windows** 系统中按下 **F12** 即可开启），可以让我们方便地对 **JavaScript** 代码进行调试。
 
@@ -278,3 +278,9 @@ cook()
 ## 十、查找函数
 
 有些函数查不到，在临时vm文件中，需要console调用打断点进入查看
+
+# whether Chrome console is open
+
+https://stackoverflow.com/questions/7798748/find-out-whether-chrome-console-is-open
+
+# [Avoid the detection of “whether Chrome DevTools(console) is open”](https://stackoverflow.com/questions/38910904/avoid-the-detection-of-whether-chrome-devtoolsconsole-is-open)

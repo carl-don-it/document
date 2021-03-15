@@ -249,6 +249,8 @@ property 属性：用于指定实体类属性名称
 
 2. 多个参数，底层封装成map，用key来引用。
 
+3. 如果添加了 `@param`那么就需要从value处开始查询，不加就可以直接使用pojo里面的field
+
    **xml**
 
    ```java
