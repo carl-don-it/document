@@ -422,3 +422,13 @@ option.add_experimental_option("excludeSwitches", ['enable-automation'])
 # 我的总结
 
 getText()不会返回null，空就是"",
+
+
+
+# window.navigator.webdriver
+
+[关于修改window.navigator.webdriver代码失效问题](https://blog.csdn.net/qq_35866846/article/details/104422505)
+
+[（新）关于修改window.navigator.webdriver代码失效问题](https://blog.csdn.net/qq_35866846/article/details/105712147)
+
+[chrome升了chrome88后，selenium修改window.navigator.webdriver](https://blog.csdn.net/qq_35866846/article/details/113185737)
