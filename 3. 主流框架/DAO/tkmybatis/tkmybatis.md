@@ -23,3 +23,11 @@
 # 代码
 
 ![image-20200204165951867](img/image-20200204165951867.png)
+
+# 报错
+
+SpringBoot使用MyBatis报错：tk.mybatis.mapper.provider.base.BaseSelectProvider
+
+![image-20210423161017459](img/image-20210423161017459.png)
+
+![image-20210423161023074](img/image-20210423161023074.png)

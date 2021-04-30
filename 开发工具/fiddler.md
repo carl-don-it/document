@@ -26,3 +26,7 @@ fiddler如果是https请求需要decripted https
 - 3. Fiddler 抓取Iphone / Android数据包
 
 [保存会话](https://testerhome.com/topics/5481)
+
+# 其他
+
+[Fiddler Filters filtration, hidden js, css, pictures](https://www.programmersought.com/article/68163236525/)
