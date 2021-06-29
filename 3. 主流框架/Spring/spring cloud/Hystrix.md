@@ -174,24 +174,24 @@ public class UserApiFallback extends ApiFallback<User> implements UserApi {
 
 OK，现在 hystrix 是绑定了 Feign 接口了，但是 Feign 接口中的某个方法如果出问题了，它怎么知道找谁去做熔断呢？所以在 Feign 接口也需要绑定一下我们定义的 hystrix 处理类：
 
- * ```java
- /**
+```java
+  /**
 
  * feign客户端
 
  * @author shengwu ni
-       */
-       //@FeignClient(value = "MICROSERVICE-ORDER")
+      */
+      //@FeignClient(value = "MICROSERVICE-ORDER")
    @FeignClient(value = "MICROSERVICE-ORDER", fallbackFactory = OrderClientServiceFallbackFactory.class)
        public interface OrderClientService {
-    
+
    @GetMapping("/provider/order/get/{id}")
    TOrder getOrder(@PathVariable(value = "id") Long id);
 
    @GetMapping("/provider/order/get/list")
    List<TOrder> getAll();
-   
 ```
+
 
 
 我把之前的注释掉了，新添加了个 fallbackFactory 属性，指定了自定义的 hystrix 处理类。这样的话，Controller 中的所有方法都可以在 hystrix 里有个默认实现了。
@@ -339,6 +339,63 @@ http://localhost:8001/provider/order/get/list
 Hystrix dashboard 面板正常显示，所监控的接口方法上必须要有@HystrixCommand 注解，否则会一直显示 Loading，这是一个注意的地方。
 
 源码下载地址：https://gitee.com/eson15/springcloud_study
+
+
+
+# 超时时间
+
+## 介绍
+
+feign和hystrix的超时时间各取一个最短的。hystrix在最外层，然后先经过ribbon，然后再到feign的http请求。hystrix可以设置每一个特定的接口的超时时间
+
+```yml
+#ribbon参数
+ribbon:
+  MaxAutoRetries: 3 #最大重试次数，当Eureka中可以找到服务，但是服务连不上时将会重试
+  MaxAutoRetriesNextServer: 3  #切换实例的重试次数
+  OkToRetryOnAllOperations: false #对所有操作请求都进行重试，如果是get则可以，如果是post，put等操作没有实现幂等的情况下是很危险的,所以设置为false
+  ConnectTimeout: 40000 #请求连接的超时时间
+  ReadTimeout: 120000 #请求处理的超时时间
+
+feign:
+  hystrix:
+    enabled: true #使用熔断
+  client:
+    config:
+      default:
+        connectTimeout: 300000
+        readTimeout: 300000
+        loggerLevel: basic
+
+#  httpclient:
+#    connection-timeout: 120000
+#    enabled: true
+#    connection-timer-repeat: 50000
+
+#设置hystrix超时时间，解决fegin第一次请求timeout的问题
+hystrix:
+  metrics:
+    enabled: true
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 300000
+#    CrawlerInfoApi#queryAll():
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 4000
+```
+
+## 参考文献
+
+[Feign的各种超时时间（含局部方法设置超时案例）](https://blog.csdn.net/hhj13978064496/article/details/104653297)
+
+[SpringBoot 关于Feign的超时时间配置](https://blog.csdn.net/catoop/article/details/107698575)
+
+ [Zuul、Ribbon、Feign、Hystrix使用时的超时时间(timeout)设置问题](https://priesttomb.github.io/%E5%88%86%E5%B8%83%E5%BC%8F/2018/09/19/Zuul-Ribbon-Feign-Hystrix-%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E8%AE%BE%E7%BD%AE%E9%97%AE%E9%A2%98/)
 
 
 # 参考

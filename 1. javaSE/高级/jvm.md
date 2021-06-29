@@ -1851,10 +1851,13 @@ public static void main(String[] args) {
 
 ```
 
+# jvm更新
 
+https://www.oracle.com/java/technologies/javase/8all-relnotes.html
 
 # 参考网页
 
 [借助HotSpot SA来一窥PermGen上的对象](https://link.zhihu.com/?target=http%3A//rednaxelafx.iteye.com/blog/730461)
 
 方法区的Class信息,又称为永久代,是否属于Java堆？https://www.zhihu.com/question/49044988eeeww
+
