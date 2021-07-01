@@ -43,3 +43,7 @@
 ## Idea 启动项目时，卡在Parsing Java 解决方案
 
 https://blog.csdn.net/Gabriel576282253/article/details/88866623
+
+## 程序并行运行
+
+![image-20210701143151897](img/image-20210701143151897.png)

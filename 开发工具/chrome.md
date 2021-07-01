@@ -291,6 +291,10 @@ http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule
 
 ![Image](img/640)
 
+## url触发的js
+
+![image-20210701185004890](img/image-20210701185004890.png)
+
 # whether Chrome console is open
 
 https://stackoverflow.com/questions/7798748/find-out-whether-chrome-console-is-open
