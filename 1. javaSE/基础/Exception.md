@@ -453,3 +453,342 @@ public class Demo {
 }
 ~~~
 
+# JVM如何处理Exception
+
+通过上面简单的介绍，对于Exception的基本概念，相信大家至少有了一定了解。接下来我们看看JVM是如何处理Exception的。
+
+首先，我们需要定义一个会抛异常的方法，和对应try/catch代码块对该异常方法的处理，具体代码如下所示：
+
+```java
+public class OneExceptionService {
+
+    public void createSomeException() {
+        throw new IllegalArgumentException("Have some exception");
+    }
+}
+
+public class MiddleService {
+
+    private OneExceptionService oneExceptionService;
+    
+    public void catchException() {
+        try {
+            oneExceptionService.createSomeException();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
+对于我们接下来讲解的内容来说，上面的代码会显得繁琐，是因为我们后面还会继续用到这一组代码。接下来我们仅仅需要关注catchException方法对应字节码，如下所示：
+
+```java
+  public void catchException();
+    Code:
+       0: aload_0
+       1: getfield      #2                  // Field oneExceptionService:Lme/hergootian/exception/OneExceptionService;
+       4: invokevirtual #3                  // Method me/hergootian/exception/OneExceptionService.createSomeException:()V
+       7: goto          20
+      10: astore_1
+      11: new           #7                  // class java/lang/RuntimeException
+      14: dup
+      15: aload_1
+      16: invokespecial #8                  // Method java/lang/RuntimeException."<init>":(Ljava/lang/Throwable;)V
+      19: athrow
+      20: return
+    Exception table:
+       from    to  target type
+           0     7    10   Class java/lang/Exception
+```
+
+在编译生成的字节码中，我们会看到下方有一个异常表（Exception table）。异常表中包含4个属性，from和to代表异常监控范围，target表示异常处理的开始，type表示异常处理所捕获的异常类型。这个异常表存储在Non-Heap空间上的PermGen/Metaspace区域。
+
+那么当我们的程序出现异常的时候，JVM会如何处理这个异常表呢？
+
+1. 首先查找出现异常的方法对应异常表，如果当前方法异常表不为空，对异常表其中一个条目进行判断，异常是否发生在该条目from到to监控的代码行，同时type匹配，则JVM调用位于target指向的处理逻辑进行处理；
+2. 如果上述过程未找到符合条件的处理者，则继续查找异常表中的其他条目；
+3. 当遍历完整个方法的异常表仍未找到符合条件的处理者，则向上查找（弹栈）；
+4. 查找当前方法的调用方法的异常表，重复上述1-3的逻辑；
+5. 如果所有栈帧均被弹出，却仍未找到合适的处理者，则抛给当前执行线程，线程则会终止；
+6. 如果当前线程是最后一个非守护线程，且异常仍未得到处理，则会导致JVM终止运行。
+
+# Exception真的影响性能么
+
+> **catch异常会影响性能**
+
+我相信一定有人听到过这样的说法。如果说catch异常会影响性能，那么我们对所有的异常都不处理，在程序最外层统一处理异常是不是更好呢？按照上面JVM处理异常的方式可知，当异常无法被处理时，会将方法逐个弹栈遍历，那么这个遍历过程是不是更慢呢？
+
+接下来我们通过例子试着给这个说法一个解释，我们完善上边的代码，增加一个unCatchException方法，代码如下所示：
+
+```java
+public class MiddleService {
+
+    private OneExceptionService oneExceptionService;
+
+    public MiddleService(OneExceptionService oneExceptionService) {
+        this.oneExceptionService = oneExceptionService;
+    }
+
+    public void unCatchException() {
+        oneExceptionService.createSomeException();
+    }
+
+    public void catchException() {
+        try {
+            oneExceptionService.createSomeException();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
+之后我们再增加一个服务，调用我们的MiddleService，一方面好方便我们做性能测试，另一方面符合最外层统一异常处理的场景，同时，为了查看实例化Exception是否真的有性能开销，我们再增加一层try/catch，代码示例如下：
+
+```java
+@Slf4j
+public class FacadeService {
+
+    private MiddleService middleService;
+
+    public FacadeService(MiddleService middleService) {
+        this.middleService = middleService;
+    }
+
+    public void callUnCatchException() {
+        try {
+            middleService.unCatchException();
+        } catch (Exception e) {
+            log.error("Catch Exception:", e);
+        }
+    }
+
+    public void callCatchException() {
+        try {
+            middleService.catchException();
+        } catch (Exception e) {
+            log.error("Catch Exception:", e);
+        }
+    }
+    
+    public void callMoreCatchException() {
+        try {
+            addOneLayerCatch();
+        } catch (Exception e) {
+            log.error("Catch Exception:", e);
+        }
+    }
+    
+    private void addOneLayerCatch() {
+        try {
+            middleService.catchException();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+```
+
+之后我们通过JMH对FacadeService的两个方法做测试，性能测试结果如下所示：
+
+```java
+Benchmark                                    Mode  Cnt   Score   Error   Units
+ExceptionBenchmark.callCatchException       thrpt   80  25.897 ± 0.232  ops/ms
+ExceptionBenchmark.callUnCatchException     thrpt   80  28.128 ± 2.608  ops/ms
+ExceptionBenchmark.callMoreCatchException   thrpt   80  21.477 ± 1.234  ops/ms
+复制代码
+```
+
+通过测试报告我们可以看到更少被try/catch包裹的方法调用栈，性能确实会更好一些。异常处理真正耗时的地方是对Exception实例的构建，因为需要对栈进行快照，这是相对很重的操作。
+
+知道了异常处理耗时较多的部分。我们换一个角度思考，如果一个程序已经出现异常，毕竟程序已经不可正确运行了，那么还有必要追求性能么？或者说这个性能在真实场景下影响的是什么？
+
+我们知道一段逻辑的处理如果慢，那么单位时间内的处理次数一定会受到影响，那么我们再用JMH做一次测试，先看测试报告：
+
+```java
+Benchmark                                                                     Mode       Cnt    Score   Error  Units
+ExceptionBenchmark.callCatchException                                       sample  10184827    0.314 ± 0.001  ms/op
+ExceptionBenchmark.callCatchException:callCatchException·p0.00              sample              0.043          ms/op
+ExceptionBenchmark.callCatchException:callCatchException·p0.50              sample              0.084          ms/op
+ExceptionBenchmark.callCatchException:callCatchException·p0.90              sample              0.443          ms/op
+ExceptionBenchmark.callCatchException:callCatchException·p0.95              sample              2.118          ms/op
+ExceptionBenchmark.callCatchException:callCatchException·p0.99              sample              3.936          ms/op
+ExceptionBenchmark.callCatchException:callCatchException·p0.999             sample             10.355          ms/op
+ExceptionBenchmark.callCatchException:callCatchException·p0.9999            sample             16.007          ms/op
+ExceptionBenchmark.callCatchException:callCatchException·p1.00              sample            369.623          ms/op
+ExceptionBenchmark.callUnCatchException                                     sample  10231220    0.313 ± 0.001  ms/op
+ExceptionBenchmark.callUnCatchException:callUnCatchException·p0.00          sample              0.046          ms/op
+ExceptionBenchmark.callUnCatchException:callUnCatchException·p0.50          sample              0.083          ms/op
+ExceptionBenchmark.callUnCatchException:callUnCatchException·p0.90          sample              0.421          ms/op
+ExceptionBenchmark.callUnCatchException:callUnCatchException·p0.95          sample              2.097          ms/op
+ExceptionBenchmark.callUnCatchException:callUnCatchException·p0.99          sample              3.969          ms/op
+ExceptionBenchmark.callUnCatchException:callUnCatchException·p0.999         sample             10.682          ms/op
+ExceptionBenchmark.callUnCatchException:callUnCatchException·p0.9999        sample             16.663          ms/op
+ExceptionBenchmark.callUnCatchException:callUnCatchException·p1.00          sample            500.695          ms/op
+复制代码
+```
+
+单纯的针对异常场景谈性能真的意义不大，但是放到真实环境下，由于单位时间内的处理次数的降低，意味着你的系统吞吐量上不去，那也就是部分异常场景，影响到了正常场景下的体验。
+
+回到上面的问题，因为异常处理会影响性能，最终反应到系统层面是降低了系统整体吞吐量。那么，我们就任其抛出而不做处理么？相信每一个在日志中排查过问题的软件工程师，都不能完全认同这个观点，那要如何如何处理？在回答这个问题之前，我们先把性能问题说完。Exception实例化耗时的地方在于构建StackTrace，JDK源码如下：
+
+```java
+public synchronized Throwable fillInStackTrace() {
+    if (stackTrace != null || backtrace != null) {
+        fillInStackTrace(0);
+        stackTrace = UNASSIGNED_STACK;
+    }
+    return this;
+}
+```
+
+那么有没有办法不构建StackTrace呢？如果你使用的版本是JDK1.7或更高版本，那我们可以通过重写构造方法来达到这个目的，在JDK1.7中对Exception类增加了如下方法：
+
+```java
+/**
+ * Constructs a new exception with the specified detail message,
+ * cause, suppression enabled or disabled, and writable stack
+ * trace enabled or disabled.
+ *
+ * @param  message the detail message.
+ * @param cause the cause.  (A {@code null} value is permitted,
+ * and indicates that the cause is nonexistent or unknown.)
+ * @param enableSuppression whether or not suppression is enabled
+ *                          or disabled
+ * @param writableStackTrace whether or not the stack trace should
+ *                           be writable
+ * @since 1.7
+ */
+protected Exception(String message, Throwable cause,
+                    boolean enableSuppression,
+                    boolean writableStackTrace) {
+    super(message, cause, enableSuppression, writableStackTrace);
+}
+```
+
+上述构造方法可以通过参数指定是否构建StackTrace，那么我们定义自己的异常类，完善上面的测试用例，异常类如下所示：
+
+```java
+public class MyException extends RuntimeException {
+
+    public MyException(Throwable cause, String message) {
+        super(message, cause, false, false);
+    }
+}
+```
+
+之后我们在MiddleService中增加一个新方法，如下代码所示：
+
+```java
+public class MiddleService {
+
+    public void catchMyException() {
+        try {
+            oneExceptionService.createSomeException();
+        } catch (Exception e) {
+            throw new MyException(e);
+        }
+    }
+}
+```
+
+同时在FacadeService中同样增加一个新方法，代码如下所示：
+
+```java
+@Slf4j
+public class FacadeService {
+
+    public void callCatchMyException() {
+        try {
+            middleService.catchMyException();
+        } catch (Exception e) {
+            log.error("Catch Exception:", e);
+        }
+    }
+}
+复制代码
+```
+
+再通过JMH进行一轮测试，测试报告如下所示：
+
+```java
+Benchmark                                    Mode  Cnt   Score   Error   Units
+ExceptionBenchmark.callCatchException       thrpt   80  25.897 ± 0.232  ops/ms
+ExceptionBenchmark.callUnCatchException     thrpt   80  28.128 ± 2.608  ops/ms
+ExceptionBenchmark.callMoreCatchException   thrpt   80  21.477 ± 1.234  ops/ms
+ExceptionBenchmark.callCatchMyException     thrpt   80  29.445 ± 0.370  ops/ms
+复制代码
+```
+
+通过报告我们能看到很明显的性能提升。但是在实际开发中为什么很少会这样使用？因为StackTrace可以帮助我们定位问题，缺失的StackTrace会让你在排查问题时丧失很多关键信息，所以不建议使用。
+
+同时，针对同类型异常短时间内频繁出现的情况（这个默认次数其实很高），为了提升性能，JVM本身也做了类似的优化处理，会导致异常堆栈的信息并不完全。需要指定参数**-XX:-OmitStackTraceInFastThrow**，才可以取消优化，让异常对栈信息完整呈现。
+
+# 处理Exception的正确姿势
+
+在讨论处理Exception的正确姿势之前，让我们回到上面案例代码FacadeService中，看一下callCatchException和callUnCatchException以及callMoreCatchException的异常堆栈信息的区别。
+
+```java
+- callUnCatchException -
+java.lang.IllegalArgumentException: Have some exception
+	at me.hergootian.exception.OneExceptionService.createSomeException(OneExceptionService.java:9)
+	at me.hergootian.exception.MiddleService.unCatchException(MiddleService.java:15)
+	at me.hergootian.exception.FacadeService.and(FacadeService.java:63)
+	at me.hergootian.exception.FacadeService.callUnCatchException(FacadeService.java:16)
+	......
+
+
+- callCatchException -
+java.lang.RuntimeException: java.lang.IllegalArgumentException: Have some exception
+	at me.hergootian.exception.MiddleService.catchException(MiddleService.java:30)
+	at me.hergootian.exception.FacadeService.then(FacadeService.java:59)
+	at me.hergootian.exception.FacadeService.callCatchException(FacadeService.java:24)
+	at me.hergootian.exception.ExceptionTest.testCallCatchException(ExceptionTest.java:15)
+    ......
+Caused by: java.lang.IllegalArgumentException: Have some exception
+	at me.hergootian.exception.OneExceptionService.createSomeException(OneExceptionService.java:9)
+	at me.hergootian.exception.MiddleService.catchException(MiddleService.java:28)
+	... 25 common frames omitted
+	
+	
+- callMoreCatchException -
+java.lang.Exception: java.lang.RuntimeException: java.lang.IllegalArgumentException: Have some exception
+    at me.hergootian.exception.FacadeService.more(FacadeService.java:50)
+    at me.hergootian.exception.FacadeService.callMultiCatchException(FacadeService.java:40)
+    at me.hergootian.exception.ExceptionTest.testCallMultiCatchException(ExceptionTest.java:27)
+    ......
+Caused by: java.lang.RuntimeException: java.lang.IllegalArgumentException: Have some exception
+    at me.hergootian.exception.MiddleService.catchException(MiddleService.java:30)
+    at me.hergootian.exception.FacadeService.more(FacadeService.java:48)
+    ... 24 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Have some exception
+    at me.hergootian.exception.OneExceptionService.createSomeException(OneExceptionService.java:9)
+    at me.hergootian.exception.MiddleService.catchException(MiddleService.java:28)
+    ... 25 common frames omitted
+复制代码
+```
+
+通过日志中的堆栈信息，不仅仅从性能上考虑，其实按照堆栈清晰度来讲，我们都不要过多的catch并再次包装异常。
+
+> **切记不要在系统内每个层级均捕获且重新包装异常**
+
+虽然我们前面探讨了catch异常，以及实例化Exception是非常耗时的操作，但是我们通过上面的异常堆栈信息，以及我们日常系统维护、排查问题时，也知道不清晰的异常堆栈对我们定位问题的干扰。
+
+每一层都捕获异常看起来好似让系统更健壮了，但是性能是其次，混乱复杂的异常堆栈会让你回来点赞的。其实每一层均尝试补货异常，本身的问题在于你对自身系统分层的不明确，编码时考虑不全面所造成的。
+
+> **Throw early, Catch late**
+
+对于异常处理有一个原则就是**Throw early， Catch late**，意思就是对于系统运行时可能发生异常的地方我们要尽早的判断/捕获，将更明确可能引起系统问题的错误暴露出来。在系统合适的地方，或者说能够处理这个异常的地方捕获异常做相应处理。
+
+> **不要拿异常做分支**
+
+在部分系统中会有那异常流做分支的，仅仅站在性能上考虑，这种方式都不会比if/else更好。
+
+但是有时我们会针对入参做校验，然后以参数类异常的方式告知方法的调用方。那么最后在系统的最外层做好防御性校验，如果这种异常很明确，不需要额外的异常堆栈，可尝试重写Exception的构造方法，取消StackTrace的构建，从而提升性能增强系统负载。
+
+
+作者：Hergootian
+链接：https://juejin.cn/post/6844904100493000711
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

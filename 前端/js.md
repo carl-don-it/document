@@ -49,3 +49,22 @@ _0x26cc3c = Function(_0x1117('7') + _0x1117('8') + '\x29\x3b')(); //focus （"re
 ```
 
 [彻底理解js中this的指向，不必硬背。](https://www.cnblogs.com/pssp/p/5216085.html)
+
+# 去除js中的json存在的转义字符\
+
+```javascript
+console.log(JSON.stringify(d).toString());
+//得到以下信息：
+//{"businessNumber":"HT-2019001","filesInfo":"[{\"fileName\":\"test.jpg\",\"groupName\":\"group1\",\"fdfsId\":\"M00/00/00/rBMBBERDSsGAWFZFAAEe88kVsg8661.jpg\"},{\"fileName\":\"test02.sql\",\"groupName\":\"group1\",\"fdfsId\":\"M00/00/00/rBMAA12ENqmAERVQAAAfFFZ78oA526.sql\"}]"}
+
+console.log(JSON.stringify(d).toString().replace(new RegExp("\\\\\"","gm"),"\""))
+//得到以下信息：
+//{"businessNumber":"HT-2019001","filesInfo":"[{"fileName":"test.jpg","groupName":"group1","fdfsId":"M00/00/00/rBMBBERDSsGAWFZFAAEe88kVsg8661.jpg"},{"fileName":"test02.sql","groupName":"group1","fdfsId":"M00/00/00/rBMAA12ENqmAERVQAAAfFFZ78oA526.sql"}]"}
+
+//结论：js中的json串出现单个反斜杠 \ 时，替换需要用 \\\\ 。
+
+————————————————
+版权声明：本文为CSDN博主「未来场景」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/cainiao0589/article/details/101264853
+
+```

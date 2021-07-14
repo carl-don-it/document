@@ -1,4 +1,4 @@
-# SpringBoot框架之通用mapper插件
+
 
 # 入门
 
@@ -31,3 +31,11 @@ SpringBoot使用MyBatis报错：tk.mybatis.mapper.provider.base.BaseSelectProvid
 ![image-20210423161017459](img/image-20210423161017459.png)
 
 ![image-20210423161023074](img/image-20210423161023074.png)
+
+# 查询
+
+![image-20210714135856947](img/image-20210714135856947.png)
+
+![image-20210714135902479](img/image-20210714135902479.png)
+
+![image-20210714135906872](img/image-20210714135906872.png)

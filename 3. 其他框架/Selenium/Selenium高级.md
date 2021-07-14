@@ -24,6 +24,9 @@ chrome启动参数参考：[peter.sh/experiments…](https://peter.sh/experiment
 | --disable-gpu                      | 禁用gpu，liinux部署需填，防止未知bug |
 | blink-settings=imagesEnabled=false | 不加载图片                           |
 | --user-agent=ua值                  | 设置ua                               |
+| --disable-web-security             | 禁用同源策略                         |
+
+
 
 3.webdriver实例化：
 
