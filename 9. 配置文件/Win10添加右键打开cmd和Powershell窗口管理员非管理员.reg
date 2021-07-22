@@ -1,0 +1,42 @@
+Windows Registry Editor Version 5.00
+ 
+; 原文链接：
+; https://blog.csdn.net/cxrsdn/article/details/84538767
+ 
+; 若原先有，先删除原来的
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\runas]
+[-HKEY_CLASSES_ROOT\Directory\Background\shell\PowershellAdmin]
+ 
+; 1.右键：命令行
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere]
+@="open-cmd-here"
+ 
+[HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHere\command]
+@="cmd.exe -noexit -command Set-Location -literalPath \"%V\"" 
+ 
+; 2.右键：命令行（管理员）
+[HKEY_CLASSES_ROOT\Directory\Background\shell\runas]
+@="open-cmd-admin-here"
+"ShowBasedOnVelocityId"=dword:00639bc8
+ 
+[HKEY_CLASSES_ROOT\Directory\Background\shell\runas\command]
+@="cmd.exe /s /k pushd \"%V\""
+ 
+; 3.shift+右键：Powershell(管理员)
+[HKEY_CLASSES_ROOT\Directory\Background\shell\PowershellAdmin]
+@="open-powershell-admin-here"
+"Extended"=""
+ 
+[HKEY_CLASSES_ROOT\Directory\Background\shell\PowershellAdmin\command]
+@="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -windowstyle hidden -Command $stpath = pwd; Start-Process PowerShell -ArgumentList \\\"-NoExit\\\", \\\"-Command Set-Location -literalPath '%V'\\\" -verb RunAs"
+ 
+; 4.设置右键 管理员打开cmd的另一种方法（可用来替换上面的2）
+; 通过Powershell调起，会闪过一次Powershell的窗口，去掉下面几行的[; ]可以取消注释
+; [-HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHereAdmin]
+; 
+; [HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHereAdmin]
+; @="在此处打开命令行窗口(管理员)"
+; 
+; [HKEY_CLASSES_ROOT\Directory\Background\shell\OpenCmdHereAdmin\command]
+; @="PowerShell -windowstyle hidden -Command \"Start-Process cmd.exe -ArgumentList '/s,/k, pushd,%V' -Verb RunAs\""

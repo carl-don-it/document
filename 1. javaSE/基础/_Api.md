@@ -293,6 +293,20 @@ public class Test {
 	}
 }
 
-运行： java org.test.Test aaa bbb ccc
+//运行： java org.test.Test aaa bbb ccc
 ```
 
+# 退出
+
+```java
+//do something before terminate the jvm, if jvm process is kill , then won't help
+Runtime.getRuntime().addShutdownHook(new Thread() {
+    @Override
+    public void run() {
+        seleniumPool.close();
+    }
+});
+
+//terminate the jvm
+Runtime.getRuntime().exit(status);
+```

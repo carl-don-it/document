@@ -577,3 +577,8 @@ Redis 在以下 2 个场景下，都会导致数据丢失。
 而且，Redis 相比于 Kafka、RabbitMQ，部署和运维也更加轻量。
 
 如果你的业务场景对于数据丢失非常敏感，而且写入量非常大，消息积压时会占用很多的机器资源，那么我建议你使用专业的消息队列中间件。
+
+# redis 客户端断开连接_Redis延时队列，这次彻底给你整明白了
+
+https://blog.csdn.net/weixin_31304817/article/details/112176486?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_baidulandingword-9&spm=1001.2101.3001.4242
+
