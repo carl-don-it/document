@@ -47,3 +47,9 @@ https://blog.csdn.net/Gabriel576282253/article/details/88866623
 ## 程序并行运行
 
 ![image-20210701143151897](img/image-20210701143151897.png)
+
+## idea debug won shutdown hook
+
+https://youtrack.jetbrains.com/issue/IDEA-75946
+
+https://stackoverflow.com/questions/24660408/how-can-i-get-intellij-debugger-to-allow-my-apps-shutdown-hooks-to-run

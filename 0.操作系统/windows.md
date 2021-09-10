@@ -6,3 +6,5 @@
 
 [Windows权限设置详解](https://www.jianshu.com/p/8efaf3f93488)
 
+[从telnet www.baidu.com 80 来玩一下http](https://www.jianshu.com/p/b5708312a5e0)
+
