@@ -1,3 +1,5 @@
+# [关系型数据库的本质是什么？mongodb为什么不是关系型数据库？](https://www.zhihu.com/question/465549093)
+
 # 介绍
 
 NoSQL = non SQL
