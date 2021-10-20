@@ -40,7 +40,7 @@ IO复用模型，Linux下的select、poll和epoll就是干这个的。将用户s
 
 一个请求一个线程，但客户端发送的连接请求都会注册到**多路复用器**上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。
 
- [I/O多路复用技术（multiplexing）是什么？]( I/O多路复用技术（multiplexing）是什么？)
+[I/O多路复用技术（multiplexing）是什么？](https://www.zhihu.com/question/28594409)
 
 [为什么 IO 多路复用要搭配非阻塞 IO?](https://www.zhihu.com/question/37271342)
 
@@ -216,11 +216,13 @@ netty本质还是tcp协议通信，因此是不会自动解析http协议的。
 
 一个普通的用Netty框架搭建的一个c/s架构的入门模块，就是实现之前NIO模块C/S的功能，不过监控和接收请求的动作框架都帮我们做了，而且通过各种架构和线程大大加强了框架的可扩展性和稳定性。
 
+> 一个handler处理从bytebuffer到string的所有编码解码过程。
+
 ![image-20200116103406538](img/image-20200116103406538.png)
 
 #### 多人聊天室
 
-因为handler是String，但是底层是二进制字节码，因此需要编码和解码
+> byte到string是一个handler，然后如何处理string也是一个handler，解耦协议和业务。
 
 ![image-20200116190903141](img/image-20200116190903141.png) ![image-20200116190241559](img/image-20200116190241559.png)
 
@@ -230,7 +232,7 @@ netty本质还是tcp协议通信，因此是不会自动解析http协议的。
 
 后端需要解析http协议的请求，因此需要解码器
 
-前端使用webSocket，并且是html5之后才支持的。
+前端使用webSocket协议，并且是html5之后才支持的。
 
 ![image-20200117211849340](img/image-20200117211849340.png)
 

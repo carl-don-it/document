@@ -684,6 +684,31 @@ YML文件的扩展名可以使用.yml或者.yaml。
 
 - 注意：value1与之间的 - 之间存在一个空格
 
+### 密码
+
+**password：** 密码第一位是*，yml文件不支持。所以需要加单引号。同时如下，password是用char[]接收的，如果你的密码是纯数字也需要加单引号。
+
+```yml
+spring:
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: mini
+      option:
+        max-connection-idle-time: 1500
+        max-connection-per-host: 200
+        max-wait-time: 60000
+        max-connection-life-time: 0
+        connect-timeout: 10000
+        socket-timeout: 60000
+      password: '*sxasasda'
+      username: user
+
+```
+
+
+
 ## Bootstrap、application
 
 1. SpringBoot本身并不支持Bootstrap，看[here](https://cloud.spring.io/spring-cloud-commons/multi/multi__spring_cloud_context_application_context_services.html)，不会加载这个配置文件，Boostrap是用在spring-cloud中的，通常用于spring-config中的，并且早于application加载。
