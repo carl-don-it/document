@@ -304,3 +304,9 @@ https://stackoverflow.com/questions/7798748/find-out-whether-chrome-console-is-o
 # 参考文献
 
 1. [Chrome 开发工具指南](http://wiki.jikexueyuan.com/project/chrome-devtools)
+
+[chromeDriver](https://sites.google.com/chromium.org/driver/capabilities?authuser=0)
+
+
+
+chrome可以通过修改comman-line来设置启动参数，还有启动参数放在profile文件里
