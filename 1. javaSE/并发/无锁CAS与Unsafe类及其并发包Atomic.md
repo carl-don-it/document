@@ -71,6 +71,8 @@ CAS的全称是Compare And Swap 即比较交换，其算法核心思想如下
 
 cas操作缓存还是内存
 
+如果说cas是原子操作，那么怎么会又aba问题。这里矛盾了
+
 #  Unsafe
 
 ## 介绍
@@ -88,7 +90,7 @@ Unsafe类存在于`sun.misc`包中，其内部方法操作可以**像C的指针�
 ```java
 //分配内存指定大小的内存
 public native long allocateMemory(long bytes);
-//根据给定的内存地址address设置重新分配指定大小的内存
+//根据给定的内存地址address设置重新分配指定大d小的内存
 public native long reallocateMemory(long address, long bytes);
 //用于释放allocateMemory和reallocateMemory申请的内存
 public native void freeMemory(long address);
@@ -199,7 +201,7 @@ public class UnSafeDemo {
 		//获取静态变量id的偏移量staticOffset
 		long staticOffset = unsafe.staticFieldOffset(userClass.getDeclaredField("id"));
 		//获取静态变量的值
-		System.out.println("设置前的ID:" + unsafe.getObject(staticBase, staticOffset));
+		System..println("设置前的ID:" + unsafe.getObject(staticBase, staticOffset));
 		//设置静态变量的值,和对象不一样
 		unsafe.putObject(staticBase, staticOffset, "SSSSSSSS");
 		//获取静态变量的值
@@ -274,7 +276,7 @@ public static Unsafe getUnsafe() {
 ```java
 //获取数组第一个元素的偏移地址
 public native int arrayBaseOffset(Class arrayClass);
-//数组中一个元素占据的内存空间,arrayBaseOffset与arrayIndexScale配合使用，可定位数组中每个元素在内存中的位置
+//数组中一个元素占据的内存空间，arrayBaseOffset与arrayIndexScale配合使用，可定位数组中每个元素在内存中的位置
 public native int arrayIndexScale(Class arrayClass);
 ```
 
@@ -1453,9 +1455,13 @@ jdk1.8的ConcurrentHashMap中，没有再使用Segment，使用了一个简单�
 
 ## 介绍
 
-假设这样一种场景，当第一个线程执行CAS(V,E,U)操作，在获取到当前变量V，准备修改为新值U前，另外两个线程已连续修改了两次变量V的值，使得该值又恢复为旧值，这样的话，我们就无法正确判断这个变量是否已被修改过，如下图。
+在多线程场景下`CAS(比较并交换)`会出现ABA问题，比如当有两个线程同时去修改变量的值，线程1和线程2都将变量由A改为B。首先线程1获得CPU的时间片，线程2由于某些原因被挂起，**线程1**经过CAS(Comparent and Swap)将变量的值**从A改为B**，线程1更新完变量的值后，此时恰好有线程3进来了，**线程3**通过CAS(comparent And Swap)将变量的值**由B改为A**，线程3更新完成后，线程2获取时间片继续执行，通过CAS(comparent And Swap)将变量的值由A改为B，而此时的线程2并不知道该变量已经有了A->B->A改变的过程。这就是CAS中的ABA问题。
 
-再有：aba之间的操作b有可能是一段方法，因此会导致线程不安全
+
+作者：不喝奶茶的Programmer
+链接：https://juejin.cn/post/6991251605215510565
+来源：稀土掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 ![img](img/%E6%97%A0%E9%94%81CAS%E4%B8%8EUnsafe%E7%B1%BB%E5%8F%8A%E5%85%B6%E5%B9%B6%E5%8F%91%E5%8C%85Atomic/20170702223304481.png)
 
