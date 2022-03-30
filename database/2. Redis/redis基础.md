@@ -676,6 +676,16 @@ String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call
 
 [基于 Redis 的分布式锁](https://crossoverjie.top/2018/03/29/distributed-lock/distributed-lock-redis/)
 
+| 拜托，面试请不要再问我Redis分布式锁的实现原理【石杉的架构笔记】 |
+| ------------------------------------------------------------ |
+| <https://mp.weixin.qq.com/s/y_Uw3P2Ll7wvk_j5Fdlusw>          |
+| 分布式从来都是Java面试中的热门话题，而分布式锁，则是这其中必不可少的一个技术点。本文就来深入的探讨一下，基于业界流行的Redisson框架如何实现Redis分布式锁，并进一步看看，这背后究竟隐藏着哪些缺陷？ |
+
+| 每秒上千订单场景下的分布式锁高并发优化实践！【石杉的架构笔记】 |
+| ------------------------------------------------------------ |
+| <https://mp.weixin.qq.com/s/RLeujAj5rwZGNYMD0uLbrg>          |
+| 每秒上千订单场景下，如何对分布式锁的并发能力进行优化？       |
+
 # 原理
 
 redis是**单线程**。memcached 是多线程模型，nginx 是master 和work 多进程模型。

@@ -1861,3 +1861,9 @@ https://www.oracle.com/java/technologies/javase/8all-relnotes.html
 
 方法区的Class信息,又称为永久代,是否属于Java堆？https://www.zhihu.com/question/49044988eeeww
 
+# GC
+
+[记一次服务Full GC背后的内存泄漏问题，真是匪夷所思](https://zhuanlan.zhihu.com/p/340824925)
+
+
+  ![1648214097779](img/1648214097779.png)
