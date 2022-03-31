@@ -81,6 +81,8 @@ cas操作缓存还是内存
 
 Unsafe类存在于`sun.misc`包中，其内部方法操作可以**像C的指针一样直接操作内存**，单从名称看来就可以知道该类是非安全的，毕竟Unsafe拥有着类似于C的指针操作，因此总是不应该首先使用Unsafe类，Java官方也不建议直接使用的Unsafe类，据说Oracle正在计划从Java 9中去掉Unsafe类，但我们还是很有必要了解该类，因为Java中CAS操作的执行依赖于Unsafe类的方法，注意Unsafe类中的所有方法都是native修饰的，也就是说Unsafe类中的方法都直接调用操作系统底层资源执行相应任务，关于Unsafe类的主要功能点如下：
 
+![1648617212765](img/1648617212765.png)
+
 ## 方法
 
 ### **内存管理**
@@ -403,7 +405,11 @@ public native boolean shouldBeInitialized(Class<?> c);
 public native  void ensureClassInitialized(Class<?> c)
 ```
 
+## 参考文献
 
+[Java魔法类：Unsafe应用解析](https://tech.meituan.com/2019/02/14/talk-about-java-magic-class-unsafe.html)
+
+> 已保存图片
 
 # Atomic系列
 
