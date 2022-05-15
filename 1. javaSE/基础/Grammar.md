@@ -149,11 +149,7 @@ https://blog.csdn.net/qq_36098284/article/details/80709524
 
 3. float  的精度没有 long 高，有效位数（尾数短）。 float  的范围大于 long指数可以很大。 
 
-### 介绍浮点数
 
-https://www.zhihu.com/question/65960911
-
-https://draveness.me/whys-the-design-floating-point-arithmetic/
 
 ## 字符型
 
