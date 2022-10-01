@@ -30,7 +30,9 @@ public class GenericDemo {
 
 因此在JDK5之后，新增了**泛型**(**Generic**)语法，让你在设计API时可以指定类或方法支持泛型，这样我们使用API的时候也变得更为简洁，并得到了**编译时期的语法检查**。
 
-* **概念 **：可以在类或方法中预支地使用未知的类型。声明一个未知的类型。当没有指定泛型时，默认类型为Object类型。
+Java有泛型这一个概念，是为了初衷是为了保证在**运行时出现的错误**能提早放到编译时检查。
+
+* **概念 **：**可以在类或方法中预支地使用未知的类型。声明一个未知的类型。**当没有指定泛型时，默认类型为Object类型。
 
 - **特点**
 
@@ -39,7 +41,7 @@ public class GenericDemo {
   3. 泛型数组的创建需要利用反射函数
 
 - **注意**
-  不同的泛型在编译时期（不是运行期间）是不同的类型，因此不可以用==，需要类型提升
+  **不同的泛型在编译时期（不是运行期间）是不同的类型**，因此不可以用==，需要类型提升
 
   以下均报错
 
@@ -308,7 +310,7 @@ public class GenericInterface {
 }
 ~~~
 
-**3、如果使用了通配符，则也需要使用通配符，因为是给父类、接口传递的类型需要合法**
+**3、如果接口使用了上下限，则实现类也需要使用上下限，因为是给父类、接口传递的类型需要合法**
 
 ```java
 public interface ValidateCodeRepository<C extends ValidateCode>{}
@@ -320,7 +322,9 @@ public class ValidateCodeRedisRepository<C extends ValidateCode>  implements Val
 
 ## 泛型通配符
 
-当使用泛型类或者接口时，传递的数据中，泛型类型不确定，可以通过通配符<?>表示。但是一旦使用泛型的通配符后，只能使用Object类中的共性方法，集合中元素自身方法无法使用。
+一般用来接受类型
+
+当使用泛型类或者接口时，**传递的数据中**，泛型类型不确定，可以通过通配符<?>表示。但是一旦使用泛型的通配符后，只能使用Object类中的共性方法，集合中元素自身方法无法使用。
 
 #### 通配符基本使用
 
@@ -343,7 +347,7 @@ public static void getElement(Collection<?> coll){}
 //？代表可以接收任意类型
 ~~~
 
-> tips:泛型不存在继承关系 Collection<Object> list = new ArrayList<String>();这种是错误的。
+> tips:泛型不存在继承关系 Collection<Object> list = new ArrayList<String>();这种是错误的。是泛型不存在，有泛型的主体类型存在继承关系，前提是泛型相同
 
 #### 通配符高级使用----受限泛型
 
@@ -455,3 +459,66 @@ T[] mArray;
 // 不能直接使用mArray = new T[DEFAULT_SIZE];
 mArray = (T[]) Array.newInstance(type, size);
 ```
+
+## 擦除
+
+代码里 `List<Integer> xs=new List<>(); 实际类型参数消失了、擦除了 List xs=new List(); `，只有那些函数签名和类结构里的泛型会存作元数据 供反射使用
+
+## 反射
+
+通过反射获得泛型的实际类型参数
+
+- 把泛型变量当成方法的参数，利用Method类的getGenericParameterTypes方法来获取泛型的实际类型参数
+
+- 例子：
+
+  ```java
+  public class GenericTest {
+      public static void main(String[] args) throws Exception {
+          getParamType();
+      }
+           /*利用反射获取方法参数的实际参数类型*/
+      public static void getParamType() throws NoSuchMethodException{
+                  TypeVariable<Class<List>>[] typeParameters = List.class.getTypeParameters();
+          System.out.println(Arrays.toString(typeParameters));
+          
+          
+          Method method = GenericTest.class.getMethod("applyMap",Map.class);
+          //获取方法的泛型参数的类型
+          Type[] types = method.getGenericParameterTypes();
+          System.out.println(types[0]);
+          //参数化的类型
+          ParameterizedType pType  = (ParameterizedType)types[0];
+          //原始类型
+          System.out.println(pType.getRawType());
+          //实际类型参数
+          System.out.println(pType.getActualTypeArguments()[0]);
+          System.out.println(pType.getActualTypeArguments()[1]);
+      }
+      /*供测试参数类型的方法*/
+      public static void applyMap(Map<Integer,String> map){
+      }
+  }
+  ```
+
+- 输出结果：
+
+  ```stylus
+  [E]
+  java.util.Map<java.lang.Integer, java.lang.String>
+  interface java.util.Map
+  class java.lang.Integer
+  class java.lang.String
+  ```
+
+
+
+## 参考文献
+
+https://www.zhihu.com/question/20400700
+
+Java 泛型 <? super T> 中 super 怎么 理解？与 extends 有何不同？ - Philip Fry的回答 - 知乎
+https://www.zhihu.com/question/20400700/answer/283109538
+
+Java 泛型 <? super T> 中 super 怎么 理解？与 extends 有何不同？ - 呵呵一笑百媚生的回答 - 知乎
+https://www.zhihu.com/question/20400700/answer/117670919

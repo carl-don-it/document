@@ -11,7 +11,7 @@ new File("").getAbsolutePath()
 
 ### class
 
-如果是运行class文件，那么工作目录是全路径的上一层。
+如果是运行class文件，那么工作目录是全路径的上一层。例如Idea的classes目录
 
 ```java
 //cmd下运行
@@ -40,7 +40,9 @@ try {
 String jarPath = new File(jarWholePath).getParentFile().getAbsolutePath();
 ```
 
-# 类路径，内部路径
+# 某一个类相对工作目录的内部路径
+
+一般使用class或者classloader，用getResource 来获取时，方法的参数是相对于**工作路径**来说的，但是jar有点特别，是jar内部开始，不是jar上层。
 
 ### 获取
 
@@ -50,19 +52,19 @@ String jarPath = new File(jarWholePath).getParentFile().getAbsolutePath();
 4. 如果是properties文件那么，获取stream后可以直接注入properties集合
 5. 注意URLEncode
 
-### class
+### 运行class
 
 如果是运行class文件，很简单，就是IDEA的 target下面的classes路径或者部署后的类路径
 
 ![image-20200330120522470](img/image-20200330120522470.png)
 
-### jar
+### 运行jar
 
 如果是运行jar文件，获取内部类路径和运行class时一样。
 
 ```java
 Properties properties = new Properties();
-InputStream resourceAsStream = Agenda.class.getResourceAsStream("/server-node.properties");
+InputStream resourceAsStream = Agenda.class.getResourceAsStream("/server-node.properties");//从class加载是相对class，加/能变成相对工作路径。
 properties.load(resourceAsStream);
 
 //打成jar包的时候，注意需要把资源打进jar包里面
