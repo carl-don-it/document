@@ -102,7 +102,7 @@ Rebox.java:8: put(capture#337 of ?) in Box<capture#337 of ?> cannot be applied t
 
 当解析一个泛型方法的调用时，编译器将设法推断类型参数它能达到的最具体类型。 例如，对于下面这个泛型方法：
 
-```
+```java
 public static<T> T identity(T arg) {
 return arg 
 }; 
@@ -112,7 +112,7 @@ return arg
 
 和它的调用：
 
-```
+```java
 Integer i = 3; 
 System.out.println(identity(i));
 
@@ -123,7 +123,7 @@ System.out.println(identity(i));
 
 当构造泛型实例时，可以使用类型推断减少冗余。例如，使用 Box 类创建 Box<String> 要求您指定两次类型参数 String：
 
-```
+```java
 Box<String> box = new BoxImpl<String>();
 ```
 
@@ -131,7 +131,7 @@ Box<String> box = new BoxImpl<String>();
 
 清单 5. 一个泛型工厂方法，可以避免不必要地指定类型参数
 
-```
+```java
 public class BoxImpl<T> implements Box<T> {
     public static<V> Box<V> make() { 
     	return new BoxImpl<V>(); 
@@ -142,13 +142,13 @@ public class BoxImpl<T> implements Box<T> {
 
 如果使用 BoxImpl.make() 工厂实例化一个 Box，您只需要指定一次类型参数：
 
-```
+```java
 Box<String> myBox = BoxImpl.make();
 ```
 
 泛型 make() 方法为一些类型 V 返回一个 Box<V>，返回值被用于需要 Box<String> 的上下文中。编译器确定 String 是 V 能接受的满足类型约束的最具体类型，因此此处将 V 推断为 String。您还可以**手动地指定 V 的值：**
 
-```
+```java
 Box<String> myBox = BoxImpl.<String>make();
 
 

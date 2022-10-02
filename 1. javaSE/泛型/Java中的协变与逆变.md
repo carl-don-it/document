@@ -5,7 +5,7 @@ Better to run than curse the road.
 
 [ 首页](https://extremegtr.github.io/)[ 标签**42**](https://extremegtr.github.io/tags/)[ 分类**22**](https://extremegtr.github.io/categories/)[ 归档**46**](https://extremegtr.github.io/archives/)
 
-# [Java中的协变与逆变](https://extremegtr.github.io/2016/07/11/Covariance-And-Contravariance-In-Java/)
+[Java中的协变与逆变](https://extremegtr.github.io/2016/07/11/Covariance-And-Contravariance-In-Java/)
 
  发表于 2016-07-11   更新于 2018-04-28   分类于 [JavaSE](https://extremegtr.github.io/categories/JavaSE/)   阅读次数： 1482
  本文字数： 7k   阅读时长 ≈ 6 分钟
