@@ -894,6 +894,137 @@ public class QuickStartController {
 
 注意：使用@ConfigurationProperties方式可以进行配置文件与实体字段的自动映射，但需要字段必须提供set方法才可以，而使用@Value注解修饰的字段不需要提供set方法
 
+## [spring.profiles.active来分区配置](https://www.cnblogs.com/anakin/p/8569827.html)
+
+- **spring.profiles.active**
+
+很多时候，我们项目在开发环境和生成环境的环境配置是不一样的，例如，数据库配置，在开发的时候，我们一般用测试数据库，而在生产环境的时候，我们是用正式的数据，这时候，我们可以利用profile在不同的环境下配置用不同的配置文件或者不同的配置
+
+spring boot允许你通过命名约定按照一定的格式(application-{profile}.properties)来定义多个配置文件，然后通过在application.properyies通过spring.profiles.active来具体激活一个或者多个配置文件，如果没有没有指定任何profile的配置文件的话，spring boot默认会启动application-default.properties。
+
+> profile的配置文件可以按照application.properyies的放置位置一样，放于以下四个位置，
+>
+> 1. 当前目录的 “/config”的子目录下
+> 2. 当前目录下
+> 3. classpath根目录的“/config”包下
+> 4. classpath的根目录下
+
+在这里我们就定义俩个profile文件，application-cus1.properties和application-cus2.properties，并在俩个文件中都分别写上变量cusvar=cus1和cusvar=cus2
+
+我们在application.properyies也写上，并把profile切换到application-cus1.properties的配置文件
+
+```properties
+cusvar=cus3
+spring.profiles.active=cus1
+```
+
+可以通过这样子来测试
+
+```java
+@RestController
+@RequestMapping("/task")
+public class TaskController {
+
+    @RequestMapping(value = {"/",""})
+    public String hellTask(@Value("${cusvar}")String cusvar ){
+
+        return "hello task !! myage is " + cusvar;
+    }
+
+}
+```
+
+> 在这里可以看到spring.profiles.active激活的profile不同，打印出来的结果也不一样。会覆盖默认的属性
+
+- @**Profile**
+
+除了可以用profile的配置文件来分区配置我们的环境变量，在代码里，我们还可以直接用@Profile注解来进行配置，例如数据库配置，这里我们先定义一个接口
+
+```java
+public interface DBConnector {
+    public void configure();    
+}
+```
+
+分别定义俩个实现类来实现它
+
+```java
+/**
+  * 测试数据库
+  */
+@Component
+@Profile("testdb")
+public class TestDBConnector implements DBConnector {
+
+    @Override
+    public void configure() {
+
+        System.out.println("testdb");
+
+    }
+}
+
+/**
+ * 生产数据库
+ */
+@Component
+@Profile("devdb")
+public class DevDBConnector implements DBConnector {
+
+    @Override
+    public void configure() {
+
+        System.out.println("devdb");
+
+    }
+
+}
+```
+
+通过在配置文件激活具体使用哪个实现类
+
+```
+spring.profiles.active=testdb
+```
+
+然后就可以这么用了
+
+```java
+@RestController
+@RequestMapping("/task")
+public class TaskController {
+
+    @Autowired DBConnector connector ;
+
+    @RequestMapping(value = {"/",""})
+    public String hellTask(){
+
+        connector.configure(); //最终打印testdb     
+        return "hello task !! myage is " + myage;
+    }
+
+}
+```
+
+除了spring.profiles.active来激活一个或者多个profile之外，还可以用spring.profiles.include来叠加profile
+
+```properties
+spring.profiles: testdb
+spring.profiles.include: proddb,prodmq
+```
+
+以上就是spring boot用profile的作用
+
+## 通过命令行设置属性值
+
+相信使用过一段时间Spring Boot的用户，一定知道这条命令：`java -jar xxx.jar --server.port=8888`，通过使用--server.port属性来设置xxx.jar应用的端口为8888。
+
+在命令行运行时，连续的两个减号`--`就是对`application.properties`中的属性值进行赋值的标识。所以，`java -jar xxx.jar --server.port=8888`命令，等价于我们在`application.properties`中添加属性`server.port=8888`，该设置在样例工程中可见，读者可通过删除该值或使用命令行来设置该值来验证。
+
+通过命令行来修改属性值固然提供了不错的便利性，但是通过命令行就能更改应用运行的参数，那岂不是很不安全？是的，所以Spring Boot也贴心的提供了屏蔽命令行访问属性的设置，只需要这句设置就能屏蔽：`SpringApplication.setAddCommandLineProperties(false)`。
+
+
+
 # 项目部署路径
 
 1. springboot的项目部署路径在temp路径下 **？不一定，存疑**
@@ -1941,3 +2072,182 @@ Hibernate: update user set age=?, name=? where id=?
 可以看到，我们的第三次查询获得了正确的结果！同时，我们的第一次查询也不是通过select查询获得的，因为在初始化数据的时候，调用save方法时，就已经将这条数据加入了redis缓存中，因此后续的查询就直接从redis中获取了。
 
 本文内容到此为止，主要介绍了为什么要使用Redis做缓存，以及如何在Spring Boot中使用Redis做缓存，并且通过一个小问题来帮助大家理解缓存机制，在使用过程中，一定要注意缓存生命周期的控制，防止数据不一致的情况出现。
+
+# spring-actuator
+
+运维监控检测
+
+```xml
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+配置文件
+
+```properties
+management.port = 8081
+```
+
+访问，还有很多url
+
+![image-20200122064835229](../../../../../%E7%BC%96%E7%A8%8B/%E7%BC%96%E7%A8%8B%E6%96%87%E6%A1%A3/3.%20%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6/Spring/spring-actuator/img/image-20200122064835229.png)
+
+# schedule
+
+实现定时任务的方案
+
+1. 使用 JDK 的Timer和TimerTask实现
+   可以实现简单的间隔执行任务，无法实现按日历去调度执行任务。
+2. 使用Quartz实现
+   Quartz 是一个异步任务调度框架，功能丰富，可以实现按日历调度。
+3. 使用Spring Task实现
+   Spring 3.0后提供Spring Task实现任务调度，支持按日历调度，相比Quartz功能稍简单，但是在开发基本够用，支持注解编程方式
+
+## 快速入门
+
+### 单线程串行化执行，同步
+
+```java
+@EnableScheduling
+//启动类或者配置类加上该注解开启
+```
+
+```java
+@Component
+public class SerializedTask {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SerializedTask.class);
+
+
+//    定义任务调试策略
+    @Scheduled(initialDelay = 3000, fixedRate = 5000) //第一次延迟3秒，以后每隔5秒执行一次
+//    @Scheduled(cron = "0/3 * * * * *")//每隔3秒去执行
+//    @Scheduled(fixedRate = 3000) //在任务开始后3秒执行下一次调度
+//    @Scheduled(fixedDelay = 3000) //在任务结束后3秒后才开始执行
+    public void task1() {
+        LOGGER.info("===============测试定时任务1开始===============");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        LOGGER.info("===============测试定时任务1结束===============");
+
+    }
+
+//    定义任务调试策略
+    @Scheduled(cron = "0/3 * * * * *")//每隔3秒去执行
+//    @Scheduled(fixedRate = 3000) //在任务开始后3秒执行下一次调度
+//    @Scheduled(fixedDelay = 3000) //在任务结束后3秒后才开始执行
+    public void task2() {
+        LOGGER.info("===============测试定时任务2开始===============");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        LOGGER.info("===============测试定时任务2结束===============");
+
+    }
+}
+```
+
+### 异步执行
+
+配置类添加线程池
+
+```java
+@Configuration
+@EnableScheduling
+public class AsyncTaskConfig implements SchedulingConfigurer, AsyncConfigurer {
+    //线程池线程数量
+    private int corePoolSize = 5;
+
+    @Bean
+    public ThreadPoolTaskScheduler taskScheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.initialize();//初始化线程池
+        scheduler.setPoolSize(corePoolSize);//线程池容量
+        return scheduler;
+    }
+
+    @Override
+    public Executor getAsyncExecutor() {
+        return taskScheduler();
+    }
+
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return null;
+    }
+
+    @Override
+    public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
+        scheduledTaskRegistrar.setTaskScheduler(taskScheduler());
+    }
+}
+```
+
+### 代码
+
+![image-20200224140532594](../../../../../%E7%BC%96%E7%A8%8B/%E7%BC%96%E7%A8%8B%E6%96%87%E6%A1%A3/3.%20%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6/Spring/spring-task/img/image-20200224140532594.png)
+
+## cron表达式
+
+- **cron表达式包括6部分**：
+
+  秒（0~59） 
+
+  分钟（0~59）
+
+  小时（0~23） 
+
+  月中的天（1~31） 
+
+  月（1~12） 
+
+  周中的天（填写MON，TUE，WED，THU，FRI，SAT,SUN，或数字1~7 1表示MON，依次类推）
+
+- **特殊字符介绍**：
+  “/”字符表示指定数值的增量
+  “*”字符表示所有可能的值
+  “-”字符表示区间范围
+  "," 字符表示列举
+  “？”字符仅被用于月中的天和周中的天两个子表达式，表示不指定值
+
+- **例子**：
+  0/3 * * * * * 每隔3秒执行
+  0 0/5 * * * * 每隔5分钟执行
+  0 0 0 * * * 表示每天0点执行
+  0 0 12 ? * WEN 每周三12点执行
+  0 15 10 ? * MON-FRI 每月的周一到周五10点 15分执行
+  0 15 10 ? * MON,FRI 每月的周一和周五10点 15分执行
+
+# hateoas
+
+类似swagger的暴露接口的工具
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-hateoas</artifactId>
+</dependency>
+```
+
+```java
+import org.springframework.hateoas.ResourceSupport;
+
+public class User extends ResourceSupport {
+
+    @GetMapping(path = "/json/user",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public User user() {
+		//暴露接口，不过很麻烦
+        user.add(linkTo(methodOn(JSONRestController.class).setUserName(user.getName())).withSelfRel());
+        user.add(linkTo(methodOn(JSONRestController.class).setUserAge(user.getAge())).withSelfRel());
+
+        return user;
+    }
+```
+

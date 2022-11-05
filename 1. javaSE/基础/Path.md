@@ -1,30 +1,18 @@
-# 工作目录
+# File的基地址
 
-### 获取
+工作目录和getResource完全不是同一个概念，分开来看。
 
-可以看看io文件夹下的 [File、递归.md](C:/Users/TJR_S/OneDrive/%E7%BC%96%E7%A8%8B/1.%20javaSE/IO/File%E3%80%81%E9%80%92%E5%BD%92.md)
+By default the classes in the java.io package always resolve relative pathnames against the current user directory. This 
+directory is named by the `system property user.dir,` and is typically the directory in which the Java virtual machine was invoked.
 
 ```java
-//工作目录就是下面的目录，可以在代码中拿到。
+
 new File("").getAbsolutePath()
 ```
 
-### class
+# jar所在目录
 
-如果是运行class文件，那么工作目录是全路径的上一层。例如Idea的classes目录
-
-```java
-//cmd下运行
-java com.don.demo.basic.path.WorkingDirectoryTest;
-//工作目录是com所在目录
-//IDEA可以改变工作目录 `%MODULE_WORKING_DIR%`比较好，默认project_Dir
-```
-
-### jar
-
-如果是运行jar包，那么就是jar包所在的目录
-
-**jar目录获取的其他方法，并不是很好用**
+**并不是很好用**
 
 ```java
 //获取类所在jar包的绝对路径 ../**.jar
@@ -40,17 +28,18 @@ try {
 String jarPath = new File(jarWholePath).getParentFile().getAbsolutePath();
 ```
 
-# 某一个类相对工作目录的内部路径
+# getResource
 
-一般使用class或者classloader，用getResource 来获取时，方法的参数是相对于**工作路径**来说的，但是jar有点特别，是jar内部开始，不是jar上层。
+一般使用class或者classloader，用getResource 来获取时，返回的是一个URL，不同的资源有不用的protocol。
 
 ### 获取
 
 1. 使用 getResource 获取 URL
 2. 使用 getResourceAsStream 直接获取 URL 代表的 stream 
-3. 底层都是依靠classLoader
+3. 底层都是依靠classLoader.getResource()，注意不要使用"/"开头，为null；class.getResource()如果用“/”则会去掉，如果不使用则会加上当前包路径。
 4. 如果是properties文件那么，获取stream后可以直接注入properties集合
-5. 注意URLEncode
+5. 注意URLEncode，默认encoding就行了
+6. 注意jar的打包方式，生成目录结构。
 
 ### 运行class
 
@@ -61,6 +50,8 @@ String jarPath = new File(jarWholePath).getParentFile().getAbsolutePath();
 ### 运行jar
 
 如果是运行jar文件，获取内部类路径和运行class时一样。
+
+注意不要用classLoader.getResource("")来获取jar路径，jar没有路径，直接获取详细一层的路径。如ClassPathTest.class.getResource("")
 
 ```java
 Properties properties = new Properties();
@@ -83,3 +74,13 @@ ServletActionContext.getServletContext().getRealPath(“/”)
 # 代码
 
 ![image-20200510205923057](img/image-20200510205923057.png)
+
+# 包路径
+
+Java遍历包中所有类 https://blog.csdn.net/wangpeng047/article/details/8124390
+
+Java遍历jar包所有类-后续 http://blog.csdn.net/wangpeng047/article/details/8202353
+
+Java遍历包中所有类-终续 http://blog.csdn.net/wangpeng047/article/details/8206427
+
+![1667615906922](img/1667615906922.png)

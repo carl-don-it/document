@@ -1384,10 +1384,6 @@ public  void beforePrintLog(){
 
 此接口是 spring 的事务管理器，它里面提供了我们常用的操作事务的方法，我们在开发中都是使用它的实现类。
 
-  ![image-20200129101811935](img/image-20200129101811935.png)![image-20200129102037114](img/image-20200129102037114.png)
-
-![image-20200129101718394](img/image-20200129101718394.png)
-
 真正管理事务的对象
 
 ```java
@@ -1397,17 +1393,11 @@ org.springframework.orm.hibernate5.HibernateTransactionManager //使用Hibernate
 
 ### TransactionDefinition
 
-它是事务的定义信息对象，里面有如下方法：  
-
-![image-20200129102403023](img/image-20200129102403023.png)
-
-传播行为、隔离级别、超时时间、是否只读事务
+它是事务的定义信息对象 
 
 ### TransactionStatus
 
-此接口提供的是事务具体的运行状态，方法介绍如下图：
-
-![image-20200129102534637](img/image-20200129102534637.png)
+此接口提供的是事务具体的运行状态
 
 ## 传播行为
 
@@ -1418,7 +1408,7 @@ PROPAGION_XXX :事务的传播行为
 
 //保证同一个事务中
   PROPAGATION_REQUIRED  	支持当前事务，如果不存在 就新建一个(默认)。通常能满足处理大多数的业务场景。
-  PROPAGATION_SUPPORTS  	支持当前事务，如果不存在，就不使用事务。这个通常是用来处理那些并非原子性的非核心业务逻辑操作。应用场景较少。（）
+  PROPAGATION_SUPPORTS  	支持当前事务，如果不存在，就不使用事务。这个通常是用来处理那些并非原子性的非核心业务逻辑操作。应用场景较少。
   PROPAGATION_MANDATORY 	支持当前事务，如果不存在，抛出异常
     
 // 保证没有在同一个事务中
@@ -1433,7 +1423,7 @@ https://blog.csdn.net/m0_37034934/article/details/81903564#commentBox
 
 即然是传播，那么至少有两个东西，才可以发生传播。单体不存在传播这个行为。
 
-事务传播行为（propagation behavior）指的就是当一个事务方法被另一个事务方法调用时，这个事务方法应该如何进行。
+**事务传播行为（propagation behavior）指的就是当一个事务方法被另一个事务方法调用时，这个事务方法应该如何进行。**
 例如：methodA事务方法调用methodB事务方法时，methodB是继续在调用者methodA的事务中运行呢，还是为自己开启一个新事务运行，这就是由methodB的事务传播行为决定的。
 
  ![这里写图片描述](img/20170420212829825.png)
@@ -1591,7 +1581,7 @@ PROPAGATION_NOT_SUPPORTED 总是非事务地执行，并挂起任何存在的事
 
 这是一个嵌套事务,使用JDBC 3.0驱动时,仅仅支持DataSourceTransactionManager作为事务管理器。 需要JDBC 驱动的java.sql.Savepoint类。使用PROPAGATION_NESTED，还需要把`PlatformTransactionManager`的nestedTransactionAllowed属性设为true(属性值默认为false)。
 
-这里关键是嵌套执行。（**不是嵌套事务，而是使用savePoint，还是同一个事务，只不过分开几个点**）
+这里关键是嵌套执行。（**使用savePoint模拟**）
 
 ```java
 @Transactional(propagation = Propagation.REQUIRED)
@@ -1634,7 +1624,7 @@ main(){
 }
 ```
 
-当methodB方法调用之前，调用`setSavepoint`方法，保存当前的状态到`savepoint`。如果methodB方法调用失败，则恢复到之前保存的状态。但是需要注意的是，这时的事务并没有进行提交，如果后续的代码(doSomeThingB()方法)调用失败，则回滚包括methodB方法的所有操作。嵌套事务一个非常重要的概念就是内层事务依赖于外层事务。外层事务失败时，会回滚内层事务所做的动作。而内层事务操作失败并不会引起外层事务的回滚。
+当methodB方法调用之前，调用`setSavepoint`方法，保存当前的状态到`savepoint`。如果methodB方法调用失败，则恢复到之前保存的状态。但是需要注意的是，这时的事务并没有进行提交，如果后续的代码(doSomeThingB()方法)调用失败，则回滚包括methodB方法的所有操作。嵌套事务一个非常重要的概念就是内层事务依赖于外层事务。**外层事务失败时，会回滚内层事务所做的动作。而内层事务操作失败并不会引起外层事务的回滚。**
 
 **PROPAGATION_NESTED 与PROPAGATION_REQUIRES_NEW的区别:**
 
@@ -1649,7 +1639,9 @@ PROPAGATION_REQUIRES_NEW 启动一个新的, 不依赖于环境的 “内部” 
 
 由此可见, PROPAGATION_REQUIRES_NEW 和 PROPAGATION_NESTED 的最大区别在于, PROPAGATION_REQUIRES_NEW 完全是一个新的事务, 而 PROPAGATION_NESTED 则是外部事务的子事务, 如果外部事务 commit, 嵌套事务也会被 commit, 这个规则同样适用于 roll back.
 
-## AOP实现事务
+## 自己实现事务
+
+自己写一个aop，并且仅限于 jdbc onnection
 
 ### 实现事务管理器
 
@@ -1791,7 +1783,9 @@ public class TransactionManager {
 
 ## 声明式事务
 
-### xml
+### tx标签
+
+基于 <tx> 命名空间的声明式事务治理：在前两种方法的基础上， Spring 2.x 引入了 <tx> 命名空间，连络行使 <aop> 命名空间，带给开发人员设置配备声明式事务的全新体验。  
 
 #### 0.  前提
 
@@ -1882,26 +1876,28 @@ public class TransactionManager {
 </beans>
 ```
 
-### 注解
+### @Transactional  
+
+基于 @Transactional 的声明式事务管理： Spring 2.x 还引入了基于 Annotation 的体式格式，具体次要触及@Transactional 标注。 @Transactional 可以浸染于接口、接口方法、类和类方法上。算作用于类上时，该类的一切public 方法将都具有该类型的事务属性。  
 
 #### 1 配置事务管理器
 
 ##### xml
 
 ```xml
-    <!-- 配置事务管理器 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"></property>
-    </bean>
+<!-- 配置事务管理器 -->
+<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"></property>
+</bean>
 ```
 
 ##### ano
 
 ```java
-	@Bean(name = "transactionManager")
-	public PlatformTransactionManager createTransactionManager(DataSource dataSource) {
-		return new DataSourceTransactionManager(dataSource);
-	}
+@Bean(name = "transactionManager")
+public PlatformTransactionManager createTransactionManager(DataSource dataSource) {
+    return new DataSourceTransactionManager(dataSource);
+}
 ```
 
 #### 2. 开启事务注解支持
@@ -1961,75 +1957,13 @@ public class AccountServiceImpl implements IAccountService{
 
 
 
-## 事务方式
 
-### 声明式事务管理
 
-#### TransactionInterceptor
 
-基于 TransactionInterceptor 的声明式事务管理：两个次要的属性： transactionManager，用来指定一个事务治 理器，并 将具体事务相 关的操作请托给它；其 他一个是 Properties 类型的transactionAttributes 属性，该属性的每一个键值对中，键指定的是方法名，方法名可以行使通配符，而值就是表现呼应方法的所运用的事务属性。  
 
-```xml
-<beans>
-...    
-	<bean id="transactionInterceptor"
-          class="org.springframework.transaction.interceptor.TransactionInterceptor">
-        <property name="transactionManager" ref="transactionManager"/>
-        <property name="transactionAttributes">
-            <props>
-                <prop key="transfer">PROPAGATION_REQUIRED</prop>
-            </props>
-        </property>
-    </bean>
-    <bean id="bankServiceTarget"
-          class="footmark.spring.core.tx.declare.origin.BankServiceImpl">
-        <property name="bankDao" ref="bankDao"/>
-    </bean>
-    <bean id="bankService"
-          class="org.springframework.aop.framework.ProxyFactoryBean">
-        <property name="target" ref="bankServiceTarget"/>
-        <property name="interceptorNames">
-            <list>
-                <idref bean="transactionInterceptor"/>
-            </list>
-        </property>
-    </bean>
-...
-</beans>
-```
 
-#### TransactionProxyFactoryBean
 
-基于 TransactionProxyFactoryBean 的声明式事务管理：设置配置文件与先前比照简化了许多。我们把这类设置配置文件格式称为 Spring 经典的声明式事务治理 。
-
-```xml
-<beans>
-......
-	<bean id="bankServiceTarget" class="footmark.spring.core.tx.declare.classic.BankServiceImpl">
-		<property name="bankDao" ref="bankDao"/>
-	</bean>
-	<bean id="bankService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-		<property name="target" ref="bankServiceTarget"/>
-		<property name="transactionManager" ref="transactionManager"/>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="transfer">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
- ......
-</beans>
-```
-
-#### tx标签
-
-基于 <tx> 命名空间的声明式事务治理：在前两种方法的基础上， Spring 2.x 引入了 <tx> 命名空间，连络行使 <aop> 命名空间，带给开发人员设置配备声明式事务的全新体验。  
-
-#### @Transactional  
-
-基于 @Transactional 的声明式事务管理： Spring 2.x 还引入了基于 Annotation 的体式格式，具体次要触及@Transactional 标注。 @Transactional 可以浸染于接口、接口方法、类和类方法上。算作用于类上时，该类的一切public 方法将都具有该类型的事务属性。  
-
-### 编程式事物管理
+## 编程式事物管理
 
 在代码中显式挪用 beginTransaction()、 commit()、 rollback()等事务治理相关的方法，这就是编程式事务管理。 Spring 对事物的编程式管理有基于底层 API 的编程式管理和基于 TransactionTemplate 的编程式事务管理两种方式。  
 
@@ -2086,10 +2020,61 @@ public class BankServiceImpl implements BankService {
 }
 ```
 
-### 区别
+#### TransactionInterceptor+ProxyFactoryBean
 
-1. 编程式事务是自己写事务处理的类，然后调用
-2. 声明式事务是在配置文件中配置，一般搭配在框架里面使用！  
+基于 TransactionInterceptor 的声明式事务管理：两个次要的属性： transactionManager，用来指定一个事务治 理器，并 将具体事务相 关的操作请托给它；其 他一个是 Properties 类型的transactionAttributes 属性，该属性的每一个键值对中，键指定的是方法名，方法名可以行使通配符，而值就是表现呼应方法的所运用的事务属性。  
+
+```xml
+<beans>
+...    
+	<bean id="transactionInterceptor"
+          class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="transfer">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="bankServiceTarget"
+          class="footmark.spring.core.tx.declare.origin.BankServiceImpl">
+        <property name="bankDao" ref="bankDao"/>
+    </bean>
+    <bean id="bankService"
+          class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="bankServiceTarget"/>
+        <property name="interceptorNames">
+            <list>
+                <idref bean="transactionInterceptor"/>
+            </list>
+        </property>
+    </bean>
+...
+</beans>
+```
+
+#### TransactionProxyFactoryBean
+
+基于 TransactionProxyFactoryBean 的声明式事务管理：设置配置文件与先前比照简化了许多。我们把这类设置配置文件格式称为 Spring 经典的声明式事务治理 。
+
+```xml
+<beans>
+......
+	<bean id="bankServiceTarget" class="footmark.spring.core.tx.declare.classic.BankServiceImpl">
+		<property name="bankDao" ref="bankDao"/>
+	</bean>
+	<bean id="bankService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="target" ref="bankServiceTarget"/>
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="transfer">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+ ......
+</beans>
+```
 
 ## 代码
 

@@ -303,80 +303,88 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)
 输入命令`javap -verbose -p Main.class`查看输出内容: **分为四部分**
 
 ```java
-Classfile /D:/project/demo_code/composite-project/jvm/src/main/java/com/don/demo/jvm/ClassFileDecompiled/Main.class
-  Last modified 2019-12-19; size 998 bytes
-  MD5 checksum ae9c8d30ba07bf4996ea8d30709713ec
+Classfile /D:/编程/项目/后端project/don/composite-project/basic/target/classes/com/don/demo/basic/finalizer/Main.class
+  Last modified 2022-10-13; size 1237 bytes
+  MD5 checksum f783883035c5b998b8b094f6ea3fdacf
   Compiled from "Main.java"
-public class com.don.demo.jvm.ClassFileDecompiled.Main
+public class com.don.demo.basic.finalizer.Main
   minor version: 0
   major version: 52
   flags: ACC_PUBLIC, ACC_SUPER
 Constant pool:
-   #1 = Methodref          #16.#34        // java/lang/Object."<init>":()V
-   #2 = String             #17            // word
-   #3 = Fieldref           #10.#35        // com/don/demo/jvm/ClassFileDecompiled/Main.word:Ljava/lang/String;
-   #4 = Fieldref           #10.#36        // com/don/demo/jvm/ClassFileDecompiled/Main.m:I
-   #5 = Methodref          #10.#37        // com/don/demo/jvm/ClassFileDecompiled/Main.inc:()I
-   #6 = Methodref          #10.#38        // com/don/demo/jvm/ClassFileDecompiled/Main.inc2:()I
-   #7 = Fieldref           #39.#40        // java/lang/System.out:Ljava/io/PrintStream;
-   #8 = Methodref          #41.#42        // java/io/PrintStream.println:(Ljava/lang/String;)V
-   #9 = String             #43            // 13
-  #10 = Class              #44            // com/don/demo/jvm/ClassFileDecompiled/Main
-  #11 = Methodref          #45.#46        // java/lang/Class.getName:()Ljava/lang/String;
-  #12 = Methodref          #16.#47        // java/lang/Object.getClass:()Ljava/lang/Class;
-  #13 = Methodref          #41.#48        // java/io/PrintStream.println:(I)V
-  #14 = Methodref          #10.#49        // com/don/demo/jvm/ClassFileDecompiled/Main.inc3:()I
-  #15 = Methodref          #10.#50        // com/don/demo/jvm/ClassFileDecompiled/Main.inc5:()V
-  #16 = Class              #51            // java/lang/Object
-  #17 = Utf8               word
-  #18 = Utf8               Ljava/lang/String;
-  #19 = Utf8               m
-  #20 = Utf8               I
-  #21 = Utf8               <init>
-  #22 = Utf8               ()V
-  #23 = Utf8               Code
-  #24 = Utf8               LineNumberTable
-  #25 = Utf8               inc
-  #26 = Utf8               ()I
-  #27 = Utf8               inc2
-  #28 = Utf8               inc3
-  #29 = Utf8               inc4
-  #30 = Utf8               inc5
-  #31 = Utf8               inc46
-  #32 = Utf8               SourceFile
-  #33 = Utf8               Main.java
-  #34 = NameAndType        #21:#22        // "<init>":()V
-  #35 = NameAndType        #17:#18        // word:Ljava/lang/String;
-  #36 = NameAndType        #19:#20        // m:I
-  #37 = NameAndType        #25:#26        // inc:()I
-  #38 = NameAndType        #27:#26        // inc2:()I
-  #39 = Class              #52            // java/lang/System
-  #40 = NameAndType        #53:#54        // out:Ljava/io/PrintStream;
-  #41 = Class              #55            // java/io/PrintStream
-  #42 = NameAndType        #56:#57        // println:(Ljava/lang/String;)V
-  #43 = Utf8               13
-  #44 = Utf8               com/don/demo/jvm/ClassFileDecompiled/Main
-  #45 = Class              #58            // java/lang/Class
-  #46 = NameAndType        #59:#60        // getName:()Ljava/lang/String;
-  #47 = NameAndType        #61:#62        // getClass:()Ljava/lang/Class;
-  #48 = NameAndType        #56:#63        // println:(I)V
-  #49 = NameAndType        #28:#26        // inc3:()I
-  #50 = NameAndType        #30:#22        // inc5:()V
-  #51 = Utf8               java/lang/Object
-  #52 = Utf8               java/lang/System
-  #53 = Utf8               out
-  #54 = Utf8               Ljava/io/PrintStream;
-  #55 = Utf8               java/io/PrintStream
-  #56 = Utf8               println
-  #57 = Utf8               (Ljava/lang/String;)V
-  #58 = Utf8               java/lang/Class
-  #59 = Utf8               getName
-  #60 = Utf8               ()Ljava/lang/String;
-  #61 = Utf8               getClass
-  #62 = Utf8               ()Ljava/lang/Class;
-  #63 = Utf8               (I)V
+   #1 = Methodref          #18.#40        // java/lang/Object."<init>":()V
+   #2 = String             #19            // string
+   #3 = Fieldref           #12.#41        // com/don/demo/basic/finalizer/Main.string:Ljava/lang/String;
+   #4 = String             #42            // goodbye
+   #5 = Fieldref           #12.#43        // com/don/demo/basic/finalizer/Main.neverUser:Ljava/lang/String;
+   #6 = Fieldref           #12.#44        // com/don/demo/basic/finalizer/Main.m:I
+   #7 = Methodref          #12.#45        // com/don/demo/basic/finalizer/Main.inc:()I
+   #8 = Methodref          #12.#46        // com/don/demo/basic/finalizer/Main.inc2:()I
+   #9 = Fieldref           #47.#48        // java/lang/System.out:Ljava/io/PrintStream;
+  #10 = Methodref          #49.#50        // java/io/PrintStream.println:(Ljava/lang/String;)V
+  #11 = String             #51            // 13
+  #12 = Class              #52            // com/don/demo/basic/finalizer/Main
+  #13 = Methodref          #53.#54        // java/lang/Class.getName:()Ljava/lang/String;
+  #14 = Methodref          #18.#55        // java/lang/Object.getClass:()Ljava/lang/Class;
+  #15 = Methodref          #49.#56        // java/io/PrintStream.println:(I)V
+  #16 = Methodref          #12.#57        // com/don/demo/basic/finalizer/Main.inc3:()I
+  #17 = Methodref          #12.#58        // com/don/demo/basic/finalizer/Main.inc5:()V
+  #18 = Class              #59            // java/lang/Object
+  #19 = Utf8               string
+  #20 = Utf8               Ljava/lang/String;
+  #21 = Utf8               m
+  #22 = Utf8               I
+  #23 = Utf8               neverUser
+  #24 = Utf8               <init>
+  #25 = Utf8               ()V
+  #26 = Utf8               Code
+  #27 = Utf8               LineNumberTable
+  #28 = Utf8               LocalVariableTable
+  #29 = Utf8               this
+  #30 = Utf8               Lcom/don/demo/basic/finalizer/Main;
+  #31 = Utf8               inc
+  #32 = Utf8               ()I
+  #33 = Utf8               inc2
+  #34 = Utf8               inc3
+  #35 = Utf8               inc4
+  #36 = Utf8               inc5
+  #37 = Utf8               inc46
+  #38 = Utf8               SourceFile
+  #39 = Utf8               Main.java
+  #40 = NameAndType        #24:#25        // "<init>":()V
+  #41 = NameAndType        #19:#20        // string:Ljava/lang/String;
+  #42 = Utf8               goodbye
+  #43 = NameAndType        #23:#20        // neverUser:Ljava/lang/String;
+  #44 = NameAndType        #21:#22        // m:I
+  #45 = NameAndType        #31:#32        // inc:()I
+  #46 = NameAndType        #33:#32        // inc2:()I
+  #47 = Class              #60            // java/lang/System
+  #48 = NameAndType        #61:#62        // out:Ljava/io/PrintStream;
+  #49 = Class              #63            // java/io/PrintStream
+  #50 = NameAndType        #64:#65        // println:(Ljava/lang/String;)V
+  #51 = Utf8               13
+  #52 = Utf8               com/don/demo/basic/finalizer/Main
+  #53 = Class              #66            // java/lang/Class
+  #54 = NameAndType        #67:#68        // getName:()Ljava/lang/String;
+  #55 = NameAndType        #69:#70        // getClass:()Ljava/lang/Class;
+  #56 = NameAndType        #64:#71        // println:(I)V
+  #57 = NameAndType        #34:#32        // inc3:()I
+  #58 = NameAndType        #36:#25        // inc5:()V
+  #59 = Utf8               java/lang/Object
+  #60 = Utf8               java/lang/System
+  #61 = Utf8               out
+  #62 = Utf8               Ljava/io/PrintStream;
+  #63 = Utf8               java/io/PrintStream
+  #64 = Utf8               println
+  #65 = Utf8               (Ljava/lang/String;)V
+  #66 = Utf8               java/lang/Class
+  #67 = Utf8               getName
+  #68 = Utf8               ()Ljava/lang/String;
+  #69 = Utf8               getClass
+  #70 = Utf8               ()Ljava/lang/Class;
+  #71 = Utf8               (I)V
 {
-  private java.lang.String word;
+  private java.lang.String string;
     descriptor: Ljava/lang/String;
     flags: ACC_PRIVATE
 
@@ -384,7 +392,11 @@ Constant pool:
     descriptor: I
     flags: ACC_PRIVATE
 
-  public com.don.demo.jvm.ClassFileDecompiled.Main();
+  private java.lang.String neverUser;
+    descriptor: Ljava/lang/String;
+    flags: ACC_PRIVATE
+
+  public com.don.demo.basic.finalizer.Main();
     descriptor: ()V
     flags: ACC_PUBLIC
     Code:
@@ -392,12 +404,19 @@ Constant pool:
          0: aload_0
          1: invokespecial #1                  // Method java/lang/Object."<init>":()V
          4: aload_0
-         5: ldc           #2                  // String word
-         7: putfield      #3                  // Field word:Ljava/lang/String;
-        10: return
+         5: ldc           #2                  // String string
+         7: putfield      #3                  // Field string:Ljava/lang/String;
+        10: aload_0
+        11: ldc           #4                  // String goodbye
+        13: putfield      #5                  // Field neverUser:Ljava/lang/String;
+        16: return
       LineNumberTable:
-        line 10: 0
-        line 11: 4
+        line 3: 0
+        line 5: 4
+        line 9: 10
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      17     0  this   Lcom/don/demo/basic/finalizer/Main;
 
   public int inc();
     descriptor: ()I
@@ -405,12 +424,15 @@ Constant pool:
     Code:
       stack=2, locals=1, args_size=1
          0: aload_0
-         1: getfield      #4                  // Field m:I
+         1: getfield      #6                  // Field m:I
          4: iconst_1
          5: iadd
          6: ireturn
       LineNumberTable:
-        line 16: 0
+        line 12: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       7     0  this   Lcom/don/demo/basic/finalizer/Main;
 
   public int inc2();
     descriptor: ()I
@@ -418,10 +440,13 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokevirtual #5                  // Method inc:()I
+         1: invokevirtual #7                  // Method inc:()I
          4: ireturn
       LineNumberTable:
-        line 20: 0
+        line 16: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/don/demo/basic/finalizer/Main;
 
   public int inc3();
     descriptor: ()I
@@ -429,52 +454,58 @@ Constant pool:
     Code:
       stack=2, locals=1, args_size=1
          0: aload_0
-         1: invokevirtual #6                  // Method inc2:()I
+         1: invokevirtual #8                  // Method inc2:()I
          4: iconst_1
          5: iadd
          6: aload_0
-         7: getfield      #4                  // Field m:I
+         7: getfield      #6                  // Field m:I
         10: iadd
         11: ireturn
       LineNumberTable:
-        line 25: 0
+        line 21: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      12     0  this   Lcom/don/demo/basic/finalizer/Main;
 
   public int inc4();
     descriptor: ()I
     flags: ACC_PUBLIC
     Code:
       stack=2, locals=1, args_size=1
-         0: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         0: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
          3: aload_0
-         4: getfield      #3                  // Field word:Ljava/lang/String;
-         7: invokevirtual #8                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-        10: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
-        13: ldc           #9                  // String 13
-        15: invokevirtual #8                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-        18: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
-        21: ldc           #10                 // class com/don/demo/jvm/ClassFileDecompiled/Main
-        23: invokevirtual #11                 // Method java/lang/Class.getName:()Ljava/lang/String;
-        26: invokevirtual #12                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
-        29: invokevirtual #11                 // Method java/lang/Class.getName:()Ljava/lang/String;
-        32: invokevirtual #8                  // Method java/io/PrintStream.println:(Ljava/lang/String;)V
-        35: getstatic     #7                  // Field java/lang/System.out:Ljava/io/PrintStream;
+         4: getfield      #3                  // Field string:Ljava/lang/String;
+         7: invokevirtual #10                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        10: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        13: ldc           #11                 // String 13
+        15: invokevirtual #10                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        18: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        21: ldc           #12                 // class com/don/demo/basic/finalizer/Main
+        23: invokevirtual #13                 // Method java/lang/Class.getName:()Ljava/lang/String;
+        26: invokevirtual #14                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+        29: invokevirtual #13                 // Method java/lang/Class.getName:()Ljava/lang/String;
+        32: invokevirtual #10                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+        35: getstatic     #9                  // Field java/lang/System.out:Ljava/io/PrintStream;
         38: aload_0
-        39: getfield      #4                  // Field m:I
-        42: invokevirtual #13                 // Method java/io/PrintStream.println:(I)V
+        39: getfield      #6                  // Field m:I
+        42: invokevirtual #15                 // Method java/io/PrintStream.println:(I)V
         45: aload_0
-        46: invokevirtual #14                 // Method inc3:()I
+        46: invokevirtual #16                 // Method inc3:()I
         49: iconst_1
         50: iadd
         51: aload_0
-        52: getfield      #4                  // Field m:I
+        52: getfield      #6                  // Field m:I
         55: iadd
         56: ireturn
       LineNumberTable:
-        line 29: 0
-        line 30: 10
-        line 31: 18
-        line 32: 35
-        line 33: 45
+        line 25: 0
+        line 26: 10
+        line 27: 18
+        line 28: 35
+        line 29: 45
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0      57     0  this   Lcom/don/demo/basic/finalizer/Main;
 
   public void inc5();
     descriptor: ()V
@@ -482,11 +513,14 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokevirtual #15                 // Method inc5:()V
+         1: invokevirtual #17                 // Method inc5:()V
          4: return
       LineNumberTable:
-        line 38: 0
-        line 39: 4
+        line 34: 0
+        line 35: 4
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/don/demo/basic/finalizer/Main;
 
   public void inc46();
     descriptor: ()V
@@ -494,13 +528,17 @@ Constant pool:
     Code:
       stack=1, locals=1, args_size=1
          0: aload_0
-         1: invokevirtual #15                 // Method inc5:()V
+         1: invokevirtual #17                 // Method inc5:()V
          4: return
       LineNumberTable:
-        line 43: 0
-        line 44: 4
+        line 39: 0
+        line 40: 4
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   Lcom/don/demo/basic/finalizer/Main;
 }
 SourceFile: "Main.java"
+
 ```
 
 ### 1. class文件信息
@@ -643,7 +681,7 @@ public com.rhythm7.Main();
 
 这里是构造方法：Main()，返回值为void, 公开方法。 code内的主要属性为:
 
-- **stack** 最大操作数栈，JVM运行时会根据这个值来分配栈帧(Frame)中的操作栈深度,此处为1。**应该是静态的**，没运行时的栈的深度，现在最大看到2。
+- **stack** 最大操作数栈，JVM运行时会根据这个值来分配栈帧(Frame)中的操作栈深度,此处为1。
 
 - **locals:** 局部变量所需的存储空间，单位为Slot, Slot是虚拟机为局部变量分配内存时所使用的最小单位，为4个字节大小。方法参数(包括实例方法中的隐藏参数this)，显示异常处理器的参数(try catch中的catch块所定义的异常)，方法体中定义的局部变量都需要使用局部变量表来存放。值得一提的是，locals的大小并不一定等于所有局部变量所占的Slot之和，因为局部变量中的Slot是可以重用的。
 
