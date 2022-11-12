@@ -126,7 +126,7 @@ class ArrayList<E>{
 
  例如，`ArrayList<String> list = new ArrayList<String>();`
 
-此时，变量E的值就是String类型,那么我们的类型就可以理解为：
+此时，**变量**E的值就是String类型,那么我们的类型就可以理解为：
 
 ~~~java 
 class ArrayList<String>{ 
