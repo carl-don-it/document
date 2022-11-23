@@ -2092,7 +2092,7 @@ management.port = 8081
 
 访问，还有很多url
 
-![image-20200122064835229](../../../../../%E7%BC%96%E7%A8%8B/%E7%BC%96%E7%A8%8B%E6%96%87%E6%A1%A3/3.%20%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6/Spring/spring-actuator/img/image-20200122064835229.png)
+![image-20200122064835229](img/image-20200122064835229.png)
 
 # schedule
 
@@ -2191,7 +2191,7 @@ public class AsyncTaskConfig implements SchedulingConfigurer, AsyncConfigurer {
 
 ### 代码
 
-![image-20200224140532594](../../../../../%E7%BC%96%E7%A8%8B/%E7%BC%96%E7%A8%8B%E6%96%87%E6%A1%A3/3.%20%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6/Spring/spring-task/img/image-20200224140532594.png)
+![image-20200224140532594](img/image-20200224140532594.png)
 
 ## cron表达式
 
