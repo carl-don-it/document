@@ -2284,10 +2284,9 @@ Hibernate 5.0+
 
 JDBC 4.0+
 
-XmlUnit 2.x+ OkHttp 3.x+ Netty 4.1+
+XmlUnit 2.x+ OkHttp 3.x+ Netty 4.1
 
-# 问题
+# 参考文献
 
-1. spring用什么做容器
-2. 
+[神器SpringDoc横空出世，最牛掰的API工具来了，赶紧看Spring吧！](https://mp.weixin.qq.com/s/rDtROZV3JPdVHZXwSW8wow)
 
