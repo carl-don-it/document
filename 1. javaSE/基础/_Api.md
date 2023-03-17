@@ -296,7 +296,7 @@ public class Test {
 //运行： java org.test.Test aaa bbb ccc
 ```
 
-# 退出
+# 退出程序
 
 ```java
 //do something before terminate the jvm, if jvm process is kill , then won't help
@@ -310,3 +310,15 @@ Runtime.getRuntime().addShutdownHook(new Thread() {
 //terminate the jvm
 Runtime.getRuntime().exit(status);
 ```
+
+# Stream
+
+[Java 8 Stream(1)-流的使用及技巧](https://blog.csdn.net/weixin_45505313/article/details/103749552)
+
+[Java 8 Stream(2)-原理解析](https://blog.csdn.net/weixin_45505313/article/details/106150967)
+
+[13万字详细分析JDK中Stream的实现原理](https://www.throwx.cn/2021/10/06/stream-of-jdk/)
+
+[Java Stream源码分析及知识点总结](https://blog.csdn.net/qq_36263268/article/details/113175067)
+
+[google](https://www.google.com.hk/search?q=java+stream+%E6%9E%B6%E6%9E%84&newwindow=1&ei=NtO-Y970FIWhhwOw_L-gCg&ved=0ahUKEwje59-S6L_8AhWF0GEKHTD-D6QQ4dUDCA8&uact=5&oq=java+stream+%E6%9E%B6%E6%9E%84&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCCEQoAEyBQghEKABOgoIABBHENYEELADOgUIABCABEoECEEYAEoECEYYAFCOBViQEmCNFGgBcAF4AIABuAKIAdILkgEHMC40LjIuMZgBAKABAcgBAcABAQ&sclient=gws-wiz-serp)
