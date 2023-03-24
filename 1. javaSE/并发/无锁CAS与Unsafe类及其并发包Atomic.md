@@ -409,6 +409,8 @@ public native  void ensureClassInitialized(Class<?> c)
 
 [Java魔法类：Unsafe应用解析](https://tech.meituan.com/2019/02/14/talk-about-java-magic-class-unsafe.html)
 
+[Java中Unsafe类详解](https://www.cnblogs.com/mickole/articles/3757278.html)
+
 > 已保存图片
 
 # Atomic系列
