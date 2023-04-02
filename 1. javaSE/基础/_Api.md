@@ -322,3 +322,16 @@ Runtime.getRuntime().exit(status);
 [Java Stream源码分析及知识点总结](https://blog.csdn.net/qq_36263268/article/details/113175067)
 
 [google](https://www.google.com.hk/search?q=java+stream+%E6%9E%B6%E6%9E%84&newwindow=1&ei=NtO-Y970FIWhhwOw_L-gCg&ved=0ahUKEwje59-S6L_8AhWF0GEKHTD-D6QQ4dUDCA8&uact=5&oq=java+stream+%E6%9E%B6%E6%9E%84&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCCEQoAEyBQghEKABOgoIABBHENYEELADOgUIABCABEoECEEYAEoECEYYAFCOBViQEmCNFGgBcAF4AIABuAKIAdILkgEHMC40LjIuMZgBAKABAcgBAcABAQ&sclient=gws-wiz-serp)
+
+# 可变参数
+
+可以采取数组方式传入或者多个参数。如果传入的是Object[] 数组的方式，那么JDK 拿到数组后就会拆分，这个时候new String[]{“1”,”2”}，就会拆分成了两个String类型的参数。因此想要传入数组参数的时候
+
+```java
+method.invoke(null,new String[]{"1","2"});
+
+//改成：
+
+method.invoke(null,new Object[]{new String[]{"1","2"}});
+```
+

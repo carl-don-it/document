@@ -59,3 +59,7 @@ received = restTemplate.postForEntity("http://www.pbzy.com/dzsc/goods/getProvinc
 factory子接口
 
 ![image-20200305105119396](img/image-20200305105119396.png)
+
+# 参考文献
+
+[httpclient 学习](https://www.cnblogs.com/pony1223/p/7471464.html)
