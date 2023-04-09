@@ -46,3 +46,6 @@ junit就让有Test注解的方法执行
 ```
 
 ![image-20200121100750652](img/image-20200121100750652.png)
+
+[Junit-jupiter-api 和 junit-jupiter-engine 的区别是什么](https://blog.csdn.net/huyuchengus/article/details/109039316)
+

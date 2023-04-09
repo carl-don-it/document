@@ -322,6 +322,8 @@ https://zhuanlan.zhihu.com/p/78368287
 
 [How To Download & Upload Files Using Selenium With Java](https://www.lambdatest.com/blog/how-to-download-upload-files-using-selenium-with-java/)
 
+[25+ Useful Selenium Web driver Code Snippets For GUI Testing Automation](https://www.cnblogs.com/wade-xu/p/4846155.html)
+
 # 坑
 
 通过编写Chrome插件来解决这个问题，让插件里面的js代码在网站自带的所有js代码之前执行。
