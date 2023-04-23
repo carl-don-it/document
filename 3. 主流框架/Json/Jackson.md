@@ -1,4 +1,4 @@
-# 简介
+#  简介
 
 Jackson框架是基于Java平台的一套数据处理工具，被称为“最好的Java Json解析器”。
 
@@ -66,25 +66,32 @@ Jackson也有处理程序对JAX-RS标准实现者例如Jersey, RESTeasy, CXF等�
 
 # Streaming API
 
-是效率最高的处理方式(开销低、读写速度快，但程序编写复杂度高)
+Stream API方式是开销最低、效率最高，但编写代码复杂度也最高，在生成Json时，需要逐步编写符号和字段拼接json；在解析Json时，需要根据token指向也查找json值，生成和解析json都不是很方便，代码可读性也很低。大多数情况下，Tree Model和Data Binding可以代替Streaming API。
 
-Jackson提供了一套底层API来解析Json字符串，这个API为每个Json对象提供了符号。例如， ‘{’ 是解析器提供的第一个对象（writeStartObject()），键值对是解析器提供的另一个单独对象（writeString(key,value)）。这些API很强大，但是需要大量的代码。大多数情况下，Tree Model和Data Binding可以代替Streaming API。
+序列化时，使用`JsonGenerator`一步一个地写key和value。反序列化时，使用`JsonParser`来一步一步获取解析到的key和value，而这些key和value在内部表示为`jsontoken`。
 
-## Jackson Generator
+## JsonFactory
+
+用于设置全局属性，用来创建`JsonGenerator`和`JsonParser`。
+
+细节请看参考文献和源码
 
 ```java
 JsonFactory // core，生成 JsonGenerator ，JsonParser
 	int DEFAULT_FACTORY_FEATURE_FLAGS //factory级别feature
     int DEFAULT_PARSER_FEATURE_FLAGS
     int DEFAULT_GENERATOR_FEATURE_FLAGS
-JsonGenerator // 
-	IOContext // 管理buff[]、底层io流，allocConcatBuffer
-    	BufferRecycler // 使用 ThreadLocal<SoftReference<BufferRecycler>> _recyclerRef 策略
-    JsonWriteContext // 很重要，对应每一个json部分，公共类，负责判断和写其他seperator，配合JsonGenerator的write方法使用，并且确定下一个属性的位置前是否需要写seperator。顶层parent是 / ，一开始就创建 JsonWriteContext.createRootContext(dups);然后会根据子object或者子array创建child
+```
+
+## JsonGenerator
+
+Jackson Generator用于生成JSON，一般用于底层简单数据。也可以设置属性。看源码和参考文献
+
+```java
+	  JsonWriteContext // 很重要，对应每一个json部分，公共类，负责判断和写其他seperator，配合JsonGenerator的write方法使用，并且确定下一个属性的位置前是否需要写seperator。顶层parent是 / ，一开始就创建 JsonWriteContext.createRootContext(dups);然后会根据子object或者子array创建child
     	clearAndGetParent() // 每写完一个就返回parent
     DupDetector
     _features
-    ObjectCodec //代理给ObjectMapper
 	_writeStringSegment(name, 0, len); // 字符串短
 	_writeStringSegments(name, 0, len);// 字符串长
 	.. //真正的各种序列化操作，write
@@ -93,7 +100,7 @@ JsonGenerator //
 	close()// 关闭本 JsonGenerator instance ,写结束标志} ];flush，释放buffer，
 ```
 
-1. Jackson Generator用于生成JSON。对于简单的变量这种数据类型，Jackson Generator和Jackson JsonParser一样从JsonFactory中创建。
+1. Jackson Generator用于生成JSON。
 
    ```java
    JsonFactory jsonFactory = new JsonFactory();
@@ -118,32 +125,39 @@ JsonGenerator //
 
 ## JsonParser
 
-JsonParser 比 Jackson OjectMapper更底层，这就使得Jackson JsonParser比ObjectMapper更快，但是也更加笨重。
-
 Jackson JsonParser的工作方式是：将JSON分成一个记号序列，让你迭代记号（Token）序列进行解析。
 
 同Jackson ObjectMapper一样，你也可以解析String、Reader、InputStream、URL、byte数组、char数组。
 
 ```java
-JsonFactory // core，生成 JsonGenerator ，JsonParser
-    JsonToken
-	    IOContext
-    JsonReadContext //很重要，对应json的每一个部分新建一个
-   		JsonReadContext.createRootContext(dups)//
-	    expectComma()// 一个JsonReadContext内json属性的间隔
-    JsonParser
-	    nextToken()// field names are special。读取field_name token后会顺便读取下一个token作为_nextToken,下一次直接拿到。
+	JsonParser
+        _inputPtr //当前buff读到的位置
+	    nextToken()// field names are special。读取field_name后会顺便解析下一个token是什么，作为_nextToken,下一次直接拿到
     //真正的各种逆序列化操作，read，下面三个方法用作拿value或者name
     	getValueAsString()//
     	getText()//
-	    getCurrentName()；
-   		close()
-    
+	    getCurrentName()；//一般是获取当前jsontoken的key，如果是{}[],那么就是上一层的key
+        	_parsingContext.getCurrentName()//代理
+   		close()//关闭读写和底层的流
+    	_skipWSOrEnd()//用于跳过空白，或者结束，里面还有其他的特殊字符需要跳过或者抛异常，但是不常用
+            JsonReadContext //很重要，对应json的每一个对象和数组新建一个
+                JsonReadContext.createRootContext(dups)//
+                expectComma()// 一个JsonReadContext内json属性的间隔
+      	_parseName()// 解析出field name，有各种优化方法，就是把byte转化为string，但是要一个个byte识别
+	    	findName() //正式生成field name 先数组保存字符串，做一层缓存，避免频繁new string，字符串也用intern提高效率，并且用了hashmap来过滤
+        		ByteQuadsCanonicalizer _symbols;// 字符串缓存层，保存byte到string的map，有几层缓存，很复杂，很多hash，略
+				_padLastQuad(q1, lastQuadBytes); // hash计算
+        		com.fasterxml.jackson.core.json.UTF8StreamJsonParser#addName() //这个方法会有byte到utf-8编码的转化和注意，最终是charp[]
+                    		_symbols.addName() //把字符串加入到缓存,雨有instance，
 ```
 
-## 其他的类
+## 辅助类
 
-```
+```java
+TextBuffer //char[]缓存类，重复利用
+BufferRecycler // 使用 ThreadLocal<SoftReference<BufferRecycler>> _recyclerRef 缓存byte[] ,可重复使用，内部有监视策略可选
+IOContext // 管理buff[]、底层io流，allocConcatBuffer
+ObjectCodec //代理给ObjectMapper，进行匹配
 TokenFilter
 JsonPointer
 JsonToken
@@ -155,13 +169,19 @@ TreeNode
 
 是最灵活的处理方式，看代码
 
+TreeModel处理Json，是以树型结构来生成和解析json，生成json时，根据json内容结构，我们创建不同类型的节点对象，组装这些节点生成json。解析json时，它不需要绑定json到java bean，根据json结构，使用path或get方法轻松查找内容。
+
 # Data Binding
 
-是最常用的处理方式。主要使用ObjectMapper来操作Json，默认情况下会使用BeanSerializer来序列化POJO。底层还是Stream Api。
+Databinding处理Json是最常用的json处理方式。
 
-复杂的部分为反射对象，如何正确地按照自定义config序列化和反序列对象和json
+主要使用ObjectMapper来操作Json。查找符合类型的`serializer`和`deserializer`来操作整一个类型，底层也是调用Stream Api来写name和value，只不过不同的类型有不同的组合写法，这体现在有很多`serializer`和`deserializer`的实现类。默认情况下会使用BeanSerializer来序列化POJO。
 
-## 入门
+复杂的部分为反射对象，如何正确地按照配置序列化和反序列对象和json。
+
+解析时，直接把json映射到相关的java对象，然后就可以遍历java对象来获取值了。
+
+## quick start
 
 ### 序列化
 
@@ -208,39 +228,6 @@ String json = "{\"gender\":\"男\",\"name\":\"张三\",\"age\":\"23\"}";//字符
  List<City> list = mapper.readValue(listJsonStr, new  TypeReference<List<City>>(){} )
 ```
 
-## 配置
-
-### 方法
-
-ObjectMapper提供了很多方法个性化配置
-
-![image-20200308222519901](img/image-20200308222519901.png)
-
-```java
-//允许json属性存在但是java对象filed不存在
-objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-//忽略大小写
-objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-mapper.configure(SerializationFeature.INDENT_OUTPUT, true);     // 为了使JSON视觉上的可读性，在生产中不需如此，会增大Json的内容  
-mapper.setSerializationInclusion(Include.NON_EMPTY);  // 配置mapper忽略空属性  
-
-//忽略空field，当反序列化json时，未知属性会引起的反序列化被打断，这里我们禁用未知属性打断反序列化功能，因为，例如json里有10个属性，而我们的bean中只定义了2个属性，其它8个属性将被忽略  
-mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-```
-
-
-
-### 注解
-
-```java
-@JsonIgnore // 忽略该属性
-@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") 
-private Date birthday;
-//该注解作用于field的时候作用于getter和setter，但是只在spring-boot种起作用，普通main函数不能，需要使用 set函数
-objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-```
-
 ## 源码
 
 ### 序列化
@@ -248,60 +235,19 @@ objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 ![image-20200308212622763](img/image-20200308212622763.png)
 
 ```java
-//提供符合type的serializer serialize 根对象，对field的value使用各个对应的serializer
+//全权代理序列化，提供符合type的serializer serialize 根对象，对field的value使用各个对应的serializer
 com.fasterxml.jackson.databind.ser.DefaultSerializerProvider#serializeValue(com.fasterxml.jackson.core.JsonGenerator, java.lang.Object);
 	//创建未知对象的serializer时候会做很多反射，解析类，获取method、field等和获取解析jackson特有注解
 	final JsonSerializer<Object> ser = findTypedValueSerializer(cls, true, null);
 
 //序列化rootValue，这里就是Serializer其中一个实现类BeanSerializer的具体实现，一般pojo从这里开始
 com.fasterxml.jackson.databind.ser.BeanSerializer#serialize(Object bean, JsonGenerator gen, SerializerProvider provider);
-  	//序列化每个field的name和value
-	@Override
-    public final void serialize(Object bean, JsonGenerator gen, SerializerProvider provider)
-        throws IOException
-    {
-        if (_objectIdWriter != null) {
-            gen.setCurrentValue(bean); // [databind#631]
-            _serializeWithObjectId(bean, gen, provider, true);
-            return;
-        }
-        gen.writeStartObject(bean); //序列化name
-        if (_propertyFilterId != null) {
-            serializeFieldsFiltered(bean, gen, provider);
-        } else {
-            serializeFields(bean, gen, provider);//序列化各个field，对于value也是 ser.serialize(value, gen, prov);
-        }
-        gen.writeEndObject();
-    }
-```
 
-类情况
-
-```java
-//反射的type类
-com.fasterxml.jackson.databind.type.*
-com.fasterxml.jackson.databind.type.TypeFactory
-com.fasterxml.jackson.databind.JavaType
-
-//config类
-com.fasterxml.jackson.databind.cfg.BaseSettings
-com.fasterxml.jackson.databind.SerializationConfig
-com.fasterxml.jackson.databind.DeserializationConfig
-
-//context和工厂
-com.fasterxml.jackson.databind.ser.DefaultSerializerProvider
-com.fasterxml.jackson.databind.deser.DefaultDeserializationContext
-com.fasterxml.jackson.databind.ser.SerializerFactory
-
-//字符串操作
-com.fasterxml.jackson.databind.JsonSerializer
 //每个field的代理序列化类，在这里反射getter方法，序列化出field 的name和value
 com.fasterxml.jackson.databind.ser.BeanPropertyWriter   
 //执行序列化的类，使用JsonGenerator去序列化，根据field的类型有不同的实现， 序列化 field 的 value 到 writer 中
 com.fasterxml.jackson.databind.JsonSerializer
 ```
-
-
 
 ### 反序列化
 
@@ -410,17 +356,7 @@ implements Serializable
     }
 ```
 
-### context和config
-
-这两个类是公共的
-
-![image-20200308215416415](img/image-20200308215416415.png)
-
-<img src="img/image-20200308214836307.png" alt="image-20200308214836307" style="zoom:96%;" />
-
 ## 自定义JsonSerializer、JsonDeSerializer
-
-### 场景
 
 ```json
 [{"id":null,"cityName":"gz"},{"id":2,"cityName":"dg"}]
@@ -562,13 +498,19 @@ public class CityJsonDeSerializer  extends JsonDeserializer<List<City>>{
 
 也可以简单一点，使用注解，省去在ObjectMapper 中注册SimpleModule
 
-```
+```java
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize(using=CityJsonSerializer.class)
 public class City {
     ...
 }
 ```
+
+## module源码
+
+这里拿到来扩展的东西。
+
+![image-20230423155946931](img/image-20230423155946931.png)
 
 ## property和field转换
 
@@ -581,17 +523,70 @@ property根据getter或者setter转化，也可以根据field转化，一般需�
     private String PushTime; {"PushTime": "2015-3-11 16:21:06",} //默认是不能匹配的
 ```
 
-# 代码
+# 配置
 
-![image-20200505215141866](img/image-20200505215141866.png)
+上层API(面向使用)一般命名为`enable/disable/config`等，而底层更倾向于命名为with。。。
 
-![image-20200308224234140](img/image-20200305233936646.png)
+- JsonFactory.Feature、JsonGenerator.Feature、JsonParser.Feature
 
-# 结束
+  > 最开始用的feature，enable，disable，configure方法使用，控制这三个基础类，
 
-Stream API方式是开销最低、效率最高，但编写代码复杂度也最高，在生成Json时，需要逐步编写符号和字段拼接json,在解析Json时，需要根据token指向也查找json值，生成和解析json都不是很方便，代码可读性也很低。
+- `FormatFeature`、JsonWriteFeature、JsonReadFeature
 
-Databinding处理Json是最常用的json处理方式，生成json时，创建相关的java对象，并根据json内容结构把java对象组装起来，最后调用writeValue方法即可生成json,
-解析时，就更简单了，直接把json映射到相关的java对象，然后就可以遍历java对象来获取值了。底层还是使用Stream API。
+  > JsonGenerator.Feature、JsonParser.Feature的替代品，内部还是做了转换的。不是直接用在三个基础类，而是JsonFactoryBuilder这样的builder类中。
 
-TreeModel处理Json，是以树型结构来生成和解析json，生成json时，根据json内容结构，我们创建不同类型的节点对象，组装这些节点生成json。解析json时，它不需要绑定json到java bean，根据json结构，使用path或get方法轻松查找内容。
+- MapperFeature、SerializationFeature、DeserializationFeature、`ConfigFeature`
+
+  > 用于控制ObjectMapper/JsonMapper的行为，高层api的特征行为，通过ObjectMapper/JsonMapper或者builder类使用。
+  >
+  > `MapperFeature`它是定义了和序列化/反序列化无关（或者说共有的）一些特征
+
+- BaseSettings、MapperConfig、MapperConfigBase、SerializationConfig、DeserializationConfig
+
+  > `ObjectMapper`使用并且持有，保存各种组件和feature，有各种with和without方法来修改内部属性，生成一个全新的config。一般是不可变的。一般不直接由用户修改，config，而是由`ObjectMapper`来间接修改，使用者只需要面向`ObjectMapper`的enable和disable。
+  >
+  > ![image-20200308215416415](img/image-20200308215416415.png)
+
+- context、config
+
+  > 序列化反序列化上下文，每次操作都会从模板中copy一个，填充本次序列化反序列化资料
+  >
+  > <img src="img/image-20200308214836307.png" alt="image-20200308214836307" style="zoom:96%;" />
+
+方法
+
+```java
+//允许json属性存在但是java对象filed不存在
+objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+//忽略大小写
+objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
+mapper.configure(SerializationFeature.INDENT_OUTPUT, true);     // 为了使JSON视觉上的可读性，在生产中不需如此，会增大Json的内容  
+mapper.setSerializationInclusion(Include.NON_EMPTY);  // 配置mapper忽略空属性  
+
+//忽略空field，当反序列化json时，未知属性会引起的反序列化被打断，这里我们禁用未知属性打断反序列化功能，因为，例如json里有10个属性，而我们的bean中只定义了2个属性，其它8个属性将被忽略  
+mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+```
+
+注解
+
+```java
+@JsonIgnore // 忽略该属性
+@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8") 
+private Date birthday;
+//该注解作用于field的时候作用于getter和setter，但是只在spring-boot种起作用，普通main函数不能，需要使用 set函数
+objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+```
+
+# 参考文献
+
+[官网](https://github.com/FasterXML/jackson/)
+
+[jackson7文章](https://www.yourbatman.cn/categories/A%E5%93%A5%E5%AD%A6Jackson/)
+
+享学部分更详细
+
+[XML Serialization and Deserialization with Jackson](https://www.baeldung.com/jackson-xml-serialization-and-deserialization)
+
+[代码](https://github.com/carl-don-it/jackson-learning)
+
