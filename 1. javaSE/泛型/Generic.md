@@ -460,10 +460,6 @@ T[] mArray;
 mArray = (T[]) Array.newInstance(type, size);
 ```
 
-## 擦除
-
-代码里 `List<Integer> xs=new List<>(); 实际类型参数消失了、擦除了 List xs=new List(); `，只有那些函数签名和类结构里的泛型会存作元数据 供反射使用
-
 ## 反射
 
 通过反射获得泛型的实际类型参数
