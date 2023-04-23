@@ -53,3 +53,9 @@ https://blog.csdn.net/Gabriel576282253/article/details/88866623
 https://youtrack.jetbrains.com/issue/IDEA-75946
 
 https://stackoverflow.com/questions/24660408/how-can-i-get-intellij-debugger-to-allow-my-apps-shutdown-hooks-to-run
+
+## springboot yml文件不是绿叶子问题
+
+https://blog.csdn.net/weixin_56408993/article/details/124285097
+
+社区版下载带spring的插件
