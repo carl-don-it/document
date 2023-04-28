@@ -590,3 +590,4 @@ objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 
 [代码](https://github.com/carl-don-it/jackson-learning)
 
+https://www.baeldung.com/jackson
