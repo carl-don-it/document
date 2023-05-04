@@ -345,3 +345,83 @@ Java 要获取接口或者抽象方法的参数的名称，必须的是JDK8以�
 
 `Java8`新推出的`-parameters`
 
+# environment
+
+五个属性，都是final。不同的子类只是初始化的时候加入不同的propertiysource 
+
+继承了`PropertyResolver`，真正的resolve代理给内部的`PropertySourcesPropertyResolver`
+
+```java
+	protected final Log logger = LogFactory.getLog(getClass());
+
+	private final Set<String> activeProfiles = new LinkedHashSet<>();
+
+	private final Set<String> defaultProfiles = new LinkedHashSet<>(getReservedDefaultProfiles());
+//拿来装PropertySource
+	private final MutablePropertySources propertySources = new MutablePropertySources();
+//真正的解析者
+	private final ConfigurablePropertyResolver propertyResolver =
+			new PropertySourcesPropertyResolver(this.propertySources);
+```
+
+`PropertySourcesPropertyResolver`迭代内部的PropertySource来查找，查找后进行深度解析，最后进行转化。
+
+```java
+	@Nullable
+	protected <T> T getProperty(String key, Class<T> targetValueType, boolean resolveNestedPlaceholders) {
+		if (this.propertySources != null) {
+			for (PropertySource<?> propertySource : this.propertySources) {
+				if (logger.isTraceEnabled()) {
+					logger.trace("Searching for key '" + key + "' in PropertySource '" +
+							propertySource.getName() + "'");
+				}
+				Object value = propertySource.getProperty(key);
+				if (value != null) {
+					if (resolveNestedPlaceholders && value instanceof String) {
+						value = resolveNestedPlaceholders((String) value);
+					}
+					logKeyFound(key, propertySource, value);
+					return convertValueIfNecessary(value, targetValueType);
+				}
+			}
+		}
+		if (logger.isTraceEnabled()) {
+			logger.trace("Could not find key '" + key + "' in any property source");
+		}
+		return null;
+	}
+```
+
+`resolveNestedPlaceholders()`深度解析，最终调用内部的 `org.springframework.util.PropertyPlaceholderHelper#parseStringValue`，这里会迭代解析placeholder，利用`getPropertyAsRawString`（这里重新回到`PropertySourcesPropertyResolver`中）和set来防止死循环。
+
+`PropertyPlaceholderHelper`是个工具方法，很多地方都用到。配合`PlaceholderResolver`
+
+> **PropertySource**
+
+不同的PropertySource都会有各自的property，和各自的get的方法。大部分比较简单，例如就是一个map.get().
+
+而在springboot中，有一个方法，org.springframework.boot.context.properties.source.ConfigurationPropertySources#attach，加入一个特殊的`ConfigurationPropertySourcesPropertySource`，用于接入spring-boot的`Source`体系
+
+```java
+	sources.addFirst(new ConfigurationPropertySourcesPropertySource(ATTACHED_PROPERTY_SOURCE_NAME,
+					new SpringConfigurationPropertySources(sources)));
+
+	private ConfigurationProperty findConfigurationProperty(ConfigurationPropertyName name) {
+		if (name == null) {
+			return null;
+		}
+		for (ConfigurationPropertySource configurationPropertySource : getSource()) {
+			ConfigurationProperty configurationProperty = configurationPropertySource.getConfigurationProperty(name);
+			if (configurationProperty != null) {
+				return configurationProperty;
+			}
+		}
+		return null;
+	}
+```
+
+> ConfigurationPropertySourcesPropertySource，可以看成内部有很多`ConfigurationPropertySource`（`ConfigurationProperty`（就是单个key-value）的容器，spring-boot新增的source表示体系，接口结构类似一个map）。应该是多了一些alias或者mapper的功能。
+>
+> 不断调用SpringConfigurationPropertySources（就是一个`Iterable<ConfigurationPropertySource>`工具类）的方法，逐个拿出之前放进的**PropertySource**，然后包装成`ConfigurationPropertySource`返回，这时，`ConfigurationPropertySource`就等于**PropertySource**，只不过可能增加一些功能。getvalue最终还是从传入的**PropertySource**中获取。
+
+如果拿不到，是不是会重复拿不到的两次操作，毕竟`ConfigurationPropertySourcesPropertySource`就包含了所有的sources，并迭代了一遍了？
