@@ -394,7 +394,32 @@ Java 要获取接口或者抽象方法的参数的名称，必须的是JDK8以�
 
 `resolveNestedPlaceholders()`深度解析，最终调用内部的 `org.springframework.util.PropertyPlaceholderHelper#parseStringValue`，这里会迭代解析placeholder，利用`getPropertyAsRawString`（这里重新回到`PropertySourcesPropertyResolver`中）和set来防止死循环。
 
-`PropertyPlaceholderHelper`是个工具方法，很多地方都用到。配合`PlaceholderResolver`
+`PropertyPlaceholderHelper`是个工具方法，用于递归解释placeholder（占位符），很多地方都用到。配合`PlaceholderResolver`
+
+```java
+/**
+	 * Replaces all placeholders of format {@code ${name}} with the value returned
+	 * from the supplied {@link PlaceholderResolver}.
+	 * @param value the value containing the placeholders to be replaced
+	 * @param placeholderResolver the {@code PlaceholderResolver} to use for replacement
+	 * @return the supplied value with placeholders replaced inline
+	 */
+	public String replacePlaceholders(String value, PlaceholderResolver placeholderResolver) {
+		Assert.notNull(value, "'value' must not be null");
+		return parseStringValue(value, placeholderResolver, null);
+	}
+
+	protected String parseStringValue(
+			String value, PlaceholderResolver placeholderResolver, @Nullable Set<String> visitedPlaceholders) {
+
+		int startIndex = value.indexOf(this.placeholderPrefix);
+		if (startIndex == -1) {
+			return value;
+		}
+        ...
+```
+
+
 
 > **PropertySource**
 
@@ -425,3 +450,51 @@ Java 要获取接口或者抽象方法的参数的名称，必须的是JDK8以�
 > 不断调用SpringConfigurationPropertySources（就是一个`Iterable<ConfigurationPropertySource>`工具类）的方法，逐个拿出之前放进的**PropertySource**，然后包装成`ConfigurationPropertySource`返回，这时，`ConfigurationPropertySource`就等于**PropertySource**，只不过可能增加一些功能。getvalue最终还是从传入的**PropertySource**中获取。
 
 如果拿不到，是不是会重复拿不到的两次操作，毕竟`ConfigurationPropertySourcesPropertySource`就包含了所有的sources，并迭代了一遍了？
+
+
+
+# listener
+
+spring的体系使用 `ApplicationListener`和 `SimpleApplicationEventMulticaster`和`applicationContext`
+
+> `SimpleApplicationEventMulticaster`有缓存机制。内部有缓存和事件对应的listener机制。
+>
+> ```java
+> final Map<ListenerCacheKey, ListenerRetriever> retrieverCache = new ConcurrentHashMap<>(64);
+> 
+> org.springframework.context.event.AbstractApplicationEventMulticaster#getApplicationListeners(org.springframework.context.ApplicationEvent, org.springframework.core.ResolvableType)
+> ```
+>
+> 第一次获取匹配的listeners和beanname对应的listener，如果是单例那么缓存listener，否则缓存bean name。之后排序返回。如果没有缓存bean name，那么排序的结果可以缓存起来。
+>
+> 第二次获取，如果没有缓存bean name，那么直接返回，都是单例，否则要生成然后排列返回。preFiltered都是true。
+
+Multicaster需要由外部初始化，spring设置预先存入的listeners，还有bean name（因为要拖延初始化），然后发布预先存入的事件。
+
+```java
+protected void registerListeners() {
+   // Register statically specified listeners first.
+   for (ApplicationListener<?> listener : getApplicationListeners()) {
+      getApplicationEventMulticaster().addApplicationListener(listener);
+   }
+
+   // Do not initialize FactoryBeans here: We need to leave all regular beans
+   // uninitialized to let post-processors apply to them!
+   String[] listenerBeanNames = getBeanNamesForType(ApplicationListener.class, true, false);
+   for (String listenerBeanName : listenerBeanNames) {
+      getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
+   }
+
+   // Publish early application events now that we finally have a multicaster...
+   Set<ApplicationEvent> earlyEventsToProcess = this.earlyApplicationEvents;
+   this.earlyApplicationEvents = null;
+   if (!CollectionUtils.isEmpty(earlyEventsToProcess)) {
+      for (ApplicationEvent earlyEvent : earlyEventsToProcess) {
+         getApplicationEventMulticaster().multicastEvent(earlyEvent);
+      }
+   }
+}
+```
+
+# 启动过程
+
