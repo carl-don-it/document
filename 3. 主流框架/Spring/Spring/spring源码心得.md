@@ -1,14 +1,6 @@
-itx的这三个项目尤其重要
+itx的这三个项目尤其重要，硬盘没了
 
 ![1665140735956](img/1665140735956.png)
-
-```java
-AnnotationConfigApplicationContext 会引入 ConfigurationClassPostProcessor
-//在这里面便提现了ConfigurationClassPostProcessor的价值!!! 它是通过一个parser对象解析@Configuration注解的类的.
-        // 本例中, 就是解析Config.class类,而在Config.class上有@ComponentScan注解,因此会通过scanner扫描该包下的所有@Component注解的类并解析成BeanDefinition添加到BeanFactory的beanDefinitionMap中.
-        // 到这里,便知道,Spring就是在这里完成了@Configuration类的解析和bean的初步扫描!
-
-```
 
 ## **AnnotationConfigApplicationContext**
 
@@ -233,7 +225,16 @@ isFactoryBean()
 
 ## ConfigurationClassPostProcessor
 
-[Spring源码系列——ConfigurationClassPostProcessor源码解析](https://juejin.cn/post/6871928510518722573#heading-6)
+
+
+```java
+AnnotationConfigApplicationContext 会引入 ConfigurationClassPostProcessor
+//在这里面便提现了ConfigurationClassPostProcessor的价值!!! 它是通过一个parser对象解析@Configuration注解的类的.
+        // 本例中, 就是解析Config.class类,而在Config.class上有@ComponentScan注解,因此会通过scanner扫描该包下的所有@Component注解的类并解析成BeanDefinition添加到BeanFactory的beanDefinitionMap中.
+        // 到这里,便知道,Spring就是在这里完成了@Configuration类的解析和bean的初步扫描!
+```
+
+[Spring源码系列——ConfigurationClassPostProcessor源码解析](https://juejin.cn/post/6871928510518722573#heading-6)重要的
 
 [Spring5源码解析7-ConfigurationClassPostProcessor (下)](https://segmentfault.com/a/1190000020633405)
 
@@ -246,6 +247,15 @@ isFactoryBean()
 > 而事务之类的切面编程属于getBean之后的，此时属性已经注入完毕，只能用增强类包装原来的对象。
 
 # aop
+
+```xml
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+```
+
+
 
 ## ProxyFactory
 
@@ -496,5 +506,150 @@ protected void registerListeners() {
 }
 ```
 
-# 启动过程
+# refresh过程
+
+简单来说，初始化容器的几个单点，处理两种postprocesser，listener体系，然后开始getBean。
+
+```java
+@Override
+public void refresh() throws BeansException, IllegalStateException {
+   synchronized (this.startupShutdownMonitor) {
+      // Prepare this context for refreshing.
+      prepareRefresh();
+
+      // Tell the subclass to refresh the internal bean factory.
+      ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+
+      // Prepare the bean factory for use in this context.
+      prepareBeanFactory(beanFactory);
+
+      try {
+         // Allows post-processing of the bean factory in context subclasses.
+         postProcessBeanFactory(beanFactory);
+
+         // Invoke factory processors registered as beans in the context.
+         invokeBeanFactoryPostProcessors(beanFactory);
+
+         // Register bean processors that intercept bean creation.
+         registerBeanPostProcessors(beanFactory);
+
+         // Initialize message source for this context.
+         initMessageSource();
+
+         // Initialize event multicaster for this context.
+         initApplicationEventMulticaster();
+
+         // Initialize other special beans in specific context subclasses.
+         onRefresh();
+
+         // Check for listener beans and register them.
+         registerListeners();
+
+         // Instantiate all remaining (non-lazy-init) singletons.
+         finishBeanFactoryInitialization(beanFactory);
+
+         // Last step: publish corresponding event.
+         finishRefresh();
+      }
+
+      catch (BeansException ex) {
+         if (logger.isWarnEnabled()) {
+            logger.warn("Exception encountered during context initialization - " +
+                  "cancelling refresh attempt: " + ex);
+         }
+
+         // Destroy already created singletons to avoid dangling resources.
+         destroyBeans();
+
+         // Reset 'active' flag.
+         cancelRefresh(ex);
+
+         // Propagate exception to caller.
+         throw ex;
+      }
+
+      finally {
+         // Reset common introspection caches in Spring's core, since we
+         // might not ever need metadata for singleton beans anymore...
+         resetCommonCaches();
+      }
+   }
+}
+```
+
+1. `prepareRefresh();`
+
+   清理scanner缓存，设置容器状态，启动时间，调用 `initPropertySources()`，看看environment 的RequiredProperties是否都存在。
+
+   用`earlyApplicationListeners`保存预先设置的`applicationListeners`，多次refresh用得上，初始化`earlyApplicationEvents`
+
+2. 设置ConfigurableListableBeanFactory的id，工具组件，BeanExpressionResolver，ClassLoader，PropertyEditorRegistrar（getBean的时候才用得上）。设置不需要注入依赖的几个接口类型，添加ApplicationContextAwareProcessor用于设置处理bean的aware回调。设置某些类型的注入是什么，注入某些bean。
+
+3. `postProcessBeanFactory(beanFactory);`
+
+   调用子类的处理方法，比如servletweb容器就是添加aware和scope（request,session）
+
+4. `invokeBeanFactoryPostProcessors(beanFactory);`
+
+   BeanDefinitionRegistryPostProcessor：`A`
+
+   BeanFactoryPostProcessor：`B`
+
+   最重要的方法，启动容器的后处理方法，主要是处理容器的bean定义，增加BeanPostProcessor
+
+   1. 先处理`A`，spring-boot有几个新类，但一般只有`ConfigurationClassPostProcessor`最重要
+      1. 容器自身手动设置的beanFactoryPostProcessors实例中，如果有`A`，那么先按照`A`调用方法，其余搁置。
+      2. 容器中没初始化的`A`，先初始化并调用`PriorityOrdered`，然后`Ordered`，最后初始化并调用剩下的，如果过程中产生新的，那么循环最后一步，直到所有的`A`都被调用一遍。
+      3. 由于`A`都是`B`的子类，因此先调用所有的`A`的`B`方法，然后调用搁置的手动设置的`B`。
+
+   2. 处理`B`，一样按照`PriorityOrdered`，`Ordered`，`nonOrdered`的顺序处理，只是最后没有循环，因为不应该在这个接口中注入新bean定义。注意要剔除`A`，已经被执行过了。
+   3. 清除缓存。
+
+5. `registerBeanPostProcessors(beanFactory);`
+
+   注册BeanPostProcessor，一样按照`PriorityOrdered`，`Ordered`，`nonOrdered`的顺序处理，MergedBeanDefinitionPostProcessor类型的需要排列到最后。ApplicationListenerDetector，BeanPostProcessorChecker。（5是因为我加了aop-starter起步依赖）
+
+   ![image-20230507151527976](img/image-20230507151527976.png)
+
+6. 国际化相关初始化，不重要，用不上
+
+7. 事件multicast创建
+
+8. 初始化其他特殊bean，`ServletWebServerApplicationContext`这时会启动tomcat
+
+   ```java
+   // Initialize other special beans in specific context subclasses.
+   onRefresh();
+   ```
+
+9. 事件multicast注册容器预先设置的listener和容器中的listener bean name，发布early事件，一般是没有的
+
+   ```java
+   				// Check for listener beans and register them.
+   				registerListeners();
+   ```
+
+   ![image-20230507152501260](img/image-20230507152501260.png)
+
+10. 补充一些bean，**初始化所有单例bean**。之后，前面的这些bean逐个检查，如果是`SmartInitializingSingleton`，那么触发方法。
+
+11. finishRefresh()
+
+    1. clearResourceCaches
+
+    2. 触发LifecycleProcessor的生命周期方法，只是一个代理类，代理其他Lifecycle，一般是没有的，如果引入了web启动依赖就有2个
+
+       ![image-20230507155312162](img/image-20230507155312162.png)
+
+       1. 获取所有的Lifecycle bean，包括SmartLifecycle
+       2. 根据phase分类到LifecycleGroup中，排序，按顺序触发start()，web是初始化tomcat。
+
+    3. 发布ContextRefreshedEvent事件，主要是清除缓存，打印日志。
+
+       ![image-20230507155853428](img/image-20230507155853428.png)
+
+    4. 注册mbean
+
+12. 清理缓存finally，容器启动完毕，失败了另算。
+
 
