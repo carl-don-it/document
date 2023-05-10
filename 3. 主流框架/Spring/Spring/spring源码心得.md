@@ -223,16 +223,31 @@ private String[] doGetBeanNamesForType(ResolvableType type, boolean includeNonSi
 isFactoryBean()
 ```
 
-## ConfigurationClassPostProcessor
+# ConfigurationClassPostProcessor
 
-
+看参考文献前两部
 
 ```java
 AnnotationConfigApplicationContext 会引入 ConfigurationClassPostProcessor
 //在这里面便提现了ConfigurationClassPostProcessor的价值!!! 它是通过一个parser对象解析@Configuration注解的类的.
         // 本例中, 就是解析Config.class类,而在Config.class上有@ComponentScan注解,因此会通过scanner扫描该包下的所有@Component注解的类并解析成BeanDefinition添加到BeanFactory的beanDefinitionMap中.
-        // 到这里,便知道,Spring就是在这里完成了@Configuration类的解析和bean的初步扫描!
+        // 到这里,便知道,Spring就是在这里完成了@Configuration类的解析和bean的初步扫描!\
+    
+    org.springframework.boot.autoconfigure.AutoConfigurationImportSelector#selectImports用不上了，新版本改用group
+@PropertySource后解释的有优先级，但都是都在后面的啦
+@ComponentScan 会使用ClassPathBeanDefinitionScanner，优先注册到registry中，然后把每个类当成配置类
+processConfigurationClass(ConfigurationClass, Predicate):250, ConfigurationClassParser
+    属于解析单个的配置类，属于一轮中的某一个点
+    一轮中ConfigurationClass只有一个，就是最外层的或者扫进来的配置类，SourceClass有可能是父类，也有可能是import的类
+
+configurationClasses是一个有序的LinkedHashMap，然后processDeferredImportSelectors()，先行解析的都是自己主动弄进来的类，而defer的都是后面的，带有importBy的，不会覆盖前面的，这些保证了先添加自己的bean定义，然后才是其他包的，并且不会被覆盖
+
+configurationClasses的第一个不是配置类，一般是scan之类的，或者内部类，资料说错了
 ```
+
+[浅析@Configuration注解的处理器：ConfigurationClassPostProcessor（ConfigurationClassParser）](https://www.cnblogs.com/xfeiyun/p/15666689.html) 
+
+[浅析@Import、DeferredImportSelector、ImportBeanDefinitionRegistrar的原理和使用](https://www.cnblogs.com/xfeiyun/p/15675230.html) 
 
 [Spring源码系列——ConfigurationClassPostProcessor源码解析](https://juejin.cn/post/6871928510518722573#heading-6)重要的
 
@@ -245,6 +260,47 @@ AnnotationConfigApplicationContext 会引入 ConfigurationClassPostProcessor
 > 提前进行类增强，cglib可以使用super方法，之后再进行getBean之类的。类和对象属于一体。
 >
 > 而事务之类的切面编程属于getBean之后的，此时属性已经注入完毕，只能用增强类包装原来的对象。
+
+## checkConfigurationClassCandidate
+
+先获取`AnnotationMetadata`，可以加载class文件，那就反射获取，不然就asm操作字节码获取。然后根据元配置判断注解是否存在。
+
+判断该定义是否是配置类，`@Configuration`是配置类，有`@Bean`方法的也是配置类，有以下四种注解的也是配置类，只有`@Configuration`是Full，需要增强。
+
+```java
+	ConfigurationClassUtils
+	/**
+	 * Check whether the given bean definition is a candidate for a configuration class
+	 * (or a nested component class declared within a configuration/component class,
+	 * to be auto-registered as well), and mark it accordingly.
+	 * @param beanDef the bean definition to check
+	 * @param metadataReaderFactory the current factory in use by the caller
+	 * @return whether the candidate qualifies as (any kind of) configuration class
+	 */
+public static boolean checkConfigurationClassCandidate(
+      BeanDefinition beanDef, MetadataReaderFactory metadataReaderFactory){...}
+    
+    	/**
+	 * Check the given metadata for a configuration class candidate
+	 * (or nested component class declared within a configuration/component class).
+	 * @param metadata the metadata of the annotated class
+	 * @return {@code true} if the given class is to be registered for
+	 * configuration class processing; {@code false} otherwise
+	 */
+	public static boolean isConfigurationCandidate(AnnotationMetadata metadata) {...}
+```
+
+![image-20230508123436859](img/image-20230508123436859.png)
+
+## ConditionEvaluator
+
+### shouldSkip
+
+```java
+public boolean shouldSkip(@Nullable AnnotatedTypeMetadata metadata, @Nullable ConfigurationPhase phase) 
+```
+
+获取所有的`@Conditional`的class类，初始化，然后调用方法，如果是`ConfigurationCondition`，那么需要和`ConfigurationPhase`一致。
 
 # aop
 
@@ -652,4 +708,33 @@ public void refresh() throws BeansException, IllegalStateException {
 
 12. 清理缓存finally，容器启动完毕，失败了另算。
 
+# metadata
 
+metadata的获取有多种，可以直接从class文件api解析获取，也可以操纵字节码，这样可以不用加载class。
+
+```java
+org.springframework.context.annotation.ConfigurationClassUtils#checkConfigurationClassCandidate
+MetadataReaderFactory
+metadataReaderFactory.getMetadataReader(className);
+MetadataReader 
+getAnnotationMetadata();
+AnnotationMetadata
+AnnotationMetadata.introspect(beanClass);
+ClassMetadata
+```
+
+# BeanDefinition
+
+```
+getClassName
+hasBeanClass
+都是指真正的class
+```
+
+# 参考文献
+
+spring源码揭秘
+
+https://fangshixiang.blog.csdn.net/article/details/88095165
+
+https://www.cnblogs.com/xfeiyun/category/2244131.html?page=5

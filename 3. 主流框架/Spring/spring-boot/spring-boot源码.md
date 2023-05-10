@@ -1,6 +1,6 @@
 # 启动过程
 
-主要是设置环境，设置监听点，启动容器，这就是spring-boot的启动所作的东西了。
+主要是设置环境，设置监听点，启动容器，这就是spring-boot的启动所作的东西了。启动过程除了一些监听器和从spring。factories中导入的类，没有体现太多的东西，也没有体现自动配置类。只是加了一些普通的监听器，没有关键功能，加载属性可能算一个。
 
 ```java
 @SpringBootApplication
@@ -29,7 +29,7 @@ public class DemoApplication implements ApplicationRunner {
 
 4. 解析main入口的属性
 
-   ```
+   ```java
    ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
    ```
 
@@ -88,7 +88,16 @@ public class DemoApplication implements ApplicationRunner {
       //SharedMetadataReaderFactoryContextInitializer
       //用于导入SharedMetadataReaderFactoryBean，ConcurrentReferenceCachingMetadataReaderFactory
       //替换org.springframework.context.annotation.ConfigurationClassPostProcessor#metadataReaderFactory
+      //listener: 之后会清空缓存，用不上了
       applicationContext.addBeanFactoryPostProcessor(new CachingMetadataReaderFactoryPostProcessor());
+      
+      //listener：把webserver的端口放进environment，一般来说默认属性名 "local.server.port"
+      ServerPortInfoApplicationContextInitializer;
+          setPortProperty(event.getApplicationContext(), propertyName, event.getWebServer().getPort());
+      
+      //listener: 把ConditionEvaluationReport打印出日志，一般只有debug才打印，如何fail，那么会提醒你用debug
+      ConditionEvaluationReportLoggingListener;
+      logAutoConfigurationReport();
       ```
 
    4. `listeners.contextPrepared(context);`  事件ApplicationContextInitializedEvent，没什么动作
@@ -166,6 +175,8 @@ public class DemoApplication implements ApplicationRunner {
 
 # 自动装配功能
 
+其实就是去获取配置文件中EnableAutoConfiguration下面的类，然后根据注解进行排序过滤
+
 ```java
 @AutoConfigurationPackage
 @Import(AutoConfigurationImportSelector.class)
@@ -198,6 +209,12 @@ spring-boot则用 `SpringApplicationRunListeners`作工具类，`SpringApplicati
 
 # 参考文献
 
-[Spring-Boot和Spring的监听器模式](https://blog.csdn.net/tanglihai/article/details/122067921)
+[Spring-Boot和Spring的监听器模式区别和联系](https://blog.csdn.net/tanglihai/article/details/122067921)
 
-https://github.com/coderbruis/JavaSourceCodeLearning
+[几篇文章讲讲spring-boot的几个分散的功能点](https://github.com/coderbruis/JavaSourceCodeLearning/tree/master/note/SpringBoot)
+
+https://fangshixiang.blog.csdn.net/article/details/105762050
+
+[你能说出SpringBoot自动装配的原理吗？ _](https://www.cnblogs.com/xfeiyun/p/15707730.html)
+
+[【㊫SpringBoot】Springboot自动装配以及启动原理解析 _](https://www.cnblogs.com/xfeiyun/p/17282030.html)
