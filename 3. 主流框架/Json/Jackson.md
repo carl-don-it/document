@@ -175,7 +175,7 @@ TreeModel处理Json，是以树型结构来生成和解析json，生成json时�
 
 Databinding处理Json是最常用的json处理方式。
 
-主要使用ObjectMapper来操作Json。查找符合类型的`serializer`和`deserializer`来操作整一个类型，底层也是调用Stream Api来写name和value，只不过不同的类型有不同的组合写法，这体现在有很多`serializer`和`deserializer`的实现类。默认情况下会使用BeanSerializer来序列化POJO。
+主要使用ObjectMapper来操作Json。根据类型查找符合的`serializer`和`deserializer`来操作整一个类型，底层也是调用Stream Api来写name和value，只不过不同的类型有不同的组合写法，这体现在有很多`serializer`和`deserializer`的实现类。默认情况下会使用BeanSerializer来序列化POJO。
 
 复杂的部分为反射对象，如何正确地按照配置序列化和反序列对象和json。
 

@@ -737,4 +737,12 @@ spring源码揭秘
 
 https://fangshixiang.blog.csdn.net/article/details/88095165
 
-https://www.cnblogs.com/xfeiyun/category/2244131.html?page=5
+[【小家Spring】Spring解析@Configuration注解的处理器：ConfigurationClassPostProcessor（ConfigurationClassParser）](https://www.cnblogs.com/xfeiyun/category/2244131.html?page=5)
+
+[【小家Spring】Spring IOC容器启动流程 AbstractApplicationContext#refresh()方法源码分析（一）](https://blog.csdn.net/f641385712/article/details/88041409)
+
+[【小家Spring】AbstractBeanFactory#getBean()、doGetBean完成Bean的初始化、实例化，以及BeanPostProcessor后置处理器源码级详细分析](https://blog.csdn.net/f641385712/article/details/88205840)
+
+[【小家Spring】细说Spring IOC容器的自动装配（@Autowired），以及Spring4.0新特性之【泛型依赖注入】的源码级解析](https://blog.csdn.net/f641385712/article/details/88410362)
+
+[【小家Spring】Spring容器（含父子容器）的启动过程源码级别分析（含web.xml启动以及全注解驱动，和ContextLoader源码分析）](https://blog.csdn.net/f641385712/article/details/87883205)
