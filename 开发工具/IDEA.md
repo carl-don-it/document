@@ -59,3 +59,9 @@ https://stackoverflow.com/questions/24660408/how-can-i-get-intellij-debugger-to-
 https://blog.csdn.net/weixin_56408993/article/details/124285097
 
 社区版下载带spring的插件
+
+## 其他
+
+[Skipped breakpoint because it happened inside debugger evaluation - Intellij IDEA](https://stackoverflow.com/questions/47866398/skipped-breakpoint-because-it-happened-inside-debugger-evaluation-intellij-ide)
+
+https://youtrack.jetbrains.com/issue/IDEA-43728

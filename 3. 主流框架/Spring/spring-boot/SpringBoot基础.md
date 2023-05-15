@@ -1110,6 +1110,14 @@ java -jar -Dspring.profiles.active=prod -Dfile.encoding=UTF-8  mall-crawl-2.1.3.
 
 ![](img\20.png)
 
+# Creating Your Own Starter
+
+https://docs.spring.io/spring-boot/docs/2.7.11/reference/htmlsingle/#howto
+
+https://docs.spring.io/spring-boot/docs/2.7.11/reference/htmlsingle/#features.developing-auto-configuration.custom-starter
+
+https://zhuanlan.zhihu.com/p/86016511
+
 # 参考文献
 
 https://github.com/dyc87112/SpringBoot-Learning

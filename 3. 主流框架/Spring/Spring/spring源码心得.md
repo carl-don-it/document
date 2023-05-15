@@ -346,6 +346,16 @@ aspect是bean，然后`AnnotationAwareAspectJAutoProxyCreator`解析aspect并收
 	}
 ```
 
+# 参考文献
+
+[灵魂画手：图解Spring AOP实现原理](https://juejin.cn/post/7106007259641020424)
+
+[Spring AOP核心源码 ProxyFactory](https://blog.csdn.net/chaitoudaren/article/details/105277908)
+
+[ProxyFactory源码分析](https://www.xxelin.com/2020/04/23/ProxyFactory-source/)、
+
+[Spring源码（七）：Spring AOP 详解](https://blog.csdn.net/JustPlayCode/article/details/115624357)
+
 # 声明式事务管理
 
 底层都是切面aop，生成一个advisor，自动代理每个可能的bean，然后通过pointcut过滤，生成代理，TransactionInterceptor拦截。下面两种方案中，advisor所用的类不大一样，最大的不同是pointcut。
