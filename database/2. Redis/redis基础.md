@@ -1176,3 +1176,10 @@ Redis [原理及应用](https://blog.csdn.net/u013679744/category_7424631.html) 
  [redis学习](https://www.cnblogs.com/xiaoxi/p/7007695.html) 没看完，很好，待解决
 
 https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html 待解决
+
+[Redis为什么用跳表而不用平衡树？](https://zhuanlan.zhihu.com/p/23370124)
+
+[Redis挂了，流量把数据库也打挂了，怎么办？](https://www.cnblogs.com/thisiswhy/p/15089432.html)
+
+[Redis 到底是单线程还是多线程？我要吊打面试官！](https://www.cnblogs.com/javastack/p/12848446.html)
+

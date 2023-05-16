@@ -65,3 +65,7 @@ https://blog.csdn.net/weixin_56408993/article/details/124285097
 [Skipped breakpoint because it happened inside debugger evaluation - Intellij IDEA](https://stackoverflow.com/questions/47866398/skipped-breakpoint-because-it-happened-inside-debugger-evaluation-intellij-ide)
 
 https://youtrack.jetbrains.com/issue/IDEA-43728
+
+## Local Changes
+
+[IDEA新版本界面看不到Version Control窗口的Local Changes显示](https://blog.csdn.net/ahwsk/article/details/108225435)

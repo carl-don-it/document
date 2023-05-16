@@ -1353,8 +1353,11 @@ jsp，html，postman，mockmvc都可以
 
 ## 异步多线程
 
-> 待解决
->
+[使用DeferredResult异步处理SpringMVC请求](https://zhuanlan.zhihu.com/p/31223106)
+
+看tomcat
+ 
+
 > ![image-20200131134953811](img/image-20200131134953811.png)
 
 # SpringBoot

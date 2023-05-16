@@ -323,6 +323,12 @@ Runtime.getRuntime().exit(status);
 
 [google](https://www.google.com.hk/search?q=java+stream+%E6%9E%B6%E6%9E%84&newwindow=1&ei=NtO-Y970FIWhhwOw_L-gCg&ved=0ahUKEwje59-S6L_8AhWF0GEKHTD-D6QQ4dUDCA8&uact=5&oq=java+stream+%E6%9E%B6%E6%9E%84&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCCEQoAEyBQghEKABOgoIABBHENYEELADOgUIABCABEoECEEYAEoECEYYAFCOBViQEmCNFGgBcAF4AIABuAKIAdILkgEHMC40LjIuMZgBAKABAcgBAcABAQ&sclient=gws-wiz-serp)
 
+[恕我直言你可能真的不会java第6篇：Stream性能差？不要人云亦云](https://zhuanlan.zhihu.com/p/150396560)
+
+[Java 8 Stream的性能到底如何？](https://segmentfault.com/a/1190000004171551)
+
+  
+
 # 可变参数
 
 可以采取数组方式传入或者多个参数。如果传入的是Object[] 数组的方式，那么JDK 拿到数组后就会拆分，这个时候new String[]{“1”,”2”}，就会拆分成了两个String类型的参数。因此想要传入数组参数的时候

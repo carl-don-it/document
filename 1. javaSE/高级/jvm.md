@@ -1899,6 +1899,12 @@ https://www.oracle.com/java/technologies/javase/8all-relnotes.html
 
 方法区的Class信息,又称为永久代,是否属于Java堆？https://www.zhihu.com/question/49044988eeeww
 
+[JVM内存模型操作的多余步load和write有什么用？](https://segmentfault.com/q/1010000000697450)
+
+[Java字节码为什么有的方法中参数在本地变量表中, 有的又不在?](https://www.zhihu.com/question/52027518)
+
+[4.4. The Constant Pool](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4-140)
+
 # GC
 
 [记一次服务Full GC背后的内存泄漏问题，真是匪夷所思](https://zhuanlan.zhihu.com/p/340824925)

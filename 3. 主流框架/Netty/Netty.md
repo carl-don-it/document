@@ -411,3 +411,19 @@ https://github.com/netty/netty
 [自研简单nio-server](https://github.com/jjenkov/java-nio-server)
 
 [如何用Netty写一个高性能的分布式服务框架？ 阿里开发者，内功心法](https://mp.weixin.qq.com/s/mcI6QUW0naOmL3PMiKzLdw)
+
+https://www.cnblogs.com/rickiyang/category/1679565.html
+
+[Netty 中的内存分配浅析](https://www.cnblogs.com/rickiyang/p/13100413.html)
+
+[Netty 核心原理剖析与 RPC 实践-完](https://learn.lianglianglee.com/专栏/Netty 核心原理剖析与 RPC 实践-完)
+
+https://github.com/code4craft/netty-learning
+
+[如何进一步学习netty呢？](https://www.zhihu.com/question/66609476/answer/244082892)
+
+
+
+
+
+  

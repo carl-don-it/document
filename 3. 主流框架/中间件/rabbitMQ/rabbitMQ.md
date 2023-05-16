@@ -1521,3 +1521,5 @@ RabbitMQ小规模集群的架构设计图(附加了监控部分).png
 https://www.jianshu.com/p/6376936845ff  
 
 [【坑爹呀！】最终一致性分布式事务如何保障实际生产中99.99%高可用？](https://juejin.im/post/5bf2c6b6e51d456693549af4)
+
+[RabbitMQ之镜像队列](https://blog.csdn.net/u013256816/article/details/71097186)
