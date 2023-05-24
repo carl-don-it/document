@@ -1246,6 +1246,8 @@ public class FileController {
 > transferTo()有问题，需要把相对路径的File转换为绝对路径的File
 >
 > https://blog.csdn.net/daniel7443/article/details/51620308
+>
+> https://blog.csdn.net/lcczpp/article/details/88887045
 
 ```java
 /**
@@ -1356,7 +1358,7 @@ jsp，html，postman，mockmvc都可以
 [使用DeferredResult异步处理SpringMVC请求](https://zhuanlan.zhihu.com/p/31223106)
 
 看tomcat
- 
+
 
 > ![image-20200131134953811](img/image-20200131134953811.png)
 

@@ -8,3 +8,4 @@ gunzip Doctrine-1.2.0.tar.gz
 tar xf Doctrine-1.2.0.tar
 ```
 
+[看完这篇Linux基本的操作就会了](https://juejin.cn/post/6844903605296726030)

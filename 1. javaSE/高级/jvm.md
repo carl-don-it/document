@@ -1905,6 +1905,16 @@ https://www.oracle.com/java/technologies/javase/8all-relnotes.html
 
 [4.4. The Constant Pool](https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.4-140)
 
+[JVM内存区域详解（Eden Space、Survivor Space、Old Gen、Code Cache和Perm Gen）](https://blog.csdn.net/shiyong1949/article/details/52585256)
+
+[为什么新生代内存需要有两个Survivor区](https://blog.csdn.net/antony9118/article/details/51425581)
+
+[超详细，一看就懂！Java中基础对象以及String字符串对象的内存分配情况分析](https://blog.csdn.net/qq_28082757/article/details/89886132)
+
+[jvm静态对象实例在放法区还是堆中？](https://www.zhihu.com/question/65328195)
+
+https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4
+
 # GC
 
 [记一次服务Full GC背后的内存泄漏问题，真是匪夷所思](https://zhuanlan.zhihu.com/p/340824925)

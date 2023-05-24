@@ -170,4 +170,16 @@ int updateByExample(@Param("record") BdmPackageTrace record, @Param("example") B
 
 ![image-20200312224011790](img/image-20200312224011790.png)
 
-#
+# 参考文献
+
+[史上最强大 generator反编译自动生成代码 多重可控,生成Controller ServiceImpl Mapper xml](https://blog.csdn.net/zhangshengqiang168/article/details/90511316)
+
+https://blog.csdn.net/honger_hua/article/details/101679181?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+
+https://blog.csdn.net/oTianKuaiLe/article/details/81193460?depth_1-utm_source=distribute.pc_relevant.none-task&utm_source=distribute.pc_relevant.none-task
+
+[【MyBatis学习15】MyBatis的逆向工程生成代码](https://blog.csdn.net/eson_15/article/details/51694684)
+
+https://www.cnblogs.com/tanghaorong/p/14013584.html
+
+[MyBatis Generator Quick Start Guide](http://mybatis.org/generator/quickstart.html)

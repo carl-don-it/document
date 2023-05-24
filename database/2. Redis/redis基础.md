@@ -1183,3 +1183,11 @@ https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html 待
 
 [Redis 到底是单线程还是多线程？我要吊打面试官！](https://www.cnblogs.com/javastack/p/12848446.html)
 
+[Redis 设计与实现（第一版）](https://redisbook.readthedocs.io/en/latest/index.html)
+
+# 运维
+
+## 安装
+
+[win10 64位安装redis 及Redis Desktop Manager使用](https://blog.csdn.net/qq_35038153/article/details/79675728)
+

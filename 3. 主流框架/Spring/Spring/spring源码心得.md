@@ -756,3 +756,6 @@ https://fangshixiang.blog.csdn.net/article/details/88095165
 [【小家Spring】细说Spring IOC容器的自动装配（@Autowired），以及Spring4.0新特性之【泛型依赖注入】的源码级解析](https://blog.csdn.net/f641385712/article/details/88410362)
 
 [【小家Spring】Spring容器（含父子容器）的启动过程源码级别分析（含web.xml启动以及全注解驱动，和ContextLoader源码分析）](https://blog.csdn.net/f641385712/article/details/87883205)
+
+[@Autowired用法详解](https://blog.csdn.net/u013257679/article/details/52295106)
+
