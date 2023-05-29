@@ -1,3 +1,20 @@
+# 总
+
+OffsetDateTime、ZonedDateTime和Instant和system.currentMillis都能在时间线上以纳秒精度存储一个瞬间.
+
+OffsetDateTime和Instant可用于模型的字段类型，因为它们都表示瞬间值并且还不可变。
+
+LocalDateTime是一个不可变的日期-时间对象。该类不存储时区，通常是默认大家都是使用同一个时区。
+
+如果哪些国家使用夏令时，直接使用Zone就好了，如果没有使用夏令时，可以使用UTC+offset。
+
+转换的时候建议使用instant作跳板一把梭。
+
+2020-01-13T16:00:00.000Z中 
+
+T表示分隔符，Z表示的是UTC。
+UTC：世界标准时间，在标准时间上加上8小时，即东八区时间，也就是北京时间。
+
 # 旧的
 
 **总结**： Calendar设置时间，Date是显示时间，Dateformat是转换Date和String
@@ -50,8 +67,4 @@ new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
 
 
 ![image-20200329191357702](img/image-20200329191357702.png)
-
-# 新的
-
-看[pdf](file:///C:/Users/TJR_S/OneDrive/%E7%BC%96%E7%A8%8B/1.%20javaSE/%E5%9F%BA%E7%A1%80/%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4.pdf)
 
