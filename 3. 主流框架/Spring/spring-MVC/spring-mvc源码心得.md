@@ -37,16 +37,11 @@ initBinderArgumentResolvers
 returnValueHandlers
 ```
 
-## spring跨域
 
-[学会Spring Mvc 跨域你只需要看完这一篇](https://cloud.tencent.com/developer/article/1549146)
-
-
-  DelegatingWebMvcConfiguration
-
-![1668952916091](img/1668952916091.png)
 
 # 参考文献
+
+https://fangshixiang.blog.csdn.net/category_7941357_4.html
 
 [SpringMVC源码学习笔记](https://blog.csdn.net/abap_brave/category_9277043.html)
 
@@ -89,3 +84,9 @@ https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1NDY0MTkzNQ==&action=getalbum&a
 # 跨域
 
 [为什么springmvc要提供跨域支持](https://www.google.com/search?q=%E4%B8%BA%E4%BB%80%E4%B9%88springmvc%E8%A6%81%E6%8F%90%E4%BE%9B%E8%B7%A8%E5%9F%9F%E6%94%AF%E6%8C%81&rlz=1C1CHBD_enHK943HK944&oq=%E4%B8%BA%E4%BB%80%E4%B9%88springmvc%E8%A6%81%E6%8F%90%E4%BE%9B%E8%B7%A8%E5%9F%9F%E6%94%AF%E6%8C%81&aqs=chrome..69i57j0i546.8377j0j7&sourceid=chrome&ie=UTF-8)
+
+[学会Spring Mvc 跨域你只需要看完这一篇](https://cloud.tencent.com/developer/article/1549146)
+
+  DelegatingWebMvcConfiguration
+
+![1668952916091](img/1668952916091.png)

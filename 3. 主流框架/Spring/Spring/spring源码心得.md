@@ -741,6 +741,16 @@ hasBeanClass
 都是指真正的class
 ```
 
+# 类型转换
+
+https://blog.csdn.net/f641385712/category_10625150.html
+
+介绍了PropertyEditor，然后convert体系，然后format体系，format体系依赖于convert体系。
+
+核心是`GenericConverter`（转换器，value），`ConverterRegistry`（就是一个map，注册就是put），`ConversionService`（暴露接口），通过getConvertibleTypes来规定转化的方向`ConvertiblePair`，这是key，用这个key把转换器塞进map。用的时候构建转换的方向（key）拿到转化器。转换的方向其实都是raw类型，涉及泛型就不够精准了，因此需要ConditionalConverter，matchs和TypeDescriptor来进行进一步的筛选。
+
+FormatterRegistry的fieldType本来是默认从formatter泛型中获取的，但是现在可以让你自定义转换方向，不从泛型中获取，实现中再为你加入一些奇淫巧计来帮你转换，我不建议自定义，因为不透明，耦合太牵强。为什么只有formatter这样实现，而converter体系不这样实现（你自己写一个也可以的），可能是因为string的转化比较重要（这样设计真的有用人吗），又或者是觉得formatter独立于converter，formatter加点功能可以，但是converter语义上应该功能单一。
+
 # 参考文献
 
 spring源码揭秘
