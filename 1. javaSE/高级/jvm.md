@@ -1915,6 +1915,8 @@ https://www.oracle.com/java/technologies/javase/8all-relnotes.html
 
 https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-2.html#jvms-2.5.4
 
+idea下载bytecode插件，最高分的那几个
+
 # GC
 
 [记一次服务Full GC背后的内存泄漏问题，真是匪夷所思](https://zhuanlan.zhihu.com/p/340824925)
