@@ -741,15 +741,35 @@ hasBeanClass
 都是指真正的class
 ```
 
-# 类型转换
+# 类型转换和数据绑定
 
-https://blog.csdn.net/f641385712/category_10625150.html
+[【方向盘】-Spring类型转换](https://blog.csdn.net/f641385712/category_10625150.html)
 
-介绍了PropertyEditor，然后convert体系，然后format体系，format体系依赖于convert体系。
+[【小家Spring】聊聊Spring中的数据转换：Converter、ConversionService、TypeConverter、PropertyEditor](https://blog.csdn.net/f641385712/article/details/90702928)
 
-核心是`GenericConverter`（转换器，value），`ConverterRegistry`（就是一个map，注册就是put），`ConversionService`（暴露接口），通过getConvertibleTypes来规定转化的方向`ConvertiblePair`，这是key，用这个key把转换器塞进map。用的时候构建转换的方向（key）拿到转化器。转换的方向其实都是raw类型，涉及泛型就不够精准了，因此需要ConditionalConverter，matchs和TypeDescriptor来进行进一步的筛选。
+[【小家Spring】聊聊Spring中的格式化：Formatter、AnnotationFormatterFactory、DateFormatter以及@DateTimeFormat...](https://blog.csdn.net/f641385712/article/details/90758540)
 
-FormatterRegistry的fieldType本来是默认从formatter泛型中获取的，但是现在可以让你自定义转换方向，不从泛型中获取，实现中再为你加入一些奇淫巧计来帮你转换，我不建议自定义，因为不透明，耦合太牵强。为什么只有formatter这样实现，而converter体系不这样实现（你自己写一个也可以的），可能是因为string的转化比较重要（这样设计真的有用人吗），又或者是觉得formatter独立于converter，formatter加点功能可以，但是converter语义上应该功能单一。
+> 介绍了PropertyEditor，然后convert体系，然后format体系，format体系依赖于convert体系。
+>
+> 核心是`GenericConverter`（转换器，value），`ConverterRegistry`（就是一个map，注册就是put），`ConversionService`（暴露接口），通过getConvertibleTypes来规定转化的方向`ConvertiblePair`，这是key，用这个key把转换器塞进map。用的时候构建转换的方向（key）拿到转化器。转换的方向其实都是raw类型，涉及泛型就不够精准了，因此需要ConditionalConverter，matchs和TypeDescriptor来进行进一步的筛选。
+>
+> FormatterRegistry的fieldType本来是默认从formatter泛型中获取的，但是现在可以让你自定义转换方向，不从泛型中获取，实现中再为你加入一些奇淫巧计来帮你转换，我不建议自定义，因为不透明，耦合太牵强。为什么只有formatter这样实现，而converter体系不这样实现（你自己写一个也可以的），可能是因为string的转化比较重要（这样设计真的有用人吗），又或者是觉得formatter独立于converter，formatter加点功能可以，但是converter语义上应该功能单一。
+
+[聊聊Spring中的数据绑定 --- DataBinder本尊（源码分析）【享学Spring】](https://blog.csdn.net/f641385712/article/details/96431460)
+
+[聊聊Spring中的数据绑定 --- WebDataBinder、ServletRequestDataBinder、WebBindingInitializer...【享学Spring】](https://blog.csdn.net/f641385712/article/details/96450469)
+
+> WebDataBinderFactory用于创建WebDataBinder，顺便初始化，每个WebDataBinder只能用一次，因此需要频繁创建。既有绑定属性到bean的功能，也有校验功能，也有类型转换功能。
+
+[聊聊Spring中的数据绑定 --- 属性访问器PropertyAccessor和实现类DirectFieldAccessor的使用【享学Spring】](https://blog.csdn.net/f641385712/article/details/95481552)
+
+[聊聊Spring中的数据绑定 --- BeanWrapper以及Java内省Introspector和PropertyDescriptor【享学Spring】](https://blog.csdn.net/f641385712/article/details/95907073)
+
+[Spring IoC是如何使用BeanWrapper和Java内省结合起来给Bean属性赋值的【享学Spring】](https://blog.csdn.net/f641385712/article/details/95933977?ops_request_misc=&request_id=e4c5eaaf4706461185d487eb3f36856d&biz_id=&utm_medium=distribute.pc_search_result.none-task-blog-2~blog~koosearch~default-3-95933977-null-null.268^v1^control&utm_term=BeanWrapper&spm=1018.2226.3001.4450)
+
+> bean的属性操作。
+
+
 
 # 参考文献
 
