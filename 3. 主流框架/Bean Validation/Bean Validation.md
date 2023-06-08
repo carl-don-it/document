@@ -8,16 +8,30 @@
 
 [【方向盘】-Bean Validation](https://blog.csdn.net/f641385712/category_10338056.html)
 
-> javax-validation的基础系列，还没有写完。
+[深入了解数据校验：Java Bean Validation 2.0（JSR303、JSR349、JSR380）Hibernate-Validation 6.x使用案例【享学Java】](https://blog.csdn.net/f641385712/article/details/96638596)
+
+[深入了解数据校验（Bean Validation）：基础类打点（ValidationProvider、ConstraintDescriptor、ConstraintValidator）【享学Java】](https://blog.csdn.net/f641385712/article/details/96764829)
+
+[深入了解数据校验（Bean Validation）：从深处去掌握@Valid的作用（级联校验）以及常用约束注解的解释说明【享学Java】](https://blog.csdn.net/f641385712/article/details/97042906)
+
+[分组序列@GroupSequenceProvider、@GroupSequence控制数据校验顺序，解决多字段联合逻辑校验问题【享学Spring MVC】](https://fangshixiang.blog.csdn.net/article/details/99725482)
+
+[Bean Validation完结篇：你必须关注的边边角角（约束级联、自定义约束、自定义校验器、国际化失败消息...）【享学Spring】](https://blog.csdn.net/f641385712/article/details/97968775)
+
+> javax-validation的原生系列.
+
+[Spring方法级别数据校验：@Validated + MethodValidationPostProcessor优雅的完成数据校验动作【享学Spring】](https://fangshixiang.blog.csdn.net/article/details/97402946)
+
+[详述Spring对Bean Validation支持的核心API：Validator、SmartValidator、LocalValidatorFactoryBean...【享学Spring】](https://blog.csdn.net/f641385712/article/details/97270786)
+
+> spring整合。
+
+[@Validated和@Valid的区别？教你使用它完成Controller参数校验（含级联属性校验）以及原理分析【享学Spring】](https://blog.csdn.net/f641385712/article/details/97621783)
+
+[让Controller支持对平铺参数执行数据校验（默认Spring MVC使用@Valid只能对JavaBean进行校验）【享学Spring】](https://blog.csdn.net/f641385712/article/details/97621755)
+
+> spring-mvc整合。建议先看数据绑定和类型转换。
 
 [javax validation--参数基础校验](https://blog.csdn.net/csyuyaoxiadn/article/details/56016359)
 
 > 别人的，有一定参考价值
-
-[分组序列@GroupSequenceProvider、@GroupSequence控制数据校验顺序，解决多字段联合逻辑校验问题【享学Spring MVC】](https://fangshixiang.blog.csdn.net/article/details/99725482)
-
-> 包含源码解析
-
-[Spring方法级别数据校验：@Validated + MethodValidationPostProcessor优雅的完成数据校验动作【享学Spring】](https://fangshixiang.blog.csdn.net/article/details/97402946)
-
-> 初步入手@Validated，和controller关系不大，这是自己控制的。
