@@ -43,6 +43,14 @@
 > - fluent boolean值，默认为false。此字段主要为控制生成的getter和setter方法前面是否带get/set
 > - chain boolean值，默认false。如果设置为true，setter返回的是此对象，方便链式调用方法
 > - prefix 设置前缀 例如：@Accessors(prefix = "abc") private String abcAge 当生成get/set方法时，会把此前缀去掉
+>
+> ```
+> 为什么不用@Accessors(chain = true) 这其实是因为这个注解会修改set包装器的原始行为（其实就是返回this对象罢了）。这就导致某些框架的字节码增强功能可能会不认这个被包装后的类（因为他们不是标准的set包装器）。
+> ```
+>
+> [@Builder与@Accessors的优劣对比（搬运）](https://blog.csdn.net/qq_37807321/article/details/106851266)
+>
+> [一篇搞懂@Accessors与@Builder（结合项目经验）](https://blog.csdn.net/weixin_45938441/article/details/121116819)
 
 ###### @Synchronized
 
