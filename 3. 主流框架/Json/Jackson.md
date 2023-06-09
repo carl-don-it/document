@@ -578,6 +578,13 @@ private Date birthday;
 objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 ```
 
+# 发现问题
+
+## @JsonAnyGetter / @JsonAnySetter
+
+需要初始化map，不能为null
+不要放在field上，会有重复序列化的问题
+
 # 参考文献
 
 [官网](https://github.com/FasterXML/jackson/)
