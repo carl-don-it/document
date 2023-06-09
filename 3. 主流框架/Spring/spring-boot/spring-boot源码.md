@@ -185,6 +185,12 @@ public @interface EnableAutoConfiguration {}
 
 # 包结构
 
+![image-20230609083457402](img/image-20230609083457402.png)依赖结构
+
+autoconfigure包都是官方默认自动配置类。
+
+spring-boot包是spring-boot自身启动的一些相关类
+
 # origin
 
 org.springframework.boot.origin.Origin
@@ -218,3 +224,5 @@ https://fangshixiang.blog.csdn.net/article/details/105762050
 [你能说出SpringBoot自动装配的原理吗？ _](https://www.cnblogs.com/xfeiyun/p/15707730.html)
 
 [【㊫SpringBoot】Springboot自动装配以及启动原理解析 _](https://www.cnblogs.com/xfeiyun/p/17282030.html)
+
+[不懂SpringApplication生命周期事件？那就等于不会Spring Boot嘛](https://blog.csdn.net/f641385712/article/details/105762050)
