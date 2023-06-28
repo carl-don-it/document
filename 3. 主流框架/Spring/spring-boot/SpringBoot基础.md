@@ -47,19 +47,19 @@ SpringBoot对上述Spring的缺点进行的改善和优化，基于约定优于�
 
 使用idea工具创建一个maven工程，该工程为普通的java工程即可
 
-![](img\1.png)
+![df](img\1.png)
 
 
 
-![](img\2.png)
+![sd](img\2.png)
 
 
 
-![](img\3.png)
+![ds](img\3.png)
 
 
 
-![](img\4.png)
+![sd](img\4.png)
 
 
 
@@ -158,19 +158,19 @@ tomcat已经起步，端口监听8080，web应用的虚拟工程名称为空
 
 打开浏览器访问url地址为：http://localhost:8080/quick
 
-![](img\5.png)
+![ssa](img\5.png)
 
 ## IDEA的Spring Initialize
 
-![](img\6.png)
+![sd](img\6.png)
 
-![](img\7.png)
+![sd](img\7.png)
 
-![](img\8.png)
+![sd](img\8.png)
 
 ![](img\9.png)
 
-![](img\10.png)
+![sd](img\10.png)
 
 
 
