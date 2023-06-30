@@ -314,7 +314,9 @@ AMQP是一种使用TCP进行可靠传输的应用程序级协议。 AMQP连接�
 
 # 使用
 
+[RabbitMQ拉模式批量消费消息](https://blog.csdn.net/qq_33814088/article/details/84839219)
 
+# 运维
 
 ## linux下安装
 
@@ -1514,9 +1516,7 @@ RabbitMQ小规模集群的架构设计图(附加了监控部分).png
 
 # 参考文章
 
-[Kafka深度解析]([http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/](http://www.jasongj.com/2015/01/02/Kafka深度解析/))
-
-[[Message Delivery Reliability](http://doc.akka.io/docs/akka/2.4.3/general/message-delivery-reliability.html)]:
+[Message Delivery Reliability](http://doc.akka.io/docs/akka/2.4.3/general/message-delivery-reliability.html)
 
 https://www.jianshu.com/p/6376936845ff  
 

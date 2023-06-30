@@ -69,3 +69,7 @@ https://youtrack.jetbrains.com/issue/IDEA-43728
 ## Local Changes
 
 [IDEA新版本界面看不到Version Control窗口的Local Changes显示](https://blog.csdn.net/ahwsk/article/details/108225435)
+
+## 插件
+
+![1687515676595](img/1687515676595.png)
