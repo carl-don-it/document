@@ -422,8 +422,12 @@ https://github.com/code4craft/netty-learning
 
 [如何进一步学习netty呢？](https://www.zhihu.com/question/66609476/answer/244082892)
 
+# epoll
 
+[java 和netty epoll实现](https://colobu.com/2014/09/12/java-nio-epoll/)
 
+[Netty源码分析——EPOLL前传之EVENTFD、TIMERFD](https://juejin.cn/post/6844903717846646792)
 
+ [netty中的epoll实现](https://juejin.cn/post/6844903906095398925)
 
-  
+[快来体验快速通道,netty中epoll传输协议详解](https://www.cnblogs.com/flydean/p/16478295.html)
