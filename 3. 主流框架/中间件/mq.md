@@ -1,0 +1,1 @@
+先看redis队列，再看rabbitMQ，kafka，rocket
