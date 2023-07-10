@@ -1191,3 +1191,7 @@ https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html 待
 
 [win10 64位安装redis 及Redis Desktop Manager使用](https://blog.csdn.net/qq_35038153/article/details/79675728)
 
+# [数据库和缓存如何保证一致性](https://xiaolincoding.com/redis/architecture/mysql_redis_consistency.html#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93-%E8%BF%98%E6%98%AF%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98)
+
+https://github.com/xiaolincoder/xiaolincoding_comment/issues/117
+
