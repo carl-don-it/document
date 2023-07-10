@@ -805,3 +805,7 @@ https://blog.csdn.net/f641385712/article/details/81286231
 https://www.51cto.com/article/620291.html
 
 https://www.zhihu.com/question/610866431
+
+# 文件
+
+# [Java实现监听文件变化的三种方法，推荐第三种](https://segmentfault.com/a/1190000041913336)
