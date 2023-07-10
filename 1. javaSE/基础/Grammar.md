@@ -796,3 +796,12 @@ public class InnerClass {
 
      注意： equals 方法不能用于基本数据类型的变量，如果没有对 equals 方法进行重写，则比较的是引用类型的变量所指向的对象的地址。  
 
+# 新特性
+
+https://blog.csdn.net/f641385712/article/details/81286231
+
+# 模块化
+
+https://www.51cto.com/article/620291.html
+
+https://www.zhihu.com/question/610866431
