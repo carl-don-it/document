@@ -463,7 +463,13 @@ public final class LogFactory {
   条件化配置文件
   解读：https://logback.qos.ch/reasonsToSwitch.html
 
+- 参考文献
 
+  [Java日志框架：logback详解](https://www.cnblogs.com/xrq730/p/8628945.html)
+
+  [logback的使用和logback.xml详解](https://www.cnblogs.com/warking/p/5710303.html)
+
+  https://github.com/qos-ch/logback
 
 # Log4j2
 
