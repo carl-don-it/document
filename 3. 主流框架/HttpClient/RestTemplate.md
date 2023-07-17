@@ -63,3 +63,6 @@ factory子接口
 # 参考文献
 
 [httpclient 学习](https://www.cnblogs.com/pony1223/p/7471464.html)
+
+[RestTemplate的使用和原理你都烂熟于胸了吗？【享学Spring MVC】](https://blog.csdn.net/f641385712/article/details/100753981)
+
