@@ -73,3 +73,25 @@ https://youtrack.jetbrains.com/issue/IDEA-43728
 ## 插件
 
 ![1687515676595](img/1687515676595.png)
+
+# 心水功能
+
+Dependencies
+✌Analyze Stack Trace or Thread Dump...
+远程调试
+Stream流调试
+多线程调试
+Postfix Completion，cast、for、fori、forr、iter
+Maven Helper
+Dependency Analyzer
+idea连接数据库
+
+# 参考文件
+
+[yourbatman](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI0MTUwOTgyOQ==&action=getalbum&album_id=1374601107946962947&scene=173&from_msgid=2247490748&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
+
+# 安装
+
+[IntelliJ IDEA 2023.1.4激活破解图文教程（亲测有用，永久激活）](https://www.exception.site/essay/idea-reset-eval)
+
+[同一台电脑安装多个版本的idea](https://juejin.cn/post/7216143702124314685)
