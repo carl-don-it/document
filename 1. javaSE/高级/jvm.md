@@ -1923,3 +1923,8 @@ idea下载bytecode插件，最高分的那几个
 
 
   ![1648214097779](img/1648214097779.png)
+
+# GraalVM
+
+[Java要抛弃祖宗的基业，Java程序员危险了！](https://mp.weixin.qq.com/s/duAT1p_FzOE5dogy5CMx7g)
+
