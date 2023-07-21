@@ -31,3 +31,11 @@ https://www.infoq.cn/profile/1278686/publish
 http://www.jasongj.com/
 
  [Kafka设计解析（一）- Kafka背景及架构介绍](http://www.jasongj.com/2015/03/10/KafkaColumn1/)
+
+[Kafka史上最详细原理总结(一)](https://blog.csdn.net/weixin_42073408/article/details/119751796?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168678926216800185818236%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=168678926216800185818236&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-4-119751796-null-null.142^v88^control_2,239^v2^insert_chatgpt&utm_term=kafka&spm=1018.2226.3001.4187)
+
+[看完这篇Kafka，你也许就会了Kafka](https://blog.csdn.net/cao1315020626/article/details/112590786?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168678926216800185818236%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=168678926216800185818236&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-112590786-null-null.142^v88^control_2,239^v2^insert_chatgpt&utm_term=kafka&spm=1018.2226.3001.4187)
+
+[Kafka学习之路 （一）Kafka的简介](https://blog.csdn.net/lisheng19870305/article/details/108592374?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522168678926216800185818236%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=168678926216800185818236&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-8-108592374-null-null.142^v88^control_2,239^v2^insert_chatgpt&utm_term=kafka&spm=1018.2226.3001.4187)
+
+https://blog.csdn.net/yuanlong122716/category_9798617.html
