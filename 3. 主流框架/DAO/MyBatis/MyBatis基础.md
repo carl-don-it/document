@@ -1023,3 +1023,8 @@ https://www.one-tab.com/page/6shhUxseTk6ZWTWh-iAYTg
 > https://download.csdn.net/download/a1257427517/10757507?utm_medium=distribute.pc_relevant_download.none-task-download-2~default~TOP_INCOME_CLICK~Position-4-10757507-download-10710954.257%5Ev14%5Epc_dl_relevant_base1_a&depth_1-utm_source=distribute.pc_relevant_download.none-task-download-2~default~TOP_INCOME_CLICK~Position-4-10757507-download-10710954.257%5Ev14%5Epc_dl_relevant_base1_a&spm=1003.2020.3001.6616.4 | Mybatis最新jar及源码资源-CSDN文库
 > https://download.csdn.net/download/friend785694123/10172693?utm_medium=distribute.pc_relevant_download.none-task-download-2~default~TOP_INCOME_CLICK~Position-5-10172693-download-10710954.257%5Ev14%5Epc_dl_relevant_base1_a&depth_1-utm_source=distribute.pc_relevant_download.none-task-download-2~default~TOP_INCOME_CLICK~Position-5-10172693-download-10710954.257%5Ev14%5Epc_dl_relevant_base1_a&spm=1003.2020.3001.6616.5 | mybatis-plus实践及架构原理_mybatisplus原理,mybatisplus原理资源-CSDN文库
 
+[失控的阿甘](https://juejin.cn/user/2963939079235517/posts)
+
+https://my.oschina.net/zudajun?q=Mybatis
+
+![1690021588313](img/1690021588313.png)
