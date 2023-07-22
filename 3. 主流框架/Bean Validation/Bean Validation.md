@@ -35,3 +35,8 @@
 [javax validation--参数基础校验](https://blog.csdn.net/csyuyaoxiadn/article/details/56016359)
 
 > 别人的，有一定参考价值
+>
+> https://blog.csdn.net/durenniu/article/details/79708028 | spring mvc 校验@NULL @notNULL等_durenniu的博客-CSDN博客
+> https://blog.csdn.net/FU250/article/details/80247930 | 使用@Valid+BindingResult进行controller参数校验__再见阿郎_的博客-CSDN博客
+> https://blog.csdn.net/u013815546/article/details/77248003 | 使用spring validation完成数据后端校验_下一秒升华的博客-CSDN博客
+
