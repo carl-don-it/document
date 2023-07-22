@@ -261,6 +261,8 @@ configurationClasses的第一个不是配置类，一般是scan之类的，或�
 >
 > 而事务之类的切面编程属于getBean之后的，此时属性已经注入完毕，只能用增强类包装原来的对象。
 
+[【小家Spring】Spring解析@Configuration注解的处理器：ConfigurationClassPostProcessor（ConfigurationClassParser）](https://fangshixiang.blog.csdn.net/article/details/88095165)
+
 ## checkConfigurationClassCandidate
 
 先获取`AnnotationMetadata`，可以加载class文件，那就反射获取，不然就asm操作字节码获取。然后根据元配置判断注解是否存在。
@@ -769,7 +771,11 @@ hasBeanClass
 
 > bean的属性操作。
 
+# ResolvableType
 
+先复习一下原生api和type分类先。
+
+[浅聊Spring的泛型处理之ResolvableType](https://www.cnblogs.com/xfeiyun/p/15797230.html) 
 
 # 参考文献
 
@@ -789,3 +795,4 @@ https://fangshixiang.blog.csdn.net/article/details/88095165
 
 [@Autowired用法详解](https://blog.csdn.net/u013257679/article/details/52295106)
 
+​	

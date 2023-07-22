@@ -1023,7 +1023,9 @@ spring.profiles.include: proddb,prodmq
 
 通过命令行来修改属性值固然提供了不错的便利性，但是通过命令行就能更改应用运行的参数，那岂不是很不安全？是的，所以Spring Boot也贴心的提供了屏蔽命令行访问属性的设置，只需要这句设置就能屏蔽：`SpringApplication.setAddCommandLineProperties(false)`。
 
+## 参考文献
 
+[在Spring Boot中使用@PropertySource读取YAML文件](https://blog.csdn.net/niugang0920/article/details/115611553)
 
 # 项目部署路径
 

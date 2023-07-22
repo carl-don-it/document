@@ -523,3 +523,6 @@ https://www.zhihu.com/question/20400700/answer/283109538
 
 Java 泛型 <? super T> 中 super 怎么 理解？与 extends 有何不同？ - 呵呵一笑百媚生的回答 - 知乎
 https://www.zhihu.com/question/20400700/answer/117670919
+
+[【小家Java】你真的了解Java泛型参数吗？细说java.lang.reflect.Type（ParameterizedType、TypeVariable、WildcardType...）](https://blog.csdn.net/f641385712/article/details/88789847)
+
