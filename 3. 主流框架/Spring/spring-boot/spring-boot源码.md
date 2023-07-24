@@ -55,13 +55,13 @@ public class DemoApplication implements ApplicationRunner {
 
       2. ```java
          	private void onApplicationEnvironmentPreparedEvent(ApplicationEnvironmentPreparedEvent event) {
-         		List<EnvironmentPostProcessor> postProcessors = loadPostProcessors();
-         		postProcessors.add(this);
-         		AnnotationAwareOrderComparator.sort(postProcessors);
-         		for (EnvironmentPostProcessor postProcessor : postProcessors) {
-         			postProcessor.postProcessEnvironment(event.getEnvironment(), event.getSpringApplication());
-         		}
-         	}
+            		List<EnvironmentPostProcessor> postProcessors = loadPostProcessors();
+            		postProcessors.add(this);
+            		AnnotationAwareOrderComparator.sort(postProcessors);
+            		for (EnvironmentPostProcessor postProcessor : postProcessors) {
+            			postProcessor.postProcessEnvironment(event.getEnvironment(), event.getSpringApplication());
+            		}
+            	}
          ```
 
       3. ![image-20230506162737836](img/image-20230506162737836.png)
@@ -226,3 +226,7 @@ https://fangshixiang.blog.csdn.net/article/details/105762050
 [【㊫SpringBoot】Springboot自动装配以及启动原理解析 _](https://www.cnblogs.com/xfeiyun/p/17282030.html)
 
 [不懂SpringApplication生命周期事件？那就等于不会Spring Boot嘛](https://blog.csdn.net/f641385712/article/details/105762050)
+
+http://fangjian0423.github.io/categories/springboot/
+
+> 重要
