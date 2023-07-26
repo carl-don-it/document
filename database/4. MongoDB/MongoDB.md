@@ -1,8 +1,12 @@
 # 介绍
 
+## 简介
+
 官方地址：https://www.mongodb.com/  
 
-MongoDB是一个文档数据库，提供好的性能，领先的非关系型数据库。采用BSON存储文档数据。
+MongoDB是一个文档数据库，提供好的性能，领先的非关系型数据库。采用[BSON](https://blog.csdn.net/m0_38110132/article/details/77716792)存储文档数据。
+
+nosql的设计原则就是要规避关联
 
 MongoDB用c++编写的,流行的开源数据库MySQL也是用C++开发的。
 
@@ -24,14 +28,14 @@ MongoDB用c++编写的,流行的开源数据库MySQL也是用C++开发的。
 2、一个数据库可以创建多个集合
 3、一个集合可以包括多个文档。  
 
-#### 可替代产品
+## 可替代产品
 
 - Cassandra
 - Redis
 - Riak
 - CouchDB
 
-#### 优势
+## 优势
 
 - 面向文档的存储：以 JSON 格式的文档保存数据。
 - 任何属性都可以建立索引。
@@ -48,7 +52,7 @@ MongoDB用c++编写的,流行的开源数据库MySQL也是用C++开发的。
 - 不需要转化/映射应用对象到数据库对象
 - 使用内部内存作为存储工作区,以便更快的存取数据。
 
-#### 文档
+## 文档
 
 文档由一组key value组成。文档是动态模式,这意味着同一集合里的文档不需要有相同的字段和结构。在关系型数据库中table中的每一条记录相当于MongoDB中的一个文档。
 
@@ -56,14 +60,59 @@ MongoDB用c++编写的,流行的开源数据库MySQL也是用C++开发的。
 
 ![image-20200124200708115](img/image-20200124200708115.png)
 
-#### 使用场景
+## 使用场景
+
+mongodb的优秀之处在于(甚至是伟大之处)，在国内遍布垃圾产品经理，需求一天三改还得当前上线的情况下，给了众多没有话语权的程序员一条活路。
 
 - 大数据
+
 - 内容管理系统
+
 - 移动端Apps
+
 - 数据管理
 
+- **何时选择MongoDB？为啥要用它？**
 
+  （1）游戏场景
+
+  使用MongoDB存储游戏用户信息、装备、积分等，直接以内嵌文档的形式存储，方便查询、更新。
+
+  （2）物流场景
+
+  使用MongoDB存储订单信息、订单状态、[物流信息](https://www.zhihu.com/search?q=物流信息&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A3035382843})，订单状态在运送过程中飞速迭代、以MongoDB内嵌数组的形式来存储，一次查询就能将订单所有的变更查出来，牛逼plus。
+
+  （3）社交场景
+
+  使用MongoDB存储用户信息，朋友圈信息，通过地理位置索引实现附近的人、定位功能。
+
+  （4）[物联网](https://www.zhihu.com/search?q=物联网&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A3035382843})场景
+
+  使用MongoDB存储设备信息、设备汇报的日志信息、并对这些信息进行多维度分析。
+
+  （5）视频直播
+
+  使用MongoDB存储用户信息、点赞互动信息。
+
+  作者：剽悍一小兔
+
+  链接：https://www.zhihu.com/question/26095333/answer/3035382843
+
+  来源：知乎
+
+  著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+![1690276495952](img/1690276495952.png)
+
+[MongoDB的缺点以及你为什么不使用MongoDB？](https://www.zhihu.com/question/360088581)
+
+[用户数据库是用MongoDB好，还是用MySql好？](https://www.zhihu.com/question/26095333)
+
+
+
+
+
+  
 
 # 使用
 
@@ -104,3 +153,23 @@ MongoDB每个集合和每个索引都对应一个命名空间，这些命名空�
 
 需要注意的一个命名空间$freelist，这个命名空间用于记录不再使用的盘区（被删除的Collection或索引）。每当命名空间需要分配新盘区时，会先查看$freelist是否有大小合适的盘区可以使用，如果有就回收空闲的磁盘空间。
 
+# 安装
+
+https://blog.csdn.net/qq_42442369/article/details/84564758 | 【已解决】MongoDB问题 -Windows无法启动MongoDB服务，错误1053（适用win10）_sevieryang的博客-CSDN博客
+https://learnku.com/articles/74413 | MongoDB6.0的安装「2023年」 | Python 技术论坛
+
+# 参考文献
+
+[BSON的介绍及BSON与JSON的区别](https://blog.csdn.net/m0_38110132/article/details/77716792)
+
+[万字详解，吃透 MongoDB！](https://zhuanlan.zhihu.com/p/601669117)
+
+https://www.zhihu.com/tardis/zm/art/364698285?source_id=1003 | 10本 MongoDB 学习书籍推荐 - 世界读书月
+https://www.zhihu.com/search?type=content&q=%E5%AD%A6%E4%B9%A0mongodb | 学习mongodb - 搜索结果 - 知乎
+https://www.zhihu.com/question/478485839 | 为什么mongoDB在国内发展的没redis好？ - 知乎
+https://www.ucloud.cn/yun/ask/77957.html | mongodb最好的教材求推荐？ - UCloud云社区
+https://docs.mongoing.com/transactions | MongoDB事务 - MongoDB-CN-Manual
+https://zhuanlan.zhihu.com/p/511378381 | 最好用的 6 款 MongoDB GUI 管理工具横向测评 - 免费和付费到底怎么选? - 知乎
+https://github.com/Studio3T/robomongo | Studio3T/robomongo: Native cross-platform MongoDB management tool
+https://www.zdfans.com/search/navicat%20for%20mongodb.html | navicat for mongodb - 搜索结果 - zd423
+https://www.zdfans.com/html/92267.html | navicat for mongodb 16破解版-navicat for mongodb 16中文免费版下载 v16.0 - zd423
