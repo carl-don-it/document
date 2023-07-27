@@ -90,3 +90,9 @@ https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1NDY0MTkzNQ==&action=getalbum&a
   DelegatingWebMvcConfiguration
 
 ![1668952916091](img/1668952916091.png)
+
+# 异步
+
+https://blog.csdn.net/f641385712/article/details/88710676 | 【小家Spring】高性能关键技术之---体验Spring MVC的异步模式（ResponseBodyEmitter、SseEmitter、StreamingResponseBody） 高级使用篇_YourBatman的博客-CSDN博客
+https://blog.csdn.net/f641385712/article/details/88692534 | 【小家Spring】高性能关键技术之---体验Spring MVC的异步模式（Callable、WebAsyncTask、DeferredResult） 基础使用篇_YourBatman的博客-CSDN博客
+
