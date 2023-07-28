@@ -341,3 +341,19 @@ method.invoke(null,new String[]{"1","2"});
 method.invoke(null,new Object[]{new String[]{"1","2"}});
 ```
 
+# Timer
+
+[深入 Java Timer 定时调度器实现原理](https://juejin.cn/post/6844903741565435918)
+
+[java.util.concurrent之ScheduledExecutorService——替代Timer，实现多线程任务调度](https://blog.csdn.net/weixin_41888813/article/details/90767979?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6&utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-6)
+
+[Java 中的定时任务：Timer基础 Timer的缺陷 ScheduledExecutorService优势](https://blog.csdn.net/u010003835/article/details/71480565)
+
+# hashcode
+
+[浅谈Java中的hashcode方法 ](https://www.cnblogs.com/dolphin0520/p/3681042.html)
+
+
+
+
+  

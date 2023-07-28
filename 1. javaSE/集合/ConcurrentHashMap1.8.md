@@ -1496,3 +1496,8 @@ public void clear() {
 
 结语：1.8的看了很久，特别是扩容那块，扩容重叠非常难以理解。感觉上单个单个的都能解释了，但整体看来还有对不上的地方。
 那几个不完全对不上的地方，留待以后顿悟，现在感觉快看吐了的，走进了死胡同。
+
+# 参考文献
+
+https://blog.csdn.net/mian_CSDN/article/details/70185104 | ConcurrentHashMap(JDK1.8)为什么要放弃Segment_jdk,面试,hashmap_乐天派-CSDN博客
+https://www.google.com/search?q=java+8+concurrenthashmap%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%BE%E5%BC%83%E4%BA%86%E5%88%86%E6%AE%B5%E9%94%81&oq=java8concurrent&aqs=chrome.1.69i57j0l7.6796j0j7&sourceid=chrome&ie=UTF-8 | java 8 concurrenthashmap为什么放弃了分段锁 - Google Search

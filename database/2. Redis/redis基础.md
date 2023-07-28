@@ -23,9 +23,11 @@
 ​		•	数据过期处理（可以精确到毫秒
 ​		•	分布式集群架构中的session分离
 
-# 使用
+# 运维
 
-## 下载安装
+## 安装
+
+[win10 64位安装redis 及Redis Desktop Manager使用](https://blog.csdn.net/qq_35038153/article/details/79675728)
 
 	1. 解压直接可以使用：
 
@@ -35,10 +37,15 @@
 
 ![image-20200124140256077](img/image-20200124140256077.png)
 
-## 文档
+## 客户端
 
-      	1. 官网：https://redis.io
-    2. 中文网：http://www.redis.net.cn/
+| [如何下载redis destop - Google Search](https://www.google.com/search?q=%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDredis+destop&oq=%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDredis+destop&aqs=chrome..69i57j33.7262j0j4&sourceid=chrome&ie=UTF-8 )
+https://blog.csdn.net/qq_35038153/article/details/79675728 | win10 64位安装redis 及Redis Desktop Manager使用_放肆青春的博客的博客-CSDN博客
+https://cnodejs.org/topic/57a944e59c26ea7c7226096f | redis desk manager 收费了，还有免费的工具吗？ - CNode技术社区
+https://github.com/luin/medis | luin/medis: 💻 Medis is a beautiful, easy-to-use Mac database management application for Redis.
+https://sourceforge.net/projects/redisdesktopmanager/ | Redis Desktop Manager download | SourceForge.net
+
+# 使用
 
 ## 工作模式
 
@@ -686,6 +693,13 @@ String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call
 | <https://mp.weixin.qq.com/s/RLeujAj5rwZGNYMD0uLbrg>          |
 | 每秒上千订单场景下，如何对分布式锁的并发能力进行优化？       |
 
+https://www.jianshu.com/p/268e5d4ce045 | Redis分布式锁的实现 - 简书
+https://crossoverjie.top/2018/03/29/distributed-lock/distributed-lock-redis/ | 基于 Redis 的分布式锁 | crossoverJie's Blog
+https://juejin.cn/post/6844903545339133959 | 基于redis的分布式锁实现 - 掘金
+https://juejin.cn/post/6844903688088059912 | 再有人问你分布式锁，这篇文章扔给他 - 掘金
+https://crossoverjie.top/2018/03/29/distributed-lock/distributed-lock-redis/#%E4%BD%BF%E7%94%A8 | 基于 Redis 的分布式锁 | crossoverJie's Blog
+https://blog.csdn.net/u014590757/article/details/79864773 | 4.秒杀模块-分布式加锁问题-基于Zookeeper解决redis和synchronized的加锁问题_郑学炜的博客-CSDN博客
+
 # 原理
 
 redis是**单线程**。memcached 是多线程模型，nginx 是master 和work 多进程模型。
@@ -1165,6 +1179,9 @@ typedef struct intset{
 
 # 参考文献
 
+  	1. 官网：https://redis.io
+2. 中文网：http://www.redis.net.cn/
+
 https://blog.csdn.net/u010870518/category_5928487.html
 
 https://www.redis.net.cn/order/
@@ -1185,11 +1202,7 @@ https://redisbook.readthedocs.io/en/latest/internal-datastruct/skiplist.html 待
 
 [Redis 设计与实现（第一版）](https://redisbook.readthedocs.io/en/latest/index.html)
 
-# 运维
 
-## 安装
-
-[win10 64位安装redis 及Redis Desktop Manager使用](https://blog.csdn.net/qq_35038153/article/details/79675728)
 
 # [数据库和缓存如何保证一致性](https://xiaolincoding.com/redis/architecture/mysql_redis_consistency.html#%E5%85%88%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93-%E8%BF%98%E6%98%AF%E5%85%88%E5%88%A0%E9%99%A4%E7%BC%93%E5%AD%98)
 

@@ -411,6 +411,8 @@ public native  void ensureClassInitialized(Class<?> c)
 
 [Java中Unsafe类详解](https://www.cnblogs.com/mickole/articles/3757278.html)
 
+[简单了解sun.misc.Unsafe](https://blog.csdn.net/xusiwei1236/article/details/45152201)
+
 > 已保存图片
 
 # Atomic系列

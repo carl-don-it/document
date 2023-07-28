@@ -1345,6 +1345,12 @@ jsp，html，postman，mockmvc都可以
 
 ![image-20200131145218536](img/image-20200131145218536.png) ![image-20200131145144921](img/image-20200131145144921.png)
 
+### multipart
+
+https://www.jianshu.com/p/32cc1c9bacd7 | Multipartfile上传文件错误,提示FileNotFound - 简书
+https://blog.csdn.net/daniel7443/article/details/51620308 | 解决使用Spring Boot、Multipartfile上传文件路径错误问题_this location is empty, please try uploading a new_daniel7443的博客-CSDN博客
+https://blog.csdn.net/lcczpp/article/details/88887045 | MultipartFile.transferTo（）遇见的问题记录_猪之仆的博客-CSDN博客
+
 ## mockmvc
 
 模拟web请求

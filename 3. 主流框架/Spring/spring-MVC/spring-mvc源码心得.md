@@ -91,6 +91,12 @@ https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1NDY0MTkzNQ==&action=getalbum&a
 
 ![1668952916091](img/1668952916091.png)
 
+https://blog.csdn.net/idomyway/article/details/79572973 | 解决 js ajax跨域访问报“No 'Access-Control-Allow-Origin' header is present on the requested resource.”错误_idomyway的博客-CSDN博客
+https://stackoverflow.com/questions/47390025/no-access-control-allow-origin-header-is-present-on-the-requested-resource-or | angularjs - No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'localhost 'is therefore not allowed access - Stack Overflow
+https://stackoverflow.com/questions/20035101/why-does-my-javascript-code-receive-a-no-access-control-allow-origin-header-i | jquery - Why does my JavaScript code receive a "No 'Access-Control-Allow-Origin' header is present on the requested resource" error, while Postman does not? - Stack Overflow
+https://stackoverflow.com/questions/29524036/the-access-control-allow-origin-header-contains-multiple-values-but-on | asp.net - The 'Access-Control-Allow-Origin' header contains multiple values '*, *', but only one is allowed - Stack Overflow
+https://blog.csdn.net/q646926099/article/details/79082204 | 跨域：The 'Access-Control-Allow-Origin' header contains multiple values '*, *', but only one is allowed_跨域 *.* but one_xiaoqiu_net的博客-CSDN博客
+
 # 异步
 
 https://blog.csdn.net/f641385712/article/details/88710676 | 【小家Spring】高性能关键技术之---体验Spring MVC的异步模式（ResponseBodyEmitter、SseEmitter、StreamingResponseBody） 高级使用篇_YourBatman的博客-CSDN博客

@@ -1004,3 +1004,6 @@ HashMap是重要的基础，HashSet/LingkedHashMap/LinkedHashSet/ConcurrentHashM
 
 之所以过来这么久，还要说1.6的，因为它简单清楚，把该说的都用尽量直接的方式说出来了。另外，也可以学习一下hash表这种数据结构，离开书本后hash表的学习的第一站，用HashMap是个很好的选择。
 
+# 参考文献
+
+[老生常谈，HashMap的死循环](https://www.jianshu.com/p/1e9cf0ac07f4)
