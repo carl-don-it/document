@@ -73,6 +73,12 @@ cas操作缓存还是内存
 
 如果说cas是原子操作，那么怎么会又aba问题。这里矛盾了
 
+## 参考文献
+
+[Java并发编程之CAS](https://www.cnblogs.com/straybirds/p/8767270.html)
+
+[并发 - CAS 的操作、实现、原理及优化](https://juejin.cn/post/6844903958318678029)
+
 #  Unsafe
 
 ## 介绍
@@ -412,6 +418,8 @@ public native  void ensureClassInitialized(Class<?> c)
 [Java中Unsafe类详解](https://www.cnblogs.com/mickole/articles/3757278.html)
 
 [简单了解sun.misc.Unsafe](https://blog.csdn.net/xusiwei1236/article/details/45152201)
+
+[Unsafe与CAS](https://www.cnblogs.com/xrq730/p/4976007.html)
 
 > 已保存图片
 
@@ -1466,6 +1474,10 @@ public class LongAdderTest {
 简单总结下：
 这个类是jdk1.8新增的类，目的是为了提供一个通用的，更高效的用于并发场景的计数器。可以网上搜下一些关于LongAdder的性能测试，有很多现成的，我自己就不写了。
 jdk1.8的ConcurrentHashMap中，没有再使用Segment，使用了一个简单的仿造LongAdder实现的计数器，这样能够保证计数效率不低于使用Segment的效率。
+
+## 参考文献
+
+[Java 原子语义同步的底层实现](https://www.cnblogs.com/qwsdcv/p/7489221.html)
 
 # CAS的ABA问题
 
