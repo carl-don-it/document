@@ -1919,6 +1919,33 @@ idea下载bytecode插件，最高分的那几个
 
 [图文详解 Java 字节码，想不懂都难](https://juejin.cn/post/6844903597163937806)
 
+https://www.cnblogs.com/qlky/p/7643524.html | Java虚拟机 - 符号引用和直接引用理解 - qlky - 博客园
+https://www.zhihu.com/question/50258991 | JVM符号引用转换直接引用的过程? - 知乎
+https://www.zhihu.com/question/49044988 | 方法区的Class信息,又称为永久代,是否属于Java堆？ - 知乎
+http://www.blogjava.net/Jack2007/archive/2008/05/21/202018.html | java内存分配研究 - 走在架构师的大道上 Jack.Wang's home - BlogJava
+https://www.51cto.com/article/225071.html | 深入Java核心 Java内存分配原理精讲-java内存分配
+https://www.cnblogs.com/iyangyuan/p/4631696.html | 触摸java常量池 - 杨元 - 博客园
+https://cloud.tencent.com/developer/article/1450501 | 彻底弄懂java中的常量池-腾讯云开发者社区-腾讯云
+https://blog.csdn.net/qq_41376740/article/details/80143215 | JAVA9 String新特性，说说你不知道的东西_河海哥yyds的博客-CSDN博客
+https://www.zhihu.com/question/30300585 | JVM里的符号引用如何存储？ - 知乎
+https://juejin.cn/post/6844903625114796046 | 我终于搞清楚了和String有关的那点事儿。 - 掘金
+https://www.zhihu.com/question/29352626 | JDK7，HotSpot的String常量池放到了native memory，native memory是什么？ - 知乎
+https://juejin.cn/post/6844903814533758983 | 聊聊jvm的StringTable及SymbolTable - 掘金
+https://jimmy2angel.github.io/2018/10/26/ConstantPool/ | 常量池及字符串对象的创建 | 小白爬坑之旅
+https://www.zhihu.com/question/38496907 | hotpot java虚拟机Class对象是放在 方法区 还是堆中 ？ - 知乎
+
+https://blog.csdn.net/qq_32331073/article/details/113099716 | 从进程的角度再看Java内存_qq_32331073的博客-CSDN博客
+https://www.history-of-my-life.com/archives/570 | 从进程的角度再看Java内存 – 浮生十六记
+
+https://juejin.im/post/5add4f056fb9a07aaa10db5e | 图文详解 Java 字节码，想不懂都难！ - 掘金
+http://gityuan.com/2015/10/24/jvm-bytecode-grammar/ | Jvm系列3—字节码指令 - Gityuan博客 | 袁辉辉的技术博客
+http://gityuan.com/2015/10/17/java-memory/ | Jvm系列1—运行时内存结构 - Gityuan博客 | 袁辉辉的技术博客
+http://gityuan.com/2015/10/25/jvm-class-loading/ | Jvm系列4—类的加载 - Gityuan博客 | 袁辉辉的技术博客
+http://gityuan.com/2015/10/26/jvm-subsystem/ | Jvm系列5—执行子系统 - Gityuan博客 | 袁辉辉的技术博客
+http://gityuan.com/2015/10/18/jvm-class-instruction/ | Jvm系列2—Class文件格式 - Gityuan博客 | 袁辉辉的技术博客
+http://gityuan.com/2015/10/18/jvm-class-instruction/ | Jvm系列2—Class文件格式 - Gityuan博客 | 袁辉辉的技术博客
+https://www.google.com/search?q=%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E7%9A%84ldc&oq=%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E7%9A%84ldc&aqs=chrome..69i57.8168j0j7&sourceid=chrome&ie=UTF-8 | 字节码文件的ldc - Google 搜索
+
 # GC
 
 [记一次服务Full GC背后的内存泄漏问题，真是匪夷所思](https://zhuanlan.zhihu.com/p/340824925)

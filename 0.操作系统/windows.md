@@ -8,6 +8,8 @@
 
 [从telnet www.baidu.com 80 来玩一下http](https://www.jianshu.com/p/b5708312a5e0)
 
+[Windows 系统关于用户和权限的逻辑是怎样的？](https://www.zhihu.com/question/66229405)
+
 # 端口、进程
 
 Window 通过cmd查看端口占用、相应进程、杀死进程等的命令

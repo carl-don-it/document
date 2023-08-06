@@ -235,6 +235,8 @@ public class TestCase {
 
 ### Runtime
 
+[Java获取Windows系统指定软件进程号及启动软件](https://blog.csdn.net/loongshawn/article/details/53009445)
+
 [Runtime.getRuntime().exec()](https://www.cnblogs.com/xinmengwuheng/p/5970255.html)
 
 ```java
@@ -355,5 +357,18 @@ method.invoke(null,new Object[]{new String[]{"1","2"}});
 
 
 
+# 代理
 
-  
+https://blog.csdn.net/sbc1232123321/article/details/79334130
+
+# JNDI
+
+https://www.iteye.com/blog/shitou521-696006 | JNDI到底是什么，有什么作用 - 石头 - ITeye博客
+https://blog.csdn.net/w372426096/article/details/80449710 | [分布式]：关于命名服务的知识点都在这里了_Franco蜡笔小强的博客-CSDN博客
+https://www.zhihu.com/question/505406778 | 各种java中间件为什么要提供jndi的支持？ - 知乎
+https://blog.csdn.net/wanxiaoderen/article/details/106638603 | b java 之JNDI介绍--- SPI机制 & Java.Util.serviceLoader_jndi spi_舞动的痞老板的博客-CSDN博客
+
+# SecurityManager
+
+https://nicky-chen.github.io/2018/07/13/java-securitymanager/ | Java安全之SecurityManager
+https://www.cnblogs.com/yiwangzhibujian/p/6207212.html | java安全管理器SecurityManager入门 - 已往之不谏 - 博客园

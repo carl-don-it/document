@@ -782,6 +782,15 @@ hasBeanClass
  | [Spring5新宠：PathPattern，AntPathMatcher：那我走？](https://mp.weixin.qq.com/s?__biz=MzI0MTUwOTgyOQ==&mid=2247494717&idx=1&sn=e73fe020e67c1e92ca03e27630151aa5&chksm=e908d897de7f51816cc4ab7a5167fe02689ad71e8d670f4666e83041f725aa568704be6ae424&scene=178&cur_album_id=1914508501259730944#rd)
  | [AntPathMatcher路径匹配器，Ant风格的URL](https://mp.weixin.qq.com/s?__biz=MzI0MTUwOTgyOQ==&mid=2247494662&idx=1&sn=a104a55d869d7a7016c0fbfa07caaa67&chksm=e908d8acde7f51ba27a62f32b2e244710497566ec9f3ba695d59164fd7a4f77366831968c842&scene=178&cur_album_id=1914508501259730944#rd)
 
+
+
+# scope-proxy
+
+https://juejin.cn/post/6869402006017507335 | 源码分析一下spring的scoped-proxy（一） - 掘金
+https://juejin.cn/post/6881598012952018957 | 源码分析一下spring的scoped-proxy（二） - 掘金
+https://juejin.cn/user/3975435166425367/posts | cafe_babe 的个人主页 - 文章 - 掘金
+https://juejin.cn/post/6867898278151716872 | 关于Sping singleton依赖prototype - 掘金
+
 # 参考文献
 
 spring源码揭秘

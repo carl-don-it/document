@@ -14,3 +14,15 @@
 
 #### 字符串和基本类型之间的转换
 
+# 重要
+
+https://ibytecode.com/blog/string-literal-pool/ | String literal pool – iByteCode Technologies
+https://javaranch.com/journal/200409/ScjpTipLine-StringsLiterally.html | The SCJP Tip Line - Strings, Literally
+https://blog.jamesdbloom.com/JVMInternals.html | JVM Internals
+https://tech.meituan.com/2014/03/06/in-depth-understanding-string-intern.html | 深入解析String#intern - 美团技术团队
+https://www.mindprod.com/jgloss/interned.html#GC | interned Strings : Java Glossary
+https://droidyue.com/blog/2014/08/30/java-details-string-concatenation/ | Java细节：字符串的拼接 - 技术小黑屋
+
+https://www.google.com/search?q=java+intern%E6%80%A7%E8%83%BD&newwindow=1&sxsrf=APwXEddMny3sXDVFM6TawJ1mXqQhF3J8yQ%3A1681996370621&ei=UjpBZIO0JbLKkPIP3tWtoAs&ved=0ahUKEwiDpbzhxLj-AhUyJUQIHd5qC7QQ4dUDCBA&uact=5&oq=java+intern%E6%80%A7%E8%83%BD&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQA0oECEEYAVCYAViYAWDvA2gBcAB4AIABgAKIAYACkgEDMi0xmAEAoAEBwAEB&sclient=gws-wiz-serp#ip=1 | java intern性能 - Google Search
+https://heapdump.cn/article/4627319 | 【译】Java String intern()对程序性能有哪些影响？ | HeapDump性能社区
+https://blog.51cto.com/flydean/5690151 | JVM系列之:String.intern的性能_51CTO博客_java string intern

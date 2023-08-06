@@ -164,3 +164,7 @@ location ~* \.(gif|jpg|jpeg)$ {
 只要通过ip地址和域名解析(DNS解析进来就能够匹配,没有匹配上的server_name就会取第一个)
 所以尽量域名对应上
 2. 如果域名匹配上了,但是没有默认,会回到经典默认界面
+
+## 参考文献
+
+[教大家在nginx中如何接入ldap认证](https://mp.weixin.qq.com/s/zAFkcDBTNjfDLAnzbi5j6Q)
