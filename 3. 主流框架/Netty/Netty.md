@@ -422,6 +422,10 @@ https://github.com/code4craft/netty-learning
 
 [如何进一步学习netty呢？](https://www.zhihu.com/question/66609476/answer/244082892)
 
+https://zhuanlan.zhihu.com/p/389034303 | 万字长文带你深入理解netty，史上最强详解！ - 知乎
+https://zhuanlan.zhihu.com/p/92193290 | 彻底搞懂 netty 线程模型 - 知乎
+https://cloud.tencent.com/developer/article/1358969 | 为什么建议 Netty 的 I/O 线程与业务线程分离-腾讯云开发者社区-腾讯云
+
 # epoll
 
 [java 和netty epoll实现](https://colobu.com/2014/09/12/java-nio-epoll/)

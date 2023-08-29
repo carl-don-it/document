@@ -2,3 +2,7 @@
 
 [搞定SpringBoot多数据源(1)：多套源策略](https://mianshenglee.github.io/2020/01/13/multi-datasource-1.html)
 
+[肝了三晚，终于吃透了Druid连接池](https://www.jianshu.com/p/6a5c290931f6)
+
+
+  
