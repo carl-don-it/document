@@ -1,6 +1,6 @@
 # 响应式编程之Reactor
 
-![img](https://upload.jianshu.io/users/upload_avatars/9112801/5e61f24f-9781-41e5-9ff0-ad6ed47c3cb6.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96/format/webp)
+![img](img/5e61f24f-9781-41e5-9ff0-ad6ed47c3cb6.webp)
 
 [pq217](https://wsa.jianshu.io/u/14294ca8b186)关注IP属地: 广东
 
