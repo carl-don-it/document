@@ -1957,3 +1957,12 @@ https://www.google.com/search?q=%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E7
 
 [Java要抛弃祖宗的基业，Java程序员危险了！](https://mp.weixin.qq.com/s/duAT1p_FzOE5dogy5CMx7g)
 
+# invokedynamic
+
+https://cr.openjdk.org/~briangoetz/lambda/lambda-translation.html | Translation of Lambda Expressions
+https://www.zhihu.com/question/39462935 | Java 8的Lambda表达式为什么要基于invokedynamic？ - 知乎
+https://www.zhihu.com/search?type=content&q=invokedynamic | invokedynamic - 搜索结果 - 知乎
+https://www.zhihu.com/search?type=content&q=lambda%E5%92%8C%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%8C%BA%E5%88%AB | lambda和匿名内部类的本质区别 - 搜索结果 - 知乎
+https://zhuanlan.zhihu.com/p/28124632 | Invokedynamic：Java的秘密武器 - 知乎
+https://www.zhihu.com/question/65383756 | Java8 lamba为什么不在编译期生成匿名类，而选择在运行时生成匿名类呢？ - 知乎
+https://zhuanlan.zhihu.com/p/26389041 | Invokedynamic 和 MethodHandle的缘由 - 知乎
