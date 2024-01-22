@@ -469,7 +469,7 @@ public final class LogFactory {
 
   [logback的使用和logback.xml详解](https://www.cnblogs.com/warking/p/5710303.html)
 
-  https://github.com/qos-ch/logback
+  [github](https://github.com/qos-ch/logback)
   
   [LogBack日志丢失原因调查和解决方法](https://blog.csdn.net/qq_24210767/article/details/80095685)
 
@@ -504,8 +504,6 @@ slf4j
 适配 Log4j、Java Logging 和 Logback
 
 # 参考
-
-Logback：https://github.com/qos-ch/logback
 
 log4j2：https://github.com/apache/logging-log4j2
 

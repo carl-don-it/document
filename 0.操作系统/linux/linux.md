@@ -1,6 +1,6 @@
-[
+# 内存
 
-Linux查看内存使用情况方法](https://www.jianshu.com/p/e9e0ce23a152)
+[Linux查看内存使用情况方法](https://www.jianshu.com/p/e9e0ce23a152)
 
 # [tar: Error is not recoverable: exiting now](https://stackoverflow.com/questions/3950839/tar-error-is-not-recoverable-exiting-now)
 
