@@ -377,6 +377,17 @@ https://www.cnblogs.com/yiwangzhibujian/p/6207212.html | java安全管理器Secu
 
 https://blog.csdn.net/f641385712/article/details/81286231
 
+https://juejin.cn/post/7250734439709048869#heading-73 | JDK8-JDK17新特性总结 - 掘金
+https://juejin.cn/post/7170858010971996174 | JDK里程碑:JDK8到JDK17的重要特性汇总 - 掘金
+https://zhuanlan.zhihu.com/p/675431098 | Java21相对Java17的一些新特性 - 知乎
+https://www.zhihu.com/question/500008728 | 最新版本的jdk11和jdk17都有哪些特点？ - 知乎
+https://blog.csdn.net/weixin_46294086/article/details/133218850 | springboot升级到jdk21最新教程_springboot jdk21-CSDN博客
+https://zhuanlan.zhihu.com/p/637031075 | JDK21要来了，并发编程更加丝滑了 - 知乎
+
+https://juejin.cn/post/7250734439709048869#heading-24 | JDK8-JDK17新特性总结 - 掘金
+http://www.flydean.com/java-new-feature-all-in-one/ | JDK8-20新特性系列 | 程序那些事
+https://www.zhihu.com/column/c_1486286161249824768 | Java8到Java17新特性及代码示例 - 知乎
+
 # 模块化
 
 https://www.51cto.com/article/620291.html
@@ -706,3 +717,12 @@ new Thread() {
 http://ashkrit.blogspot.com/2013/07/which-memory-is-faster-heap-or.html
 
 http://ashkrit.blogspot.com/2013/07/arraylist-using-memory-mapped-file.html
+
+# 虚拟线程
+
+https://www.zhihu.com/question/557372897/answer/2698635704 | Java有了虚拟线程(virtual thread)之后线程池方案是不是会逐渐成为历史？ - 知乎
+https://www.zhihu.com/question/549661510 | 如果java虚拟线程稳定了，是不是有一大批框架和工具要重写？ - 知乎
+https://zhuanlan.zhihu.com/p/94018082 | 从头到尾理解有栈协程实现原理 - 知乎
+https://www.zhihu.com/question/626744453/answer/3303312621 | Java 虚拟线程对响应式编程开发有什么影响? - 知乎
+https://www.zhihu.com/question/564849344/answer/3336212328 | JAVA 的虚拟线程将来会支持 synchronized 吗？ - 知乎
+https://zhuanlan.zhihu.com/p/108759542 | 解决并发编程之痛的良药--结构化并发编程 - 知乎
