@@ -1090,6 +1090,10 @@ https://blog.csdn.net/weixin_42237752/article/details/88770230
 java -jar -Dspring.profiles.active=prod -Dfile.encoding=UTF-8  mall-crawl-2.1.3.RELEASE.jar #powerShell下需要添加""，这里还设定了文件编码
 ```
 
+[SpringBoot的yml多环境配置3种方法](https://www.cnblogs.com/shanhubei/p/16783990.html)
+
+https://blog.csdn.net/junR_980218/article/details/124593341
+
 # 热部署
 
 我们在开发中反复修改类、页面等资源，每次修改后都是需要重新启动才生效，这样每次启动都很麻烦，浪费了大量的时间，我们可以在修改代码后不重启就能生效，在 pom.xml 中添加如下配置就可以实现这样的功能，我们称之为热部署。
