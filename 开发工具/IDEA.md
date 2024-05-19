@@ -90,8 +90,11 @@ idea连接数据库
 
 [yourbatman](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI0MTUwOTgyOQ==&action=getalbum&album_id=1374601107946962947&scene=173&from_msgid=2247490748&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 
+[鼠标右键菜单添加idea打开文件夹/项目](https://blog.csdn.net/hung_jun/article/details/106883126)
+
 # 安装
 
 [IntelliJ IDEA 2023.1.4激活破解图文教程（亲测有用，永久激活）](https://www.exception.site/essay/idea-reset-eval)
 
 [同一台电脑安装多个版本的idea](https://juejin.cn/post/7216143702124314685)
+

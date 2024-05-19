@@ -1,0 +1,3 @@
+https://www.cnblogs.com/d1012181765/p/15338105.html | Apache Camel 教程 - yiwenzhang - 博客园
+https://blog.csdn.net/neweastsun/article/details/103279472 | Apache Camel入门教程-CSDN博客
+https://blog.csdn.net/sinat_17618381/article/details/107010254?spm=1001.2101.3001.6650.9&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-9-107010254-blog-103279472.235%5Ev43%5Epc_blog_bottom_relevance_base4&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-9-107010254-blog-103279472.235%5Ev43%5Epc_blog_bottom_relevance_base4&utm_relevant_index=14 | Apache Camel 最简单入门教程&案例_apache camel中文教程-CSDN博客
