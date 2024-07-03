@@ -598,3 +598,5 @@ objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 [代码](https://github.com/carl-don-it/jackson-learning)
 
 https://www.baeldung.com/jackson
+
+[Jackson处理Map集合key为对象的情况](https://blog.csdn.net/li02112017/article/details/122473696)

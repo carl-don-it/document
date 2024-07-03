@@ -43,6 +43,8 @@ returnValueHandlers
 
 https://fangshixiang.blog.csdn.net/category_7941357_4.html
 
+[Spring MVC之RequestMappingHandlerAdapter调用解析处理方法详解](https://blog.csdn.net/qq_40718168/article/details/96991273#:~:text=%E6%80%BB%E7%9A%84%E6%9D%A5%E8%AE%B2%EF%BC%8CRequestMappingHandlerAdapter,%E9%80%9A%E8%BF%87View%E5%AF%B9%E8%B1%A1%E8%BF%9B%E8%A1%8C%E7%9A%84)
+
 [SpringMVC源码学习笔记](https://blog.csdn.net/abap_brave/category_9277043.html)
 
 [spring Web入门及源码学习](https://tianjunwei.blog.csdn.net/category_6348297.html)
