@@ -28,7 +28,11 @@ Jackson版本： 1.x (目前版本从1.1~1.9)与2.x。1.x与2.x从包的命名�
 
 Jackson也有处理程序对JAX-RS标准实现者例如Jersey, RESTeasy, CXF等提供了数据格式支持。处理程序实现了MessageBodyReader和MessageBodyWriter，目前支持的数据格式包括JSON, Smile, XML, YAML和CBOR。
 
-数据格式提供了除了Json之外的数据格式支持，它们绝大部分仅仅实现了streaming API abstractions，以便数据绑定	组件可以按照原来的方式使用。另一些（几乎不需要）提供了databind标准功能来处理例如
+数据格式提供了除了Json之外的数据格式支持，它们绝大部分仅仅实现了streaming API abstractions，以便数据绑定	组件可以按照原来的方式使用。另一些（几乎不需要）提供了databind标准功能来处理。
+
+https://www.baeldung.com/jackson-xml-serialization-and-deserialization#bd-serialize
+
+原理：实现自己的factory，然后按原来的databind使用
 
 # 依赖
 
