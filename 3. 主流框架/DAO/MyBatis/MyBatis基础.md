@@ -968,33 +968,37 @@ session = factory.openSession(true);   // 设置为自动提交
 
 # 缓存
 
-![image-20200312181816760](img/image-20200312181816760.png)
+### 一级缓存（本地缓存）
 
-- **什么是缓存**
-  	存在于内存中的临时数据。
-- **为什么使用缓存**
-  	减少和数据库的交互次数，提高执行效率。
-- **什么样的数据能使用缓存，什么样的数据不能使用**
-  - 适用于缓存
-    		经常查询并且不经常改变的。
-      		数据的正确与否对最终结果影响不大的。
-  - 不适用于缓存：
-    		经常改变的数据
-      		数据的正确与否对最终结果影响很大的。
-      		例如：商品的库存，银行的汇率，股市的牌价。
-- **Mybatis中的一级缓存和二级缓存**
-  - 一级缓存：
-    		它指的是Mybatis中SqlSession对象的缓存。
-      		当我们执行查询之后，查询的结果会同时存入到SqlSession为我们提供一块区域中。
-      		该区域的结构是一个Map。当我们再次查询同样的数据，mybatis会先去sqlsession中
-      		查询是否有，有的话直接拿出来用。
-      		当SqlSession对象消失时，mybatis的一级缓存也就消失了。
-  - 二级缓存:
-    	它指的是Mybatis中SqlSessionFactory对象的缓存。由同一个SqlSessionFactory对象创建的SqlSession共享其缓存。
-      	二级缓存的使用步骤：
-      		第一步：让Mybatis框架支持二级缓存（在SqlMapConfig.xml中配置）
-      		第二步：让当前的映射文件支持二级缓存（在IUserDao.xml中配置）
-      		第三步：让当前的操作支持二级缓存（在select标签中配置）
+MyBatis自带一级缓存且不可卸载，sqlSession级别的缓存
+
+1. MyBatis一级缓存的生命周期和SqlSession一致。
+
+2. MyBatis一级缓存内部设计简单，只是一个没有容量限定的HashMap，在缓存的功能性上有所欠缺。
+
+3. MyBatis的一级缓存最大范围是SqlSession内部，有多个SqlSession或者分布式的环境下，数据库写操作会引起脏数据，建议设定缓存级别为Statement。
+
+4. 当执行查询以后，查询的结果会同时缓存到SqlSession为我们提供的一块区域中，该区域的结构是一个Map，当再次查询同样的数据时，mybatis会先去sqlsession中查询缓存，有的话直接拿出来用。当SqlSession对象消失时，mybatis的一级缓存也就消失了，同时一级缓存是SqlSession范围的缓存，当调用SqlSession的修改、添加、删除、commit()，close等方法时，就会清空一级缓存。
+
+5. 当mybatis和spring整合后
+
+   1. 在未开启事务的情况之下，每次查询，spring都会关闭旧的sqlSession而创建新的sqlSession，因此此时的一级缓存是没有起作用的
+   2. 在开启事务的情况之下，spring使用threadLocal获取当前线程绑定的同一个sqlSession，因此此时一级缓存是有效的，当事务执行完毕，会关闭sqlSession
+
+   **「当mybatis和spring整合后，未开启事务的情况下，不会有任何问题，因为一级缓存没有生效。当开启事务的情况下，可能会有问题，由于一级缓存的存在，在事务内的查询隔离级别是可重复读，即使你数据库的隔离级别设置的是提交读，提高了隔离级别」**
+
+### 二级缓存
+
+没啥用，看参考文献
+
+### 参考文献
+
+https://juejin.cn/post/6844904201244377095 | 【不懂就问】MyBatis的一级缓存竟然还会引来麻烦？【“不懂就问”，是一个新的系列，主要整理我的小册群里遇到的一些比较 - 掘金
+https://tech.meituan.com/2018/01/19/mybatis-cache.html | 聊聊MyBatis缓存机制 - 美团技术团队
+https://cloud.tencent.com/developer/article/1923221 | 为什么Mybatis一级和二级缓存都不建议使用？-腾讯云开发者社区-腾讯云
+https://blog.csdn.net/jinhaijing/article/details/84230810 | Mybatis的一级缓存和二级缓存详解_mybatis 的一级缓存和二级缓存是什么意思-CSDN博客
+https://blog.csdn.net/u012373815/article/details/47069223 | mybatis的缓存机制（一级缓存二级缓存和刷新缓存）和mybatis整合ehcache_mybatis缓存机制-CSDN博客
+https://www.cnblogs.com/gavincoder/p/13977037.html | Mybatis深入浅出之缓存机制 - 马非白即黑 - 博客园
 
 ## 使用
 
@@ -1007,6 +1011,8 @@ session = factory.openSession(true);   // 设置为自动提交
 # 参考资源
 
 http://mybatis.org/generator/index.html#
+
+[入门教程1](https://blog.csdn.net/footless_bird/category_12222648.html)
 
 https://www.one-tab.com/page/6shhUxseTk6ZWTWh-iAYTg
 
