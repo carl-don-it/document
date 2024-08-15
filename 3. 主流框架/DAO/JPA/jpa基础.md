@@ -70,6 +70,10 @@ https://blog.csdn.net/a82514921/article/details/108041847 | Java单元测试实�
 
 [Hibernate中对象的三种状态及相互转化](https://blog.csdn.net/fg2006/article/details/6436517)
 
+[Hibernate一级缓存和三种状态](https://www.cnblogs.com/longlyseul/p/9863474.html)
+
+> 缓存的生命周期和细节
+
 # save
 
 [使 JPA 中的 repository.save() 不执行 select 语句的方法_jparepository的save delete方法 不执行sql-CSDN博客](https://blog.csdn.net/Souther_Feather/article/details/94839092#:~:text=%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%85%88%E5%B0%86,%E4%B8%8D%E6%8C%81%E4%B9%85%E5%8C%96%E5%8F%82%E7%85%A7%E5%AF%B9%E8%B1%A1%EF%BC%89%E3%80%82 )
