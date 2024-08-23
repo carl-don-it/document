@@ -74,21 +74,23 @@ https://youtrack.jetbrains.com/issue/IDEA-43728
 
 ![1687515676595](img/1687515676595.png)
 
-# 心水功能
 
-Dependencies
-✌Analyze Stack Trace or Thread Dump...
-远程调试
-Stream流调试
-多线程调试
-Postfix Completion，cast、for、fori、forr、iter
-Maven Helper
-Dependency Analyzer
-idea连接数据库
 
 # 参考文件
 
 [yourbatman](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI0MTUwOTgyOQ==&action=getalbum&album_id=1374601107946962947&scene=173&from_msgid=2247490748&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
+
+> **心水功能**
+>
+> Dependencies
+> ✌Analyze Stack Trace or Thread Dump...
+> 远程调试
+> Stream流调试
+> 多线程调试
+> Postfix Completion，cast、for、fori、forr、iter
+> Maven Helper
+> Dependency Analyzer
+> idea连接数据库
 
 [鼠标右键菜单添加idea打开文件夹/项目](https://blog.csdn.net/hung_jun/article/details/106883126)
 
