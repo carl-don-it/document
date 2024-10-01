@@ -11,6 +11,8 @@ https://blog.csdn.net/VIP099/article/details/107576710 | Spring系列：JPA 常�
 
 [JPA 中的 PersistenceUnit 和 PersistenceContext](https://springdoc.cn/java-persistenceunit-persistencecontext-difference/)
 
+https://www.cnblogs.com/lenve/p/10640472.html | 干货|一文读懂 Spring Data Jpa！ - 江南一点雨 - 博客园
+
 
 # 深入了解
 
@@ -79,6 +81,9 @@ https://blog.csdn.net/a82514921/article/details/108041847 | Java单元测试实�
 [使 JPA 中的 repository.save() 不执行 select 语句的方法_jparepository的save delete方法 不执行sql-CSDN博客](https://blog.csdn.net/Souther_Feather/article/details/94839092#:~:text=%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%E5%8F%AF%E4%BB%A5%E5%85%88%E5%B0%86,%E4%B8%8D%E6%8C%81%E4%B9%85%E5%8C%96%E5%8F%82%E7%85%A7%E5%AF%B9%E8%B1%A1%EF%BC%89%E3%80%82 )
 
 [Spring Data JPA批量插入过慢及其优化 —— 自定义Repository_spring.jpa.properties.hibernate.jdbc-CSDN博客](https://blog.csdn.net/tfstone/article/details/113741890)
+
+
+https://www.cnblogs.com/sunny3158/p/16353823.html | Spring Data JPA删除及批量删除功能 delete(list)和deleteInBatch(list) 是执行多条sql和条sql 的区别 - sunny123456 - 博客园
 
 # 报错
 
