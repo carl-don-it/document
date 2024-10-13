@@ -507,3 +507,12 @@ slf4j
 
 log4j2：https://github.com/apache/logging-log4j2
 
+[动态修改日志级别，太有用了！ ](https://www.cnblogs.com/ibigboy/p/17656193.html)
+
+
+
+
+
+
+
+#   

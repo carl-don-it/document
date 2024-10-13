@@ -82,8 +82,9 @@ https://blog.csdn.net/a82514921/article/details/108041847 | Java单元测试实�
 
 [Spring Data JPA批量插入过慢及其优化 —— 自定义Repository_spring.jpa.properties.hibernate.jdbc-CSDN博客](https://blog.csdn.net/tfstone/article/details/113741890)
 
-
 https://www.cnblogs.com/sunny3158/p/16353823.html | Spring Data JPA删除及批量删除功能 delete(list)和deleteInBatch(list) 是执行多条sql和条sql 的区别 - sunny123456 - 博客园
+
+[Spring Data JPA 执行 INSERT 时跳过 SELECT](https://springdoc.cn/spring-data-jpa-skip-select-insert/)
 
 # 报错
 
