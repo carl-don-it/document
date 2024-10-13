@@ -22,6 +22,8 @@ https://blog.csdn.net/qq_34556414/category_10759534_2.html | Prometheus_富士�
 
 [3W字干货深入分析基于Micrometer和Prometheus实现度量和监控的方案 ](https://www.cnblogs.com/throwable/p/13257557.html)
 
+https://www.cnblogs.com/skymyyang/p/13730607.html | Prometheus监控系统 - Devops、小铁匠 - 博客园
+
 # metric
 
 https://dbaplus.cn/news-134-5049-1.html | 详解Prometheus四种指标类型，谁还不是个监控老司机了 - 运维 - dbaplus社群
@@ -32,13 +34,13 @@ https://stackoverflow.com/questions/55162093/understanding-histogram-quantile-ba
 
 https://docs.micrometer.io/micrometer/reference/concepts/histogram-quantiles.html | Histograms and Percentiles :: Micrometer
 
-
+https://stackoverflow.com/questions/50821924/micrometer-prometheus-gauge-displays-nan | java - Micrometer - Prometheus Gauge displays NaN - Stack Overflow
 
 # query
 
 https://blog.csdn.net/qq_34556414/article/details/123010040 | PromQL 分组与聚合函数 基于标签、时间聚合_prometheus group by-CSDN博客_
 
-
+https://blog.csdn.net/duke_ding2/article/details/127169072 | Prometheus的查询_prometheus最近一条数据-CSDN博客
 
 
 
@@ -65,6 +67,8 @@ https://blog.csdn.net/doyzfly/article/details/113619042 | Prometheus 编写告�
 https://blog.csdn.net/qq_43684922/article/details/131142711 | 【博客655】prometheus如何应对告警目标消失带来的评估缺失问题_如果都是没有数据,那如何针对没有数据告警? 这个prom有没有标准的方案? 还是需要-CSDN博客
 
 https://blog.csdn.net/luanpeng825485697/article/details/82730704 | prometheus之记录规则(recording rules)与告警规则(alerting rule)_prometheus record-CSDN博客
+
+https://pracucci.com/prometheus-understanding-the-delays-on-alerting.html | Prometheus: understanding the delays on alerting
 
 # 客户端
 
@@ -102,3 +106,5 @@ https://docs.micrometer.io/micrometer/reference/concepts/histogram-quantiles.htm
 https://yunlzheng.gitbook.io/prometheus-book
 
 https://hulining.gitbook.io/prometheus/v2.18
+
+
