@@ -60,3 +60,9 @@ https://www.cnblogs.com/fengpingfan/tag/JMeter/
 后来查询了一下 JMeter 的用户手册，发现可以通过修改其配置文件，实现在任意系统的移植，而不需要改每个系统对应的启动文件。
 
 **系统配置文件：{JMeter 主目录}\bin\system.properties，将 java.net.preferIPv4Stack 设置为 true 即可。**
+
+# 参考文档
+
+https://blog.csdn.net/MJH827/article/details/134463361 | Jmeter 性能测试基础！-CSDN博客
+https://www.cnblogs.com/kasia/p/17124334.html | 超详细！Jmeter性能测试 - 孙凯玉 - 博客园
+
