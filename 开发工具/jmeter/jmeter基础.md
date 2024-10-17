@@ -68,3 +68,5 @@ https://www.cnblogs.com/kasia/p/17124334.html | 超详细！Jmeter性能测试 -
 
 https://blog.csdn.net/u011541946/category_7516034.html | JMeter性能测试中级篇_Anthony_tester的博客-CSDN博客
 https://blog.csdn.net/u011541946/category_6893578.html | Jmeter性能测试基础_Anthony_tester的博客-CSDN博客
+
+https://mp.weixin.qq.com/s/ZQdh1MqrAvmhkBLyH0E7jw
