@@ -89,3 +89,41 @@ https://www.cnblogs.com/sunny3158/p/16353823.html | Spring Data JPA删除及批�
 # 报错
 
 [【spring data jpa】使用spring data jpa 的删除操作，需要加注解@Modifying @Transactional 否则报错如下： No EntityManager with actual transaction available for current thread - cannot reliably process 'remove' call - Angel挤一挤 - 博客园](https://www.cnblogs.com/sxdcgaq8080/p/8984140.html)
+
+
+
+# 总结 还没review
+
+hibernate
+
+ 
+
+spring-boot中没有事务，不会用到缓存，每次都是查询新的，从数据库拿，context是每次开关的，entitymanage是拿不到的，因为是线程事务绑定，所以也没有。因为没有事务，
+
+ 
+
+ 
+
+有事务的情况下
+
+ 
+
+entitymanage拿得到，就是管理context的，事务结束后就没有了，这期间，一级缓存一直在起作用，更改可能是最后flush的，先操作的是缓存，最后才到数据库
+
+缓存的范围只是事务范围，没有extend，所以不会有事务外entitymanager
+
+ 
+
+缓存使用期间，有些语句会先触发flush，或者再提交的时候才flush，自定义query不会修改缓存，update会先flush缓存，所以注意使用。
+
+ 
+
+ 
+
+原生hibernate 
+
+缓存贯穿整个 entitymanager,与事务开启与否无关，因此事务外修改数据，之后在进行提交也可以修改数据。还没验证。如果是这样就太复杂了，怪不得spring要每个事务一个单独的entitymanager，就是为了隔离缓存。
+
+ 
+
+open-in-view可以配置entityManageer的范围原来

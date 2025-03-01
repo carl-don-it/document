@@ -1010,7 +1010,7 @@ https://www.cnblogs.com/gavincoder/p/13977037.html | Mybatis深入浅出之缓�
 
 # 参考资源
 
-http://mybatis.org/generator/index.html#
+http://mybatis.org/generator/index.html
 
 [入门教程1](https://blog.csdn.net/footless_bird/category_12222648.html)
 
@@ -1034,3 +1034,5 @@ https://www.one-tab.com/page/6shhUxseTk6ZWTWh-iAYTg
 https://my.oschina.net/zudajun?q=Mybatis
 
 ![1690021588313](img/1690021588313.png)
+
+[Mybatis源码解析](https://www.cnblogs.com/java-chen-hao/category/1576447.html)
