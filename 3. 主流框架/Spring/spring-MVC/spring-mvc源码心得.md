@@ -49,7 +49,9 @@ https://fangshixiang.blog.csdn.net/category_7941357_4.html
 
 [spring Web入门及源码学习](https://tianjunwei.blog.csdn.net/category_6348297.html)
 
-https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1NDY0MTkzNQ==&action=getalbum&album_id=1762570575379513345&scene=173&from_msgid=2247492374&from_itemidx=1&count=3&nolastread=1#wechat_redirect
+ [Spring MVC 源码解析](https://www.cnblogs.com/java-chen-hao/category/1503579.html)
+
+[江南一点雨](https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI1NDY0MTkzNQ==&action=getalbum&album_id=1762570575379513345&scene=173&from_msgid=2247492374&from_itemidx=1&count=3&nolastread=1#wechat_redirect)
 
 [Callable和DeferredResult实现服务器向客户端信息的推送](https://www.cnblogs.com/code-sayhi/articles/10191526.html)
 
@@ -99,8 +101,53 @@ https://stackoverflow.com/questions/20035101/why-does-my-javascript-code-receive
 https://stackoverflow.com/questions/29524036/the-access-control-allow-origin-header-contains-multiple-values-but-on | asp.net - The 'Access-Control-Allow-Origin' header contains multiple values '*, *', but only one is allowed - Stack Overflow
 https://blog.csdn.net/q646926099/article/details/79082204 | 跨域：The 'Access-Control-Allow-Origin' header contains multiple values '*, *', but only one is allowed_跨域 *.* but one_xiaoqiu_net的博客-CSDN博客
 
+[跨域问题和swagger不能访问问题](https://blog.csdn.net/wqwq093030/article/details/106177768 )
+
 # 异步
+
+mvc的异步都是基于servelet asyncontext。
+
+1. `Callback`和`DeferredResult`用于设置单个结果，开启异步，结束第一次。设置处理结果，使用dispatch再走一次，拿到结果，然后处理，然后response。
+2. `SseEmitter`以及`ResponseBodyEmitter`，开启异步，结束第一次。然后直接写，然后结束的时候再设置结果，然后使用dispatch再走一次，一般是没有结果的，直接close。
+3. complete的set的result作为第二次dispatch时的controller结果，可以是异常，因此后续处理和controller一样。filter和controlleradvice也可以。最后回调complete结果
+4. 如果主动异常，tomcat会主动dispatch，然后回调 spring error（spring自己设的）设置结果（这里可以自己改结果），然后走filter，和controller，然后继续走spring流程，最后回调complete结果，（和上面相反，上面先结果，然后dispatch）
+5. **里面涉及了很多tomcat的只是和流程，还有spring自己封装出来的方法，以后再细看**
+   1. 基本上回调completeion就行了。异常 和正常都一样处理。
+6. 两者都要处理异常、客户端断开、超时等问题，要处理回调。
+7. 要处理回调，清楚资源。
+8. 超时后还可以设置结果吗，这个异常和超时是spring发的还是tomcat自己的
+
+filter
+
+Spring MVC异步模式中使用Filter和HandlerInterceptor可以支持异步，需要配置。
+
+[使用DeferredResult异步处理SpringMVC请求](https://zhuanlan.zhihu.com/p/31223106)
+
+看tomcat
+
+> ![image-20200131134953811](../../../3.%20%E4%B8%BB%E6%B5%81%E6%A1%86%E6%9E%B6/Spring/spring-MVC/img/image-20200131134953811.png)
 
 https://blog.csdn.net/f641385712/article/details/88710676 | 【小家Spring】高性能关键技术之---体验Spring MVC的异步模式（ResponseBodyEmitter、SseEmitter、StreamingResponseBody） 高级使用篇_YourBatman的博客-CSDN博客
 https://blog.csdn.net/f641385712/article/details/88692534 | 【小家Spring】高性能关键技术之---体验Spring MVC的异步模式（Callable、WebAsyncTask、DeferredResult） 基础使用篇_YourBatman的博客-CSDN博客
 
+# 异常处理
+
+https://stackoverflow.com/questions/14214424/iframe-causes-clientabortexception-java-io-ioexception-at-org-apache-catalina-c
+
+# 请求流程
+
+filter拦截
+
+HandlerInterceptor拦截
+
+controller，这里可能就处理结果了，没有mv，也可能返回mv
+
+处理异常 HandlerExceptionResolver
+
+处理结果mv
+
+mappedHandler.triggerAfterCompletion 无异常
+
+mappedHandler.triggerAfterCompletion 有异常
+
+> 其中还有一些异步，其他细节

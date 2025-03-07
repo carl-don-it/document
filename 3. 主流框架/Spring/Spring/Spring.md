@@ -289,6 +289,12 @@ value[]：用于指定其他配置类的字节码。
 public class SpringConfiguration { }
 ```
 
+#### 参考文件
+
+https://blog.csdn.net/weixin_43849277/article/details/120728182 | @PropertySource与@ConfigurationProperties多种方式读取配置文件详解，附带@PropertySources使用说明_存在多个相同文件 如何使用properties读取正确配置文件-CSDN博客
+https://blog.csdn.net/wangmx1993328/article/details/81005170 | Spring Boot @PropertySource 加载配置文件、@ImportResource 导入Spring 配置文件、YamlPropertiesFactoryBean 读取 yml 文件-CSDN博客
+https://blog.csdn.net/weixin_44060488/article/details/134049105 | @PropertySource(“/application.yml“)用途介绍-CSDN博客
+
 ## 创建bean
 
 ### xml
