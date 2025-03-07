@@ -700,6 +700,8 @@ SpringBoot项目创建后,resources下默认有两个文件夹 static 和 templa
 
 ## 异常处理
 
+https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc | Exception Handling in Spring MVC
+
 #### 默认机制
 
 （当服务不存在）
@@ -894,6 +896,8 @@ public class ExceptionCatch {
 
 ### Filter
 
+http://www.mydlq.club/article/48/ | SpringBoot 配置过滤器 Filter | 小豆丁技术栈
+
 #### 介绍
 
 过滤器，会拦截所有匹配的url，之前是xml设置。
@@ -905,6 +909,12 @@ public class ExceptionCatch {
 > **好处**
 >
 > 拿到原始的http请求和信息	
+
+异步filter
+
+> 使用OncePerRequestFilter，可以处理异步servelet。
+>
+> 这种没用：@WebFilter(asyncSupported = true, urlPatterns = {"/AsyncServlet", "/NonBlockingServlet"})
 
 #### @Component 注册
 
@@ -964,6 +974,10 @@ spring-boot提供的
 #### 介绍
 
 是 AOP 思想的具体应用  ，要求必须实现： HandlerInterceptor 接口  。
+
+MappedInterceptor更好，可以匹配url。
+
+异常不要使用这个，这个是兜底的，
 
 > 会拦截所有的handler（也就是所有的controller，不管是自己写的，还是spring内部自带的）。如果访问的是 jsp， html,css,image 或者 js 是不会进行拦截的。  
 >
@@ -1359,14 +1373,9 @@ https://blog.csdn.net/lcczpp/article/details/88887045 | MultipartFile.transferTo
 
 ![image-20200131133913546](img/image-20200131133913546.png)
 
-## 异步多线程
-
-[使用DeferredResult异步处理SpringMVC请求](https://zhuanlan.zhihu.com/p/31223106)
-
-看tomcat
 
 
-> ![image-20200131134953811](img/image-20200131134953811.png)
+##### 
 
 # SpringBoot
 
@@ -1426,3 +1435,11 @@ endpoints.enabled = true
 endpoints.sensitive = false
 ```
 
+# sse
+
+https://blog.csdn.net/Great_est/article/details/135346089 | SseEmitter连接断开与清除-CSDN博客
+https://juejin.cn/post/7250328942841495613 | 轻松实现服务器事件推送！Spring SseEmitter 详解服务器推送技术背景简介 服务器推送(Server Pus - 掘金
+http://119.96.220.140:9099/article/1673836873803 | SSE 消息推送 异常解决方案 - Dharma
+https://blog.ezcomezgo.com/?p=394 | Spring Boot 中使用 SseEmitter 实现服务器推送消息 - 来去匆匆
+https://medium.com/@savra.sv/sse-server-sent-events-in-spring-boot-c913f14d6d49 | SSE (Server-sent events) in Spring Boot | by Sergey Savrukhin | Medium
+https://stackoverflow.com/questions/70187214/how-to-handle-exception-and-send-error-to-sse-client | java - How to handle exception and send error to SSE client - Stack Overflow

@@ -539,13 +539,13 @@ property根据getter或者setter转化，也可以根据field转化，一般需�
 
   > JsonGenerator.Feature、JsonParser.Feature的替代品，内部还是做了转换的。不是直接用在三个基础类，而是JsonFactoryBuilder这样的builder类中。
 
-- MapperFeature、SerializationFeature、DeserializationFeature、`ConfigFeature`
+- MapperFeature、SerializationFeature、DeserializationFeature、`ConfigFeature` （控制mapper的特征行为，例如注解的具体行为或者默认行为，要不要生效等等。）
 
   > 用于控制ObjectMapper/JsonMapper的行为，高层api的特征行为，通过ObjectMapper/JsonMapper或者builder类使用。
   >
   > `MapperFeature`它是定义了和序列化/反序列化无关（或者说共有的）一些特征
 
-- BaseSettings、MapperConfig、MapperConfigBase、SerializationConfig、DeserializationConfig
+- BaseSettings、MapperConfig、MapperConfigBase、SerializationConfig、DeserializationConfig(只是一些保存的容器)
 
   > `ObjectMapper`使用并且持有，保存各种组件和feature，有各种with和without方法来修改内部属性，生成一个全新的config。一般是不可变的。一般不直接由用户修改，config，而是由`ObjectMapper`来间接修改，使用者只需要面向`ObjectMapper`的enable和disable。
   >
@@ -580,14 +580,27 @@ mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 private Date birthday;
 //该注解作用于field的时候作用于getter和setter，但是只在spring-boot种起作用，普通main函数不能，需要使用 set函数
 objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+
+//  ignore pojo annotations https://stackoverflow.com/questions/31680046/how-to-ignore-pojo-annotations-while-using-jackson-objectmapper
+ ObjectMapper objectMapper = new ObjectMapper().configure(
+                 org.codehaus.jackson.map.DeserializationConfig.Feature.USE_ANNOTATIONS, false)
+                    .configure(org.codehaus.jackson.map.SerializationConfig.Feature.USE_ANNOTATIONS, false)
 ```
 
-# 发现问题
+# @jsonview
 
-## @JsonAnyGetter / @JsonAnySetter
+https://www.cnblogs.com/lvbinbin2yujie/p/10575146.html | (oﾟvﾟ)ノ Hi - SpringMvc @JsonView 使用方式
+https://blog.csdn.net/doctor_who2004/article/details/102528677 | Spring MVC @JsonView使用详解_springmvc jsonviewres-CSDN博客
+https://blog.csdn.net/yumikobu/article/details/88627093 | 处理Spring中使用JsonView与自定义返回结果切面的冲突_java的切面和接口返回值冲突-CSDN博客
+
+# @JsonAnyGetter / @JsonAnySetter
 
 需要初始化map，不能为null
 不要放在field上，会有重复序列化的问题
+
+
+
+# 
 
 # 参考文献
 

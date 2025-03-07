@@ -426,6 +426,62 @@ https://zhuanlan.zhihu.com/p/389034303 | 万字长文带你深入理解netty，�
 https://zhuanlan.zhihu.com/p/92193290 | 彻底搞懂 netty 线程模型 - 知乎
 https://cloud.tencent.com/developer/article/1358969 | 为什么建议 Netty 的 I/O 线程与业务线程分离-腾讯云开发者社区-腾讯云
 
+## netty和tomcat对比 
+
+是的，你的理解是正确的。Netty 是一个基于事件驱动、异步非阻塞的网络框架，它的设计目标是高并发、低延迟的场景。Netty 的工作线程模型通常使用少量的线程（如 `EventLoopGroup` 中的线程）来处理大量的连接和请求。这种设计在 I/O 密集型场景下表现非常出色，因为线程不会被阻塞，可以高效地处理大量的并发连接。
+
+然而，如果业务逻辑是阻塞的（例如，执行耗时的数据库操作、同步调用外部服务、复杂的计算等），Netty 的少量工作线程可能会被阻塞，导致整体性能下降。具体来说：
+
+1. **Netty 的工作线程模型**：
+   - Netty 的 `EventLoop` 线程负责处理 I/O 事件和执行任务。
+   - 如果业务逻辑是阻塞的，`EventLoop` 线程会被占用，无法处理其他请求，导致吞吐量下降。
+2. **Tomcat 的工作线程模型**：
+   - Tomcat 使用传统的线程池模型，每个请求由一个独立的线程处理。
+   - 如果业务逻辑是阻塞的，Tomcat 可以通过增加线程池的大小来缓解问题（尽管线程过多会带来上下文切换的开销）。
+
+### 为什么 Netty 在阻塞业务下可能比 Tomcat 更慢？
+
+- Netty 的工作线程数量通常较少（默认情况下，`EventLoopGroup` 的线程数与 CPU 核心数相关），如果这些线程被阻塞，整个系统的吞吐量会急剧下降。
+- Tomcat 的线程池可以配置较大的线程数（默认是 200），即使某些线程被阻塞，其他线程仍然可以处理请求。
+
+### 如何解决 Netty 中的阻塞问题？
+
+1. **将阻塞任务放到单独的线程池中执行**：
+
+   - 使用 Netty 的 `EventExecutorGroup` 或者 Java 的 `ExecutorService` 来处理阻塞任务，避免阻塞 `EventLoop` 线程。
+
+   - 示例代码：
+
+     java
+
+     Copy
+
+     ```
+     EventExecutorGroup blockingExecutor = new DefaultEventExecutorGroup(16); // 创建一个独立的线程池
+     channelPipeline.addLast(blockingExecutor, new MyBlockingHandler()); // 将阻塞任务交给独立的线程池处理
+     ```
+
+2. **使用异步非阻塞的 API**：
+
+   - 尽量将阻塞操作改为异步操作，例如使用异步数据库驱动（如 `R2DBC`）或异步 HTTP 客户端。
+
+3. **优化业务逻辑**：
+
+   - 减少阻塞操作的耗时，或者将阻塞操作拆分为多个小任务。
+
+### 总结
+
+- 如果你的业务逻辑是阻塞的，Netty 的默认配置可能会导致性能不如 Tomcat。
+- 通过将阻塞任务放到独立的线程池中处理，可以避免阻塞 `EventLoop` 线程，从而提升 Netty 的性能。
+- 在高并发、低延迟的场景下，Netty 仍然是更好的选择，但需要合理处理阻塞任务。
+
+### 文献
+
+https://blog.csdn.net/zhangzehai2234/article/details/135175994 | Tomcat与Netty比较_netty和tomcat-CSDN博客
+https://blog.csdn.net/alan_liuyue/article/details/105403984 | Netty详解：tomcat区别+高并发原理_tomcat 和 netty 关系-CSDN博客
+https://www.zhihu.com/question/322233601 | tomcat和netty线程模型在高IO应用（例如HTTP服务器）哪个更好？ - 知乎
+https://www.zhihu.com/question/53498767 | tomcat 源码为啥不采用netty 处理并发？ - 知乎
+
 # epoll
 
 [java 和netty epoll实现](https://colobu.com/2014/09/12/java-nio-epoll/)
@@ -435,3 +491,4 @@ https://cloud.tencent.com/developer/article/1358969 | 为什么建议 Netty 的 
  [netty中的epoll实现](https://juejin.cn/post/6844903906095398925)
 
 [快来体验快速通道,netty中epoll传输协议详解](https://www.cnblogs.com/flydean/p/16478295.html)
+
