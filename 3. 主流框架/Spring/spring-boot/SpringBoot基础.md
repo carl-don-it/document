@@ -1127,3 +1127,9 @@ https://zhuanlan.zhihu.com/p/86016511
 # 参考文献
 
 https://github.com/dyc87112/SpringBoot-Learning
+
+# 问题
+
+### 3.0版本以上的actuator-starter
+
+![image-20250217155051342](img/image-20250217155051342.png)

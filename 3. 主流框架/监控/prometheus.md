@@ -85,6 +85,8 @@ https://segmentfault.com/a/1190000040783147 | prometheus -- rate()与irate()分�
 
 https://zhangguanzhang.github.io/2020/07/30/prometheus-rate-and-irate/#/%E7%94%B1%E6%9D%A5 | prometheus的rate与irate内部是如何计算的 · zhangguanzhang's Blog
 
+保证interval大于几个scrape-time，然后step选择interval
+
 # 细节
 
 https://aleiwu.com/post/prometheus-bp/#rate-%E7%B1%BB%E5%87%BD%E6%95%B0-recording-rule-%E7%9A%84%E5%9D%91 | Prometheus 不完全避坑指南
@@ -107,4 +109,7 @@ https://yunlzheng.gitbook.io/prometheus-book
 
 https://hulining.gitbook.io/prometheus/v2.18
 
+# 案例
+
+显示一段时间的increase，然后计算这一段count的平均时间，会有小数，因为有外延
 
