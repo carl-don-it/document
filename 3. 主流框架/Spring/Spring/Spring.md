@@ -2296,3 +2296,16 @@ XmlUnit 2.x+ OkHttp 3.x+ Netty 4.1
 
 [神器SpringDoc横空出世，最牛掰的API工具来了，赶紧看Spring吧！](https://mp.weixin.qq.com/s/rDtROZV3JPdVHZXwSW8wow)
 
+# webclient
+
+https://docs.flydean.com/spring-framework-documentation5/testing/integration-testing/3.7webtestclient | 3.7WebTestClient | Spring5参考指南
+https://blog.csdn.net/HiBoyljw/article/details/82783443 | Spring 5 WebClient和WebTestClient使用教程 原 leftso_webtestclient spring-CSDN博客
+https://pkpk1234.gitbooks.io/my-notes/content/reactor-notes-stepverifier.html | Reactor-Notes-StepVerifier · my-notes
+https://projectreactor.io/docs/core/milestone/reference/testing.html | Testing :: Reactor Core Reference Guide
+https://blog.csdn.net/get_set/category_9272724.html | 【道法术器】响应式Spring_享学IT的博客-CSDN博客
+https://blog.csdn.net/get_set/article/details/79611380 | （16）Reactor的测试——响应式Spring的道法术器_reactor-test-CSDN博客
+https://blog.csdn.net/get_set/article/details/79611420 | （17）Reactor的调试——响应式Spring的道法术器_reactor debug mode is enabled-CSDN博客
+https://www.cnblogs.com/waldron/p/17828886.html | 微服务系列-使用WebFlux的WebClient进行Spring Boot 微服务通信示例 - 架构成长指南 - 博客园
+https://juejin.cn/post/7067745610136289310 | Spring Boot 使用WebClientWebClient是Spring WebFlux模块提供的一个非 - 掘金
+https://blog.csdn.net/zzhongcy/article/details/105412842 | Spring5的WebClient使用详解-CSDN博客
+https://docs.spring.io/spring-framework/reference/web/webflux-webclient/client-testing.html | Testing :: Spring Framework
