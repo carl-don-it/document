@@ -12,6 +12,8 @@ https://mingongge.blog.csdn.net/?type=blog | 民工哥技术之路-CSDN博客_
 
 https://www.rockdata.net/zh-cn/docs/17/index.html | PostgreSQL 17.1 文档 - Redrock Postgres
 
+https://mp.weixin.qq.com/mp/appmsgalbum?__biz=MzI0MDQ4MTM5NQ==&action=getalbum&album_id=1463285375270813697#wechat_redirect | #数据库
+
 # 高可用
 
 https://juejin.cn/post/7294056563630374912 | PostgreSQL基于Patroni方案的高可用启动流程分析什么是Patroni 在很多生产环境中，分布式数据 - 掘金
