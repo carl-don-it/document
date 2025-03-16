@@ -347,3 +347,5 @@ wget --post-data ‘user=foo&password=bar’ <http://www.baidu.com>
 # 参考文献
 
 https://blog.csdn.net/f641385712/category_8544782.html
+
+https://blog.csdn.net/m0_64768308/article/details/129330451 | Linux各个系统版本及区别（Ubuntu,CentOS..）_linux版本-CSDN博客
