@@ -10,7 +10,7 @@ https://blog.csdn.net/pgdba/category_12317739.html?spm=1001.2014.3001.5482 | Pos
 https://blog.csdn.net/thinking_chou/article/details/142672044 | 【PostgreSQL 】运维篇——PostgreSQL 高可用性架构-CSDN博客
 https://mingongge.blog.csdn.net/?type=blog | 民工哥技术之路-CSDN博客_
 
-
+https://www.rockdata.net/zh-cn/docs/17/index.html | PostgreSQL 17.1 文档 - Redrock Postgres
 
 # 高可用
 
