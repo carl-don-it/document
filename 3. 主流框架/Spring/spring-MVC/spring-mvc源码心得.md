@@ -117,6 +117,12 @@ mvc的异步都是基于servelet asyncontext。
 7. 要处理回调，清楚资源。
 8. 超时后还可以设置结果吗，这个异常和超时是spring发的还是tomcat自己的
 
+> emitter.completeWithError和 emitter.complete 是主动结束，spring发起的，通道是正常的，只是返回值提前设置
+>
+>  
+>
+> 其他情况，超时，通道有问题，就是被动结束，tomcat发起的，然后先onerror设置异常或者ontimeout，然后处理。
+
 filter
 
 Spring MVC异步模式中使用Filter和HandlerInterceptor可以支持异步，需要配置。
